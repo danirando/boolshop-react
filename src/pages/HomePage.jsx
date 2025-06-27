@@ -1,7 +1,11 @@
 export default function HomePage() {
   return (
     <div>
-      <h1>Home page</h1>
+      <div className="hero-space">
+        <h1 className="hero-text">
+          Nuovi outfit, stessa vibe. Scopri la tua prossima ossessione.
+        </h1>
+      </div>
     </div>
   );
 }

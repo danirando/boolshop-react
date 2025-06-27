@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
 .logo {
   width: 150px;
 }
@@ -19,4 +21,29 @@
 
 .bi.bi-cart {
   color: #122852;
+}
+
+.hero-space {
+  background-image: url(../../../public/jumbo.png);
+  padding: 150px 100px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 60vh; /* altezza minima, regola a tuo gusto */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  padding: 2rem; /* spazio interno, evita che il testo tocchi i bordi */
+  box-sizing: border-box; /* include padding nella width */
+}
+
+.hero-text {
+  color: #1a1a33;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-family: "Pacifico", cursive;
 }
