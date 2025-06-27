@@ -1,0 +1,22 @@
+.logo {
+  width: 150px;
+}
+
+.navbar {
+  background-color: rgb(254, 242, 241);
+}
+
+.search-button {
+  background-color: rgb(254, 242, 241);
+  color: #122852;
+  border: 1px solid #122852;
+}
+
+.search-button:hover {
+  background-color: #ffd0cd;
+  border-color: #ffd0cd;
+}
+
+.bi.bi-cart {
+  color: #122852;
+}
