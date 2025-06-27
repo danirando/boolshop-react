@@ -47,3 +47,8 @@
   font-size: clamp(2rem, 5vw, 4rem);
   font-family: "Pacifico", cursive;
 }
+.hero-content {
+  padding: 10px;
+  border-radius: 50px;
+  background-color: rgb(128, 128, 128, 0.5);
+}
