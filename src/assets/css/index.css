@@ -66,6 +66,14 @@
   padding: 30px;
   background-color: #fef2f1;
 }
+
+.navbar-collapse.collapse {
+  max-height: 90px;
+}
+
+.navbar-collapse.collapse.show {
+  max-height: 600px;
+}
 .nav-link {
   position: relative;
   padding: 0.5rem;
