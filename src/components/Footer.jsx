@@ -1,11 +1,11 @@
 export default function Footer() {
   return (
-    <div className="d-flex justify-content-between align-items-center footer-container">
+    <div className="d-flex flex-wrap justify-content-between align-items-center footer-container">
       <div className="footer-left">
         <h5>Boolshop spa</h5>
         <p>Sede legale: Milano, Via Montenapoleone, 432</p>
       </div>
-      <div className="footer-center">
+      <div className="footer-center ">
         <img src="../../logo.png" className="img-fluid" alt="" />
       </div>
       <div className="footer-right">

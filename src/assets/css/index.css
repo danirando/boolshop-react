@@ -66,6 +66,12 @@
   padding: 30px;
   background-color: #fef2f1;
 }
+.nav-link {
+  position: relative;
+  padding: 0.5rem;
+  overflow: visible;
+  border-radius: 50%;
+}
 
 /* HOMEPAGE */
 
@@ -109,7 +115,7 @@ main {
 /* FOOTER */
 
 .footer-container {
-  height: 90px;
+  min-height: 90px;
   background-color: #ffd0cd;
   padding: 0 30px;
 }
@@ -131,4 +137,11 @@ main {
 
 .footer-center img {
   width: 200px;
+}
+
+@media (max-width: 600px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
 }
