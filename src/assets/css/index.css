@@ -2,6 +2,12 @@
 
 .logo {
   width: 150px;
+  display: inline-flex;
+  transition: transform 0.2s ease-in-out;
+}
+
+.logo:hover {
+  transform: scale(1.1);
 }
 
 .navbar {
@@ -20,7 +26,18 @@
 }
 
 .bi.bi-cart {
-  color: #122852;
+  display: inline-flex; /* usa flexbox per centrare l'icona */
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem; /* stessa dimensione */
+  height: 2.5rem;
+  border-radius: 50%;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.bi.bi-cart:hover {
+  background-color: #d56693;
+  transform: scale(1.2);
 }
 
 .hero-space {
