@@ -11,11 +11,11 @@
 }
 
 .navbar {
-  background-color: rgb(254, 242, 241);
+  background-color: #fef2f1;
 }
 
 .search-button {
-  background-color: rgb(254, 242, 241);
+  background-color: #fef2f1;
   color: #122852;
   border: 1px solid #122852;
 }
@@ -26,6 +26,8 @@
 }
 
 .bi.bi-cart {
+  color: #122852;
+
   display: inline-flex; /* usa flexbox per centrare l'icona */
   align-items: center;
   justify-content: center;
