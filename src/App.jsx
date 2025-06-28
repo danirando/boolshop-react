@@ -14,7 +14,7 @@ export default function App() {
           <Route element={<DefaultLayout />}>
             <Route path="/" element={<HomePage />}></Route>
             <Route path="/clothes" element={<ClothesListPage />}>
-              <Route path="/detail" element={<ClothDetailPage />}></Route>
+              <Route path="detail" element={<ClothDetailPage />}></Route>
             </Route>
             <Route path="/checkout" element={<CheckoutPage />}></Route>
             <Route path="/cart" element={<CartPage />}></Route>
