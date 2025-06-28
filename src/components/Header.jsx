@@ -1,20 +1,19 @@
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <Navbar expand="lg" className="navbar d-flex align-items-center">
+    <Navbar expand="md" className="navbar d-flex align-items-center">
       <Container fluid>
         <Navbar.Brand href="/">
-          <img src="../../logo.png" className="img-fluid logo" alt="" />
+          <img src="../../logo.png" className="img-fluid logo" alt="Logo" />
         </Navbar.Brand>
+
         <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
+
+        <Navbar.Collapse style={{ height: "90px" }} id="navbarScroll">
           <Nav
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: "100px" }}
@@ -24,10 +23,18 @@ export default function Header() {
               <i className="bi bi-cart" style={{ fontSize: "1.5rem" }}></i>
             </Link>
           </Nav>
-          <Form className="d-flex">
-            <Form.Control type="search" className="me-2" aria-label="Search" />
-            <Button className="search-button">Cerca</Button>
-          </Form>
+
+          <form className="d-flex">
+            <input
+              type="search"
+              className="form-control me-2 search-input"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button type="submit" className="btn search-button">
+              Cerca
+            </button>
+          </form>
         </Navbar.Collapse>
       </Container>
     </Navbar>
