@@ -1,6 +1,12 @@
 /* IMPORT GOOGLE FONTS */
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 
+body {
+  background-color: #feefed;
+  font-family: "Pacifico", cursive;
+  color: #122852;
+}
+
 /* HEADER */
 
 .logo {
@@ -25,20 +31,22 @@
 
 .navbar {
   background-color: #fef2f1;
-  position: fixed; /* Fissa la navbar */
-  top: 0; /* In alto */
+  position: fixed;
+  top: 0;
   left: 0;
-  width: 100%; /* Occupa tutta la larghezza */
+  width: 100%;
   height: 90px;
 }
 
-.search-button {
+.search-button,
+.add-button {
   background-color: #fef2f1;
   color: #122852;
   border: 1px solid #122852;
 }
 
-.search-button:hover {
+.search-button:hover,
+.add-button:hover {
   background-color: #ffd0cd;
   border-color: #ffd0cd;
 }
@@ -89,15 +97,15 @@
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
-  min-height: 60vh; /* altezza minima, regola a tuo gusto */
+  min-height: 60vh;
 
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 
-  padding: 2rem; /* spazio interno, evita che il testo tocchi i bordi */
-  box-sizing: border-box; /* include padding nella width */
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
 .hero-text {
@@ -113,11 +121,29 @@
   background-color: rgb(128, 128, 128, 0.5);
 }
 
+.container.sections {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.separetor {
+  height: 1px;
+  background-color: black;
+}
+
+.card-img-fixed {
+  height: 500px;
+  object-fit: cover;
+}
+
+section > h2 {
+  padding-bottom: 20px;
+}
+
 /* MAIN */
 
 main {
   padding-top: 90px;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 /* FOOTER */
@@ -126,6 +152,7 @@ main {
   min-height: 90px;
   background-color: #ffd0cd;
   padding: 0 30px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .footer-left,
