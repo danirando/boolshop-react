@@ -1,11 +1,12 @@
 /* IMPORT GOOGLE FONTS */
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&family=Quicksand:wght@300..700&display=swap");
 
-body {
+/* body {
   background-color: #feefed;
   font-family: "Pacifico", cursive;
   color: #122852;
-}
+} */
 
 /* HEADER */
 
@@ -114,7 +115,7 @@ body {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   max-width: 800px;
   font-size: clamp(2rem, 5vw, 4rem);
-  font-family: "Pacifico", cursive;
+  font-family: "Bree Serif", cursive;
 }
 .hero-content {
   padding: 10px;

@@ -7,7 +7,7 @@ export default function HomePage() {
       <div className="hero-space">
         <div className="hero-content">
           <h1 className="hero-text">
-            Nuovi outfit, stessa vibe. Scopri la tua prossima ossessione.
+            Nuovi outfit, stessa vibe. Scopri la tua prossima ossessione
           </h1>
         </div>
       </div>
