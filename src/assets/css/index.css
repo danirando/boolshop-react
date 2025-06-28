@@ -1,4 +1,7 @@
+/* IMPORT GOOGLE FONTS */
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
+/* HEADER */
 
 .logo {
   width: 150px;
@@ -12,6 +15,11 @@
 
 .navbar {
   background-color: #fef2f1;
+  position: fixed; /* Fissa la navbar */
+  top: 0; /* In alto */
+  left: 0;
+  width: 100%; /* Occupa tutta la larghezza */
+  height: 90px;
 }
 
 .search-button {
@@ -42,8 +50,10 @@
   transform: scale(1.2);
 }
 
+/* HOMEPAGE */
+
 .hero-space {
-  background-image: url(../../../public/jumbo.png);
+  background-image: url(../../../jumbo.png);
   padding: 150px 100px;
   background-size: cover;
   background-repeat: no-repeat;
@@ -60,7 +70,7 @@
 }
 
 .hero-text {
-  color: #1a1a33;
+  color: #122852;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   max-width: 800px;
   font-size: clamp(2rem, 5vw, 4rem);
@@ -70,4 +80,38 @@
   padding: 10px;
   border-radius: 50px;
   background-color: rgb(128, 128, 128, 0.5);
+}
+
+/* MAIN */
+
+main {
+  padding-top: 90px;
+  height: 100vh;
+}
+
+/* FOOTER */
+
+.footer-container {
+  height: 90px;
+  background-color: #ffd0cd;
+  padding: 0 30px;
+}
+
+.footer-left,
+.footer-right {
+  font-size: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #122852;
+}
+
+.footer-left *,
+.footer-right * {
+  margin: 0;
+  color: #122852;
+}
+
+.footer-center img {
+  width: 200px;
 }
