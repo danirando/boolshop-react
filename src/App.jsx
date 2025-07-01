@@ -23,7 +23,7 @@ export default function App() {
               {/* ROTTE CON IN COMUNE IL PREFISSO  */}
               <Route path="/clothes">
                 <Route path="" element={<ClothesListPage />}></Route>
-                <Route path=":id" element={<ClothDetailPage />}></Route>
+                <Route path=":slug" element={<ClothDetailPage />}></Route>
               </Route>
 
               <Route path="*" element={<NotFoundPage />}></Route>

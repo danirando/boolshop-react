@@ -1,7 +1,7 @@
 export default function NotFoundPage() {
   return (
     <>
-      <h1>non ce un cazzo</h1>
+      <h1>404</h1>
     </>
   );
 }
