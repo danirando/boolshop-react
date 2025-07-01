@@ -15,7 +15,6 @@ export default function HomePage() {
   };
 
   const clothesInPromo = FetchPromoClothes(clothes);
-  console.log(clothesInPromo);
 
   const FetchBestSellerClothes = (clothes) => {
     if (!clothes) return [];
@@ -23,7 +22,6 @@ export default function HomePage() {
   };
 
   const clothesBestSeller = FetchBestSellerClothes(clothes);
-  console.log(clothesBestSeller);
 
   return (
     <div>
@@ -41,26 +39,24 @@ export default function HomePage() {
             <CardGroup>
               {clothesBestSeller.map((item) => {
                 return (
-                  <>
-                    <Card key={item.id}>
-                      <Card.Img
-                        className="card-img-fixed"
-                        variant="top"
-                        src={item.img}
-                      />
-                      <Card.Body>
-                        <Card.Title>{item.name}</Card.Title>
-                        <Card.Text>
-                          <span>
-                            Price: <span className="price">{item.price}</span>
-                          </span>
-                        </Card.Text>
-                      </Card.Body>
-                      <Card.Footer>
-                        <button className="btn add-button">Add to cart</button>
-                      </Card.Footer>
-                    </Card>
-                  </>
+                  <Card key={item.id}>
+                    <Card.Img
+                      className="card-img-fixed"
+                      variant="top"
+                      src={item.img}
+                    />
+                    <Card.Body>
+                      <Card.Title>{item.name}</Card.Title>
+                      <Card.Text>
+                        <span>
+                          Price: <span className="price">{item.price}</span>
+                        </span>
+                      </Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <button className="btn add-button">Add to cart</button>
+                    </Card.Footer>
+                  </Card>
                 );
               })}
             </CardGroup>
@@ -76,48 +72,45 @@ export default function HomePage() {
                 ).toFixed(2);
 
                 return (
-                  <>
-                    <Card key={item.id}>
-                      <div
-                        style={{
-                          position: "relative",
-                          display: "inline-block",
-                        }}>
-                        <Card.Img
-                          className="card-img-fixed"
-                          variant="top"
-                          src={item.img}
-                        />
-                        {item.promo > 0 && (
-                          <span
-                            className="badge bg-danger"
-                            style={{
-                              position: "absolute",
-                              top: "10px",
-                              left: "10px",
-                              fontWeight: "bold",
-                            }}>
-                            -{item.promo}%
-                          </span>
-                        )}
-                      </div>
+                  <Card key={item.id}>
+                    <div
+                      style={{
+                        position: "relative",
+                        display: "inline-block",
+                      }}>
+                      <Card.Img
+                        className="card-img-fixed"
+                        variant="top"
+                        src={item.img}
+                      />
+                      {item.promo > 0 && (
+                        <span
+                          className="badge bg-danger"
+                          style={{
+                            position: "absolute",
+                            top: "10px",
+                            left: "10px",
+                            fontWeight: "bold",
+                          }}>
+                          -{item.promo}%
+                        </span>
+                      )}
+                    </div>
 
-                      <Card.Body>
-                        <Card.Title>{item.name}</Card.Title>
-                        <Card.Text>
-                          <span>
-                            Price:{" "}
-                            <span className="old-price">{item.price}</span>
-                            <span> </span>
-                            <span className="price">{discountedPrice}</span>
-                          </span>
-                        </Card.Text>
-                      </Card.Body>
-                      <Card.Footer>
-                        <button className="btn add-button">Add to cart</button>
-                      </Card.Footer>
-                    </Card>
-                  </>
+                    <Card.Body>
+                      <Card.Title>{item.name}</Card.Title>
+                      <Card.Text>
+                        <span>
+                          Price: <span className="old-price">{item.price}</span>
+                          <span> </span>
+                          <span className="price">{discountedPrice}</span>
+                        </span>
+                      </Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <button className="btn add-button">Add to cart</button>
+                    </Card.Footer>
+                  </Card>
                 );
               })}
             </CardGroup>
