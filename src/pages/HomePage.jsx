@@ -16,12 +16,9 @@ export default function HomePage() {
 
   const clothesInPromo = FetchPromoClothes(clothes);
 
-  const FetchBestSellerClothes = (clothes) => {
-    if (!clothes) return [];
-    return clothes.filter((item) => item.sold_number >= 20).slice(0, 3);
-  };
-
-  const clothesBestSeller = FetchBestSellerClothes(clothes);
+  const clothesBestSeller = clothes
+    .sort((a, b) => b.sold_number - a.sold_number)
+    .slice(0, 3);
 
   return (
     <div>
