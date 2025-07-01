@@ -1,7 +1,16 @@
+import { useContext } from "react";
 import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
+import { ClothesContext } from "../contexts/ClothesContext";
 
 export default function HomePage() {
+  const { clothes, loading, error } = useContext(ClothesContext);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Errore: {error.message}</p>;
+
+  console.log(clothes);
+
   return (
     <div>
       <div className="hero-space">
@@ -25,7 +34,7 @@ export default function HomePage() {
                 <Card.Body>
                   <Card.Title>Card title</Card.Title>
                   <Card.Text>
-                    <div>Prezzo:</div>
+                    <span>Prezzo:</span>
                   </Card.Text>
                 </Card.Body>
                 <Card.Footer>
@@ -43,7 +52,7 @@ export default function HomePage() {
                 <Card.Body>
                   <Card.Title>Card title</Card.Title>
                   <Card.Text>
-                    <div>Prezzo:</div>
+                    <span>Prezzo:</span>
                   </Card.Text>
                 </Card.Body>
                 <Card.Footer>
@@ -61,7 +70,7 @@ export default function HomePage() {
                 <Card.Body>
                   <Card.Title>Card title</Card.Title>
                   <Card.Text>
-                    <div>Prezzo:</div>
+                    <span>Prezzo:</span>
                   </Card.Text>
                 </Card.Body>
                 <Card.Footer>
@@ -85,7 +94,7 @@ export default function HomePage() {
                 <Card.Body>
                   <Card.Title>Card title</Card.Title>
                   <Card.Text>
-                    <div>Prezzo:</div>
+                    <span>Prezzo:</span>
                   </Card.Text>
                 </Card.Body>
                 <Card.Footer>
@@ -103,7 +112,7 @@ export default function HomePage() {
                 <Card.Body>
                   <Card.Title>Card title</Card.Title>
                   <Card.Text>
-                    <div>Prezzo:</div>
+                    <span>Prezzo:</span>
                   </Card.Text>
                 </Card.Body>
                 <Card.Footer>
@@ -121,7 +130,7 @@ export default function HomePage() {
                 <Card.Body>
                   <Card.Title>Card title</Card.Title>
                   <Card.Text>
-                    <div>Prezzo:</div>
+                    <span>Prezzo:</span>
                   </Card.Text>
                 </Card.Body>
                 <Card.Footer>
