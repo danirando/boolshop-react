@@ -14,6 +14,7 @@ body {
   display: inline-flex;
   transition: transform 0.2s ease-in-out;
 }
+
 @media (max-width: 576px) {
   .logo {
     width: 80px;
@@ -51,8 +52,10 @@ body {
   background-color: #ffd0cd;
   border-color: #ffd0cd;
 }
+
 .search-input {
   width: 300px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .bi.bi-cart {
@@ -83,6 +86,7 @@ body {
 .navbar-collapse.collapse.show {
   max-height: 600px;
 }
+
 .nav-link {
   position: relative;
   padding: 0.5rem;
@@ -116,6 +120,7 @@ body {
   font-size: clamp(2rem, 5vw, 4rem);
   font-family: "Pacifico", cursive;
 }
+
 .hero-content {
   padding: 10px;
   border-radius: 50px;
@@ -126,6 +131,7 @@ body {
   padding-top: 30px;
   padding-bottom: 30px;
 }
+
 .separetor {
   height: 1px;
   background-color: black;
@@ -134,10 +140,31 @@ body {
 .card-img-fixed {
   height: 500px;
   object-fit: cover;
+  position: relative;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  object-fit: cover;
+  object-position: center top;
 }
 
-section > h2 {
+.banner {
+  position: absolute;
+  height: 20px;
+  width: 50px;
+  background-color: red;
+}
+
+section>h2 {
   padding-bottom: 20px;
+}
+
+.old-price,
+.price {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.old-price {
+  text-decoration: line-through;
 }
 
 /* MAIN */
