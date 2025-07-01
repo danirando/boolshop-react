@@ -36,7 +36,7 @@ export default function HomePage() {
             <CardGroup>
               {clothesBestSeller.map((item) => {
                 return (
-                  <Card key={item.id}>
+                  <Card className="card-clothes" key={item.id}>
                     <Card.Img
                       className="card-img-fixed"
                       variant="top"
@@ -69,7 +69,7 @@ export default function HomePage() {
                 ).toFixed(2);
 
                 return (
-                  <Card key={item.id}>
+                  <Card className="card-clothes" key={item.id}>
                     <div
                       style={{
                         position: "relative",
