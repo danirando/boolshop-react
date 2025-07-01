@@ -6,28 +6,31 @@ import ClothesListPage from "./pages/ClothesListPage";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import { ClothesProvider } from "./contexts/ClothesContext";
 
 export default function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          {/* ROTTE CON IN COMUNE IL LAYOUT */}
-          <Route element={<DefaultLayout />}>
-            <Route path="/" element={<HomePage />}></Route>
-            <Route path="/checkout" element={<CheckoutPage />}></Route>
-            <Route path="/cart" element={<CartPage />}></Route>
+      <ClothesProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* ROTTE CON IN COMUNE IL LAYOUT */}
+            <Route element={<DefaultLayout />}>
+              <Route path="/" element={<HomePage />}></Route>
+              <Route path="/checkout" element={<CheckoutPage />}></Route>
+              <Route path="/cart" element={<CartPage />}></Route>
 
-            {/* ROTTE CON IN COMUNE IL PREFISSO  */}
-            <Route path="/clothes">
-              <Route path="" element={<ClothesListPage />}></Route>
-              <Route path=":id" element={<ClothDetailPage />}></Route>
+              {/* ROTTE CON IN COMUNE IL PREFISSO  */}
+              <Route path="/clothes">
+                <Route path="" element={<ClothesListPage />}></Route>
+                <Route path=":id" element={<ClothDetailPage />}></Route>
+              </Route>
+
+              <Route path="*" element={<NotFoundPage />}></Route>
             </Route>
-
-            <Route path="*" element={<NotFoundPage />}></Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </ClothesProvider>
     </>
   );
 }

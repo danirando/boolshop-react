@@ -17,8 +17,7 @@ export default function Header() {
           <Nav
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: "100px" }}
-            navbarScroll
-          >
+            navbarScroll>
             <Link to="#" className="nav-link">
               <i className="bi bi-cart" style={{ fontSize: "1.5rem" }}></i>
             </Link>
@@ -32,7 +31,7 @@ export default function Header() {
               aria-label="Search"
             />
             <button type="submit" className="btn search-button">
-              Cerca
+              Search
             </button>
           </form>
         </Navbar.Collapse>
