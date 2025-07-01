@@ -1,24 +1,48 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
 import { ClothesContext } from "../contexts/ClothesContext";
+import axios from "axios";
 
 export default function HomePage() {
-  const { clothes, loading, error } = useContext(ClothesContext);
+  const [mostSoldClothes, setMostSoldClothes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // chiamata axios per i più venduti
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/most-sold")
+      .then((res) => {
+        setMostSoldClothes(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err);
+        setLoading(false);
+      });
+  }, []);
+
+  const [promoClothes, setPromoClothes] = useState([]);
+
+  // chiamata axios per in promo
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/promo")
+      .then((res) => {
+        setPromoClothes(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err);
+        setLoading(false);
+      });
+  }, []);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Errore: {error.message}</p>;
-
-  const FetchPromoClothes = (clothes) => {
-    if (!clothes) return [];
-    return clothes.filter((item) => item.promo > 0);
-  };
-
-  const clothesInPromo = FetchPromoClothes(clothes);
-
-  const clothesBestSeller = clothes
-    .sort((a, b) => b.sold_number - a.sold_number)
-    .slice(0, 3);
 
   return (
     <div>
@@ -34,7 +58,7 @@ export default function HomePage() {
           <section>
             <h2>Top Seller</h2>
             <CardGroup>
-              {clothesBestSeller.map((item) => {
+              {mostSoldClothes.map((item) => {
                 return (
                   <Card className="card-clothes" key={item.id}>
                     <Card.Img
@@ -62,7 +86,7 @@ export default function HomePage() {
           <section>
             <h2>In promo</h2>
             <CardGroup>
-              {clothesInPromo.map((item) => {
+              {promoClothes.map((item) => {
                 const discountedPrice = (
                   parseFloat(item.price) *
                   (1 - item.promo / 100)
