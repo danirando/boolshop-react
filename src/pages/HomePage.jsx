@@ -68,23 +68,23 @@ export default function HomePage() {
             <CardGroup>
               {mostSoldClothes.map((item) => {
                 return (
-                  <Card
-                    className="card-clothes"
-                    key={item.id}
-                    onClick={() => navigate(`/clothes/${item.slug}`)}>
-                    <Card.Img
-                      className="card-img-fixed"
-                      variant="top"
-                      src={item.img}
-                    />
-                    <Card.Body>
-                      <Card.Title>{item.name}</Card.Title>
-                      <Card.Text>
-                        <span>
-                          Price: <span className="price">{item.price}</span>
-                        </span>
-                      </Card.Text>
-                    </Card.Body>
+                  <Card className="card-clothes" key={item.id}>
+                    <div onClick={() => navigate(`/clothes/${item.slug}`)}>
+                      <Card.Img
+                        className="card-img-fixed"
+                        variant="top"
+                        src={item.img}
+                      />
+                      <Card.Body>
+                        <Card.Title>{item.name}</Card.Title>
+                        <Card.Text>
+                          <span>
+                            Price: <span className="price">{item.price}</span>
+                          </span>
+                        </Card.Text>
+                      </Card.Body>
+                    </div>
+
                     <Card.Footer>
                       <AddToCartButton item={item} />
                     </Card.Footer>
@@ -109,44 +109,45 @@ export default function HomePage() {
                 };
 
                 return (
-                  <Card
-                    className="card-clothes"
-                    key={item.id}
-                    onClick={() => navigate(`/clothes/${item.slug}`)}>
-                    <div
-                      style={{
-                        position: "relative",
-                        display: "inline-block",
-                      }}>
-                      <Card.Img
-                        className="card-img-fixed"
-                        variant="top"
-                        src={item.img}
-                      />
-                      {item.promo > 0 && (
-                        <span
-                          className="badge bg-danger"
-                          style={{
-                            position: "absolute",
-                            top: "10px",
-                            left: "10px",
-                            fontWeight: "bold",
-                          }}>
-                          -{item.promo}%
-                        </span>
-                      )}
+                  <Card className="card-clothes" key={item.id}>
+                    <div onClick={() => navigate(`/clothes/${item.slug}`)}>
+                      <div
+                        style={{
+                          position: "relative",
+                          display: "inline-block",
+                        }}>
+                        <Card.Img
+                          className="card-img-fixed"
+                          variant="top"
+                          src={item.img}
+                        />
+                        {item.promo > 0 && (
+                          <span
+                            className="badge bg-danger"
+                            style={{
+                              position: "absolute",
+                              top: "10px",
+                              left: "10px",
+                              fontWeight: "bold",
+                            }}>
+                            -{item.promo}%
+                          </span>
+                        )}
+                      </div>
+
+                      <Card.Body>
+                        <Card.Title>{item.name}</Card.Title>
+                        <Card.Text>
+                          <span>
+                            Price:{" "}
+                            <span className="old-price">{item.price}</span>
+                            <span> </span>
+                            <span className="price">{discountedPrice}</span>
+                          </span>
+                        </Card.Text>
+                      </Card.Body>
                     </div>
 
-                    <Card.Body>
-                      <Card.Title>{item.name}</Card.Title>
-                      <Card.Text>
-                        <span>
-                          Price: <span className="old-price">{item.price}</span>
-                          <span> </span>
-                          <span className="price">{discountedPrice}</span>
-                        </span>
-                      </Card.Text>
-                    </Card.Body>
                     <Card.Footer>
                       <button
                         className="btn add-button"
