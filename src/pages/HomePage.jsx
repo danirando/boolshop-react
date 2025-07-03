@@ -42,6 +42,7 @@ export default function HomePage() {
       .then((res) => {
         setPromoClothes(res.data);
         setLoading(false);
+        console.log(res.data);
       })
       .catch((err) => {
         setError(err);
