@@ -26,8 +26,6 @@ body {
   }
 }
 
-
-
 .logo:hover {
   transform: scale(1.1);
 }
@@ -177,7 +175,7 @@ body {
   background-color: red;
 }
 
-section>h2 {
+section > h2 {
   padding-bottom: 20px;
 }
 
