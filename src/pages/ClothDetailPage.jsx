@@ -19,7 +19,7 @@ export default function ClothDetailPage() {
   useEffect(fetchClothes, []);
   return (
     <>
-      <div className="container">
+      <div className="container-sm container-md">
         <div className="row">
           <div className="col-12">
             <div className="text-center my-5">
@@ -27,32 +27,34 @@ export default function ClothDetailPage() {
               <p>Informazioni dettagliate sul prodotto selezionato.</p>
             </div>
 
-            <div className="d-flex justify-content-center flex-column align-items-center my-5">
-              <div className=" d-flex justify-content-center  align-items-strech my-5">
-                <div className="  " style={{ width: "25rem" }}>
-                  <img
-                    className="card-img-top"
-                    src={cloth.img}
-                    alt={cloth.name}
-                  />
-                </div>
-                <div className="text d-flex flex-column gap-4 p-3">
-                  <div>{cloth.name} </div>
-                  <div className="text-success">{cloth.price}€ </div>
-                  <div className="text-secondary">
-                    Materiale: {cloth.material}
+            <div className="">
+              <div className="d-flex justify-content-center flex-column align-items-center my-5">
+                <div className=" d-flex justify-content-center flex-column flex-md-row align-items-stretch my-5">
+                  <div className="  " style={{ width: "25rem" }}>
+                    <img
+                      className="card-img-top"
+                      src={cloth.img}
+                      alt={cloth.name}
+                    />
                   </div>
-                  <div className="text-secondary">
-                    Categoria: {cloth.category?.[0]?.name}
+                  <div className="text d-flex flex-column gap-4 p-3">
+                    <div>{cloth.name} </div>
+                    <div className="text-success">{cloth.price}€ </div>
+                    <div className="text-secondary">
+                      Materiale: {cloth.material}
+                    </div>
+                    <div className="text-secondary">
+                      Categoria: {cloth.category?.[0]?.name}
+                    </div>
+                    <div>componente selezione taglie</div>
+                    <AddToCartButton item={cloth} />
                   </div>
-                  <div>componente selezione taglie</div>
-                  <AddToCartButton item={cloth} />
                 </div>
-              </div>
 
-              <NavLink to="/clothes" className="nav-link">
-                Torna indietro
-              </NavLink>
+                <NavLink to="/clothes" className="nav-link">
+                  Torna indietro
+                </NavLink>
+              </div>
             </div>
           </div>
         </div>
