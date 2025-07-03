@@ -10,6 +10,7 @@ import { useCart } from "../contexts/CartContext";
 import AddToCartButton from "../components/AddToCartButton";
 
 export default function HomePage() {
+  const [selectedSizes, setSelectedSizes] = useState({});
   const [mostSoldClothes, setMostSoldClothes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -85,8 +86,37 @@ export default function HomePage() {
                       </Card.Body>
                     </div>
 
-                    <Card.Footer>
-                      <AddToCartButton item={item} />
+                    <Card.Footer className="d-flex flex-column gap-3">
+                      {item.sizes && item.sizes.length > 0 && (
+                        <select
+                          className="form-select"
+                          style={{ maxWidth: 90 }}
+                          value={selectedSizes[item.id] || item.sizes[0]}
+                          onChange={(e) =>
+                            setSelectedSizes((prev) => ({
+                              ...prev,
+                              [item.id]: e.target.value,
+                            }))
+                          }
+                          onClick={(e) => e.stopPropagation()}>
+                          {item.sizes.map((sz) => (
+                            <option key={sz} value={sz}>
+                              {sz}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+                      <button
+                        className="btn add-button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addToCart({
+                            ...item,
+                            size: selectedSizes[item.id] || item.sizes[0],
+                          });
+                        }}>
+                        Add to cart
+                      </button>
                     </Card.Footer>
                   </Card>
                 );
@@ -142,10 +172,35 @@ export default function HomePage() {
                       </Card.Body>
                     </div>
 
-                    <Card.Footer>
+                    <Card.Footer className="d-flex flex-column gap-3">
+                      {item.sizes && item.sizes.length > 0 && (
+                        <select
+                          className="form-select"
+                          style={{ maxWidth: 90 }}
+                          value={selectedSizes[item.id] || item.sizes[0]}
+                          onChange={(e) =>
+                            setSelectedSizes((prev) => ({
+                              ...prev,
+                              [item.id]: e.target.value,
+                            }))
+                          }
+                          onClick={(e) => e.stopPropagation()}>
+                          {item.sizes.map((sz) => (
+                            <option key={sz} value={sz}>
+                              {sz}
+                            </option>
+                          ))}
+                        </select>
+                      )}
                       <button
                         className="btn add-button"
-                        onClick={() => addToCart(cartDiscount)}>
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addToCart({
+                            ...item,
+                            size: selectedSizes[item.id] || item.sizes[0],
+                          });
+                        }}>
                         Add to cart
                       </button>
                     </Card.Footer>
