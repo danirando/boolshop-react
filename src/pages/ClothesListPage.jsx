@@ -1,22 +1,11 @@
 import { NavLink } from "react-router-dom";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import AddToCartButton from "../components/AddToCartButton";
 
-//prendere dati dal context
+import { useContext } from "react";
+import AddToCartButton from "../components/AddToCartButton";
+import { ClothesContext } from "../contexts/ClothesContext";
 
 export default function ClothesListPage() {
-  const [clothes, setClothes] = useState([]);
-  const clothesUrl = import.meta.env.VITE_BOOKS_API_URL + "/clothes";
-
-  const fetchClothes = () => {
-    axios.get(clothesUrl).then((res) => {
-      console.log(res.data);
-      setClothes(res.data);
-    });
-  };
-
-  useEffect(fetchClothes, []);
+  const { clothes } = useContext(ClothesContext);
 
   return (
     <>

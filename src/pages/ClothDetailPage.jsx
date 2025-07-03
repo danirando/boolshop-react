@@ -6,7 +6,7 @@ import AddToCartButton from "../components/AddToCartButton";
 // prendere dati dal context
 
 export default function ClothDetailPage() {
-  const { slug, id } = useParams();
+  const { slug } = useParams();
   const [cloth, setCloth] = useState({});
   const clothUrl = import.meta.env.VITE_BOOKS_API_URL + "/clothes/" + slug;
 
