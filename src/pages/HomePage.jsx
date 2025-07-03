@@ -4,6 +4,8 @@ import CardGroup from "react-bootstrap/CardGroup";
 import { ClothesContext } from "../contexts/ClothesContext";
 import axios from "axios";
 
+import { useNavigate } from "react-router-dom";
+
 import { useCart } from "../contexts/CartContext";
 import AddToCartButton from "../components/AddToCartButton";
 
@@ -11,6 +13,7 @@ export default function HomePage() {
   const [mostSoldClothes, setMostSoldClothes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const { addToCart } = useCart();
 
@@ -65,7 +68,10 @@ export default function HomePage() {
             <CardGroup>
               {mostSoldClothes.map((item) => {
                 return (
-                  <Card className="card-clothes" key={item.id}>
+                  <Card
+                    className="card-clothes"
+                    key={item.id}
+                    onClick={() => navigate(`/clothes/${item.slug}`)}>
                     <Card.Img
                       className="card-img-fixed"
                       variant="top"
@@ -103,13 +109,15 @@ export default function HomePage() {
                 };
 
                 return (
-                  <Card className="card-clothes" key={item.id}>
+                  <Card
+                    className="card-clothes"
+                    key={item.id}
+                    onClick={() => navigate(`/clothes/${item.slug}`)}>
                     <div
                       style={{
                         position: "relative",
                         display: "inline-block",
-                      }}
-                    >
+                      }}>
                       <Card.Img
                         className="card-img-fixed"
                         variant="top"
@@ -123,8 +131,7 @@ export default function HomePage() {
                             top: "10px",
                             left: "10px",
                             fontWeight: "bold",
-                          }}
-                        >
+                          }}>
                           -{item.promo}%
                         </span>
                       )}
@@ -143,8 +150,7 @@ export default function HomePage() {
                     <Card.Footer>
                       <button
                         className="btn add-button"
-                        onClick={() => addToCart(cartDiscount)}
-                      >
+                        onClick={() => addToCart(cartDiscount)}>
                         Add to cart
                       </button>
                     </Card.Footer>
