@@ -41,6 +41,7 @@ export default function HomePage() {
     axios
       .get("http://localhost:3000/promo")
       .then((res) => {
+        console.log("mostSoldClothes:", res.data);
         setPromoClothes(res.data);
         setLoading(false);
       })
@@ -52,6 +53,22 @@ export default function HomePage() {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Errore: {error.message}</p>;
+
+  function decrementQuantity(itemId, fromPromo = false) {
+    if (fromPromo) {
+      setPromoClothes((prev) =>
+        prev.map((item) =>
+          item.id === itemId ? { ...item, stock: item.stock - 1 } : item
+        )
+      );
+    } else {
+      setMostSoldClothes((prev) =>
+        prev.map((item) =>
+          item.id === itemId ? { ...item, stock: item.stock - 1 } : item
+        )
+      );
+    }
+  }
 
   return (
     <div>
@@ -87,36 +104,43 @@ export default function HomePage() {
                     </div>
 
                     <Card.Footer className="d-flex flex-column gap-3">
-                      {item.sizes && item.sizes.length > 0 && (
-                        <select
-                          className="form-select"
-                          style={{ maxWidth: 90 }}
-                          value={selectedSizes[item.id] || item.sizes[0]}
-                          onChange={(e) =>
-                            setSelectedSizes((prev) => ({
-                              ...prev,
-                              [item.id]: e.target.value,
-                            }))
-                          }
-                          onClick={(e) => e.stopPropagation()}>
-                          {item.sizes.map((sz) => (
-                            <option key={sz} value={sz}>
-                              {sz}
-                            </option>
-                          ))}
-                        </select>
+                      {item.stock > 0 ? (
+                        <>
+                          {item.sizes && item.sizes.length > 0 && (
+                            <select
+                              className="form-select"
+                              style={{ maxWidth: 90 }}
+                              value={selectedSizes[item.id] || item.sizes[0]}
+                              onChange={(e) =>
+                                setSelectedSizes((prev) => ({
+                                  ...prev,
+                                  [item.id]: e.target.value,
+                                }))
+                              }
+                              onClick={(e) => e.stopPropagation()}>
+                              {item.sizes.map((sz) => (
+                                <option key={sz} value={sz}>
+                                  {sz}
+                                </option>
+                              ))}
+                            </select>
+                          )}
+                          <button
+                            className="btn add-button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              addToCart({
+                                ...item,
+                                size: selectedSizes[item.id] || item.sizes[0],
+                              });
+                              decrementQuantity(item.id, false); // <-- qui
+                            }}>
+                            Add to cart
+                          </button>
+                        </>
+                      ) : (
+                        <div>Out of stock</div>
                       )}
-                      <button
-                        className="btn add-button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          addToCart({
-                            ...item,
-                            size: selectedSizes[item.id] || item.sizes[0],
-                          });
-                        }}>
-                        Add to cart
-                      </button>
                     </Card.Footer>
                   </Card>
                 );
@@ -173,36 +197,43 @@ export default function HomePage() {
                     </div>
 
                     <Card.Footer className="d-flex flex-column gap-3">
-                      {item.sizes && item.sizes.length > 0 && (
-                        <select
-                          className="form-select"
-                          style={{ maxWidth: 90 }}
-                          value={selectedSizes[item.id] || item.sizes[0]}
-                          onChange={(e) =>
-                            setSelectedSizes((prev) => ({
-                              ...prev,
-                              [item.id]: e.target.value,
-                            }))
-                          }
-                          onClick={(e) => e.stopPropagation()}>
-                          {item.sizes.map((sz) => (
-                            <option key={sz} value={sz}>
-                              {sz}
-                            </option>
-                          ))}
-                        </select>
+                      {item.stock > 0 ? (
+                        <>
+                          {item.sizes && item.sizes.length > 0 && (
+                            <select
+                              className="form-select"
+                              style={{ maxWidth: 90 }}
+                              value={selectedSizes[item.id] || item.sizes[0]}
+                              onChange={(e) =>
+                                setSelectedSizes((prev) => ({
+                                  ...prev,
+                                  [item.id]: e.target.value,
+                                }))
+                              }
+                              onClick={(e) => e.stopPropagation()}>
+                              {item.sizes.map((sz) => (
+                                <option key={sz} value={sz}>
+                                  {sz}
+                                </option>
+                              ))}
+                            </select>
+                          )}
+                          <button
+                            className="btn add-button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              addToCart({
+                                ...item,
+                                size: selectedSizes[item.id] || item.sizes[0],
+                              });
+                              decrementQuantity(item.id, true); // <-- qui
+                            }}>
+                            Add to cart
+                          </button>
+                        </>
+                      ) : (
+                        <div>Out of stock</div>
                       )}
-                      <button
-                        className="btn add-button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          addToCart({
-                            ...item,
-                            size: selectedSizes[item.id] || item.sizes[0],
-                          });
-                        }}>
-                        Add to cart
-                      </button>
                     </Card.Footer>
                   </Card>
                 );
