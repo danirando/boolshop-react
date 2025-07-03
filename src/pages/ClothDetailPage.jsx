@@ -1,16 +1,12 @@
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AddToCartButton from "../components/AddToCartButton";
-
-// prendere dati dal context
 
 export default function ClothDetailPage() {
   const { slug } = useParams();
   const [cloth, setCloth] = useState({});
   const clothUrl = import.meta.env.VITE_BOOKS_API_URL + "/clothes/" + slug;
-
-  if (!slug) return <p>Caricamento...</p>;
 
   const fetchClothes = () => {
     axios.get(clothUrl).then((res) => {
@@ -39,7 +35,7 @@ export default function ClothDetailPage() {
                   alt={cloth.name}
                 />
               </div>
-              <div className="text d-flex flex-column gap-3  p-3">
+              <div className="text d-flex flex-column gap-4 p-3">
                 <div>{cloth.name} </div>
                 <div className="text-success">{cloth.price}€ </div>
                 <div className="text-secondary">
