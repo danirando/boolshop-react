@@ -1,6 +1,7 @@
 import { useCart } from "../contexts/CartContext";
 import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
+import { useNavigate } from "react-router-dom";
 
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
@@ -8,6 +9,8 @@ export default function CartPage() {
     (total, item) => total + item.price * item.quantity,
     0
   );
+  const navigate = useNavigate();
+
   return (
     <div className="container mt-5">
       <div className="my-5">
@@ -29,6 +32,7 @@ export default function CartPage() {
                   variant="top"
                   src={item.img}
                   className="card-img-fixed"
+                  onClick={() => navigate(`/clothes/${item.slug}`)}
                 />
                 <Card.Body>
                   <Card.Title>{item.name}</Card.Title>
