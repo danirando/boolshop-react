@@ -18,8 +18,9 @@ export default function Header() {
         <Nav
           className="me-auto my-2 my-lg-0"
           style={{ maxHeight: "100px" }}
-          navbarScroll>
-          <Link to="#" className="nav-link">
+          navbarScroll
+        >
+          <Link to="/cart" className="nav-link">
             <i className="bi bi-cart" style={{ fontSize: "1.5rem" }}></i>
           </Link>
         </Nav>
