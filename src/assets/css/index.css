@@ -203,13 +203,27 @@ body {
 }
 
 .card-img-fixed {
+  width: 100%;
+  /* Assicura che l'immagine riempia la larghezza */
   height: 500px;
   object-fit: cover;
-  position: relative;
+  object-position: center top;
+  display: block;
+  /* Elimina eventuali spazi indesiderati */
   border-top-left-radius: 0 !important;
   border-top-right-radius: 0 !important;
-  object-fit: cover;
-  object-position: center top;
+  margin: 0;
+  /* Elimina margini */
+  padding: 0;
+}
+
+.card-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 2.5em;
+  width: 100%;
+  display: block;
 }
 
 .banner {
@@ -233,6 +247,7 @@ section>h2 {
 }
 
 .card-clothes {
+
   transition: transform 0.2s ease-in-out;
 }
 
@@ -240,6 +255,7 @@ section>h2 {
   transform: scale(1.05);
   z-index: 50;
   cursor: pointer;
+
 }
 
 /* FOOTER */
