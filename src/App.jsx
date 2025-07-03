@@ -7,30 +7,33 @@ import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import { ClothesProvider } from "./contexts/ClothesContext";
+import { CartProvider } from "./contexts/CartContext";
 
 export default function App() {
   return (
     <>
-      <ClothesProvider>
-        <BrowserRouter>
-          <Routes>
-            {/* ROTTE CON IN COMUNE IL LAYOUT */}
-            <Route element={<DefaultLayout />}>
-              <Route path="/" element={<HomePage />}></Route>
-              <Route path="/checkout" element={<CheckoutPage />}></Route>
-              <Route path="/cart" element={<CartPage />}></Route>
+      <CartProvider>
+        <ClothesProvider>
+          <BrowserRouter>
+            <Routes>
+              {/* ROTTE CON IN COMUNE IL LAYOUT */}
+              <Route element={<DefaultLayout />}>
+                <Route path="/" element={<HomePage />}></Route>
+                <Route path="/checkout" element={<CheckoutPage />}></Route>
+                <Route path="/cart" element={<CartPage />}></Route>
 
-              {/* ROTTE CON IN COMUNE IL PREFISSO  */}
-              <Route path="/clothes">
-                <Route path="" element={<ClothesListPage />}></Route>
-                <Route path=":slug" element={<ClothDetailPage />}></Route>
+                {/* ROTTE CON IN COMUNE IL PREFISSO  */}
+                <Route path="/clothes">
+                  <Route path="" element={<ClothesListPage />}></Route>
+                  <Route path=":slug" element={<ClothDetailPage />}></Route>
+                </Route>
+
+                <Route path="*" element={<NotFoundPage />}></Route>
               </Route>
-
-              <Route path="*" element={<NotFoundPage />}></Route>
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </ClothesProvider>
+            </Routes>
+          </BrowserRouter>
+        </ClothesProvider>
+      </CartProvider>
     </>
   );
 }
