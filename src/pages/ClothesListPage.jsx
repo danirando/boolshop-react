@@ -2,7 +2,10 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+// import {useCount} from "../context/ClothesContext";
+
 export default function ClothesListPage() {
+  // const {clothes, setClothes} = useCount()
   const [clothes, setClothes] = useState([]);
   const clothesUrl = import.meta.env.VITE_BOOKS_API_URL + "/clothes";
 
