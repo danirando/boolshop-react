@@ -97,13 +97,19 @@ export default function HomePage() {
                   (1 - item.promo / 100)
                 ).toFixed(2);
 
+                const cartDiscount = {
+                  ...item,
+                  price: parseFloat(discountedPrice),
+                };
+
                 return (
                   <Card className="card-clothes" key={item.id}>
                     <div
                       style={{
                         position: "relative",
                         display: "inline-block",
-                      }}>
+                      }}
+                    >
                       <Card.Img
                         className="card-img-fixed"
                         variant="top"
@@ -117,7 +123,8 @@ export default function HomePage() {
                             top: "10px",
                             left: "10px",
                             fontWeight: "bold",
-                          }}>
+                          }}
+                        >
                           -{item.promo}%
                         </span>
                       )}
@@ -136,7 +143,8 @@ export default function HomePage() {
                     <Card.Footer>
                       <button
                         className="btn add-button"
-                        onClick={() => addToCart(item)}>
+                        onClick={() => addToCart(cartDiscount)}
+                      >
                         Add to cart
                       </button>
                     </Card.Footer>
