@@ -1,14 +1,17 @@
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
+// components
 import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
+import AddToCartButton from "../components/AddToCartButton";
 
 import { useContext } from "react";
-import AddToCartButton from "../components/AddToCartButton";
 import { ClothesContext } from "../contexts/ClothesContext";
 
 export default function ClothesListPage() {
   const { clothes } = useContext(ClothesContext);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -18,7 +21,10 @@ export default function ClothesListPage() {
           <CardGroup>
             {clothes.map((cloth) => {
               return (
-                <div className="col-sm-12 col-md-6 col-lg-4">
+                <div
+                  className="col-sm-12 col-md-6 col-lg-4"
+                  onClick={() => navigate(`/clothes/${cloth.slug}`)}
+                >
                   <Card className="card-clothes " key={cloth.id}>
                     <Card.Img
                       className="card-img-fixed"
@@ -36,12 +42,12 @@ export default function ClothesListPage() {
                     <Card.Footer>
                       <div className="d-flex justify-content-between align-items-center">
                         <AddToCartButton item={cloth} />
-                        <NavLink
+                        {/* <NavLink
                           to={`/clothes/${cloth.slug}`}
                           className="nav-item"
                         >
                           Vedi dettagli
-                        </NavLink>
+                        </NavLink> */}
                       </div>
                     </Card.Footer>
                   </Card>
@@ -49,36 +55,6 @@ export default function ClothesListPage() {
               );
             })}
           </CardGroup>
-
-          {/* {clothes.map((cloth) => {
-            return (
-              <>
-                <div key={cloth.id} className="col-sm-12 col-md-6 col-lg-4">
-                  <div className="card h-100  ">
-                    <img
-                      src={cloth.img}
-                      alt={cloth.name}
-                      className="card-img-top h-100 "
-                    />
-
-                    <div className="card-body py-2">
-                      <h6>{cloth.name}</h6>
-                      <p>{cloth.price}€</p>
-                      <div className="d-flex justify-content-between align-items-center">
-                        <NavLink
-                          to={`/clothes/${cloth.slug}`}
-                          className="nav-item"
-                        >
-                          Vedi dettagli
-                        </NavLink>
-                        <AddToCartButton item={cloth} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </>
-            );
-          })} */}
         </div>
       </div>
     </>
