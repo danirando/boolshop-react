@@ -71,7 +71,7 @@ export default function HomePage() {
                   <Card className="card-clothes" key={item.id}>
                     <div onClick={() => navigate(`/clothes/${item.slug}`)}>
                       <Card.Img
-                        className="card-img-fixed"
+                        className="card-img-fixed img-fluid"
                         variant="top"
                         src={item.img}
                       />
@@ -111,29 +111,23 @@ export default function HomePage() {
                 return (
                   <Card className="card-clothes" key={item.id}>
                     <div onClick={() => navigate(`/clothes/${item.slug}`)}>
-                      <div
-                        style={{
-                          position: "relative",
-                          display: "inline-block",
-                        }}>
-                        <Card.Img
-                          className="card-img-fixed"
-                          variant="top"
-                          src={item.img}
-                        />
-                        {item.promo > 0 && (
-                          <span
-                            className="badge bg-danger"
-                            style={{
-                              position: "absolute",
-                              top: "10px",
-                              left: "10px",
-                              fontWeight: "bold",
-                            }}>
-                            -{item.promo}%
-                          </span>
-                        )}
-                      </div>
+                      <Card.Img
+                        className="card-img-fixed img-fluid"
+                        variant="top"
+                        src={item.img}
+                      />
+                      {item.promo > 0 && (
+                        <span
+                          className="badge bg-danger"
+                          style={{
+                            position: "absolute",
+                            top: "10px",
+                            left: "10px",
+                            fontWeight: "bold",
+                          }}>
+                          -{item.promo}%
+                        </span>
+                      )}
 
                       <Card.Body>
                         <Card.Title>{item.name}</Card.Title>
