@@ -34,7 +34,15 @@ export default function ClothesListPage() {
                       </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                      <AddToCartButton item={cloth} />
+                      <div className="d-flex justify-content-between align-items-center">
+                        <AddToCartButton item={cloth} />
+                        <NavLink
+                          to={`/clothes/${cloth.slug}`}
+                          className="nav-item"
+                        >
+                          Vedi dettagli
+                        </NavLink>
+                      </div>
                     </Card.Footer>
                   </Card>
                 </div>
