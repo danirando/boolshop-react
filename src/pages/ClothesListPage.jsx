@@ -2,10 +2,9 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-// import {useCount} from "../context/ClothesContext";
+//prendere dati dal context
 
 export default function ClothesListPage() {
-  // const {clothes, setClothes} = useCount()
   const [clothes, setClothes] = useState([]);
   const clothesUrl = import.meta.env.VITE_BOOKS_API_URL + "/clothes";
 
@@ -37,7 +36,10 @@ export default function ClothesListPage() {
                     <div className="card-body py-2">
                       <h6>{cloth.name}</h6>
                       <p>{cloth.price}€</p>
-                      <NavLink to="/clothes/:id" className="nav-item">
+                      <NavLink
+                        to={`/clothes/${cloth.slug}`}
+                        className="nav-item"
+                      >
                         Vedi dettagli
                       </NavLink>
                     </div>
