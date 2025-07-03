@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
 
 export default function CartPage() {
-  const { cart, removeFromCart, updateQuantity } = useCart();
+  const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -69,7 +69,10 @@ export default function CartPage() {
 
           <div className="mt-4">
             <h3>Total: {totalPrice.toFixed(2)} €</h3>
-            <button className="btn btn-primary mt-3">Checkout</button>
+            <button className="btn btn-danger my-3 mx-2" onClick={clearCart}>
+              Clear cart
+            </button>
+            <button className="btn btn-primary my-3">Checkout</button>
           </div>
         </>
       )}
