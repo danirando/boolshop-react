@@ -12,7 +12,6 @@ export default function ClothDetailPage() {
   const fetchClothes = () => {
     axios.get(clothUrl).then((res) => {
       console.log(res.data);
-
       setCloth(res.data);
     });
   };
