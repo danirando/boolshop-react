@@ -4,10 +4,15 @@ import CardGroup from "react-bootstrap/CardGroup";
 import { ClothesContext } from "../contexts/ClothesContext";
 import axios from "axios";
 
+import { useCart } from "../contexts/CartContext";
+import AddToCartButton from "../components/AddToCartButton";
+
 export default function HomePage() {
   const [mostSoldClothes, setMostSoldClothes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const { addToCart } = useCart();
 
   // chiamata axios per i più venduti
 
@@ -75,7 +80,7 @@ export default function HomePage() {
                       </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                      <button className="btn add-button">Add to cart</button>
+                      <AddToCartButton item={item} />
                     </Card.Footer>
                   </Card>
                 );
@@ -129,7 +134,11 @@ export default function HomePage() {
                       </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                      <button className="btn add-button">Add to cart</button>
+                      <button
+                        className="btn add-button"
+                        onClick={() => addToCart(item)}>
+                        Add to cart
+                      </button>
                     </Card.Footer>
                   </Card>
                 );
