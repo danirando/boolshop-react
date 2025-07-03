@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AddToCartButton from "../components/AddToCartButton";
+import { NavLink } from "react-router-dom";
 
 export default function ClothDetailPage() {
   const { slug } = useParams();
@@ -27,26 +28,32 @@ export default function ClothDetailPage() {
               <p>Informazioni dettagliate sul prodotto selezionato.</p>
             </div>
 
-            <div className=" d-flex justify-content-center  align-items-strech my-5">
-              <div className="  " style={{ width: "25rem" }}>
-                <img
-                  className="card-img-top"
-                  src={cloth.img}
-                  alt={cloth.name}
-                />
-              </div>
-              <div className="text d-flex flex-column gap-4 p-3">
-                <div>{cloth.name} </div>
-                <div className="text-success">{cloth.price}€ </div>
-                <div className="text-secondary">
-                  Materiale: {cloth.material}
+            <div className="d-flex justify-content-center flex-column align-items-center my-5">
+              <div className=" d-flex justify-content-center  align-items-strech my-5">
+                <div className="  " style={{ width: "25rem" }}>
+                  <img
+                    className="card-img-top"
+                    src={cloth.img}
+                    alt={cloth.name}
+                  />
                 </div>
-                <div className="text-secondary">
-                  Categoria: {cloth.category?.[0]?.name}
+                <div className="text d-flex flex-column gap-4 p-3">
+                  <div>{cloth.name} </div>
+                  <div className="text-success">{cloth.price}€ </div>
+                  <div className="text-secondary">
+                    Materiale: {cloth.material}
+                  </div>
+                  <div className="text-secondary">
+                    Categoria: {cloth.category?.[0]?.name}
+                  </div>
+                  <div>componente selezione taglie</div>
+                  <AddToCartButton item={cloth} />
                 </div>
-                <div>componente selezione taglie</div>
-                <AddToCartButton item={cloth} />
               </div>
+
+              <NavLink to="/clothes" className="nav-link">
+                Torna indietro
+              </NavLink>
             </div>
           </div>
         </div>
