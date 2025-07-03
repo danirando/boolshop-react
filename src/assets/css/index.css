@@ -17,7 +17,7 @@ body {
 
 @media (max-width: 767px) {
   .logo {
-    width: 80px;
+    text-align: center;
     height: auto;
   }
 
@@ -25,6 +25,58 @@ body {
     max-width: 200px;
   }
 }
+
+@media (max-width: 762px) {
+  .header-container {
+    flex-direction: column;
+  }
+
+  .navbar {
+    min-height: 290px;
+    align-items: flex-start;
+
+  }
+
+  .d-flex.form-inline,
+  .navbar .d-flex {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .search-input {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+
+  .bi.bi-cart {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.8rem;
+
+  }
+
+  .nav-link .badge {
+    min-width: 1.1em;
+    height: 1.1em;
+    font-size: 0.7rem;
+    top: 0.1rem;
+    right: 0.1rem;
+    padding: 0;
+    margin-right: 1rem
+  }
+
+  .nav-link {
+    margin-right: 1rem;
+  }
+
+}
+
 
 .logo:hover {
   transform: scale(1.1);
@@ -76,6 +128,7 @@ body {
   z-index: 2;
   pointer-events: none;
   box-shadow: 0 0 0 2px #fff;
+  margin-right: 1rem
 }
 
 .bi.bi-cart {
@@ -175,7 +228,7 @@ body {
   background-color: red;
 }
 
-section > h2 {
+section>h2 {
   padding-bottom: 20px;
 }
 

@@ -9,7 +9,7 @@ export default function Header() {
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   return (
     <Navbar expand="md" className="navbar d-flex align-items-center">
-      <Container fluid>
+      <Container fluid className="d-flex header-container">
         <Navbar.Brand href="/">
           <img
             src="../../logo.png"
