@@ -17,17 +17,22 @@ export default function Header() {
             alt="Logo"
           />
         </Navbar.Brand>
+        <Link to="/clothes" className="nav-link">
+          Abbigliamento
+        </Link>
 
         <Nav
           className="me-auto my-2 my-lg-0"
           style={{ maxHeight: "100px" }}
-          navbarScroll>
+          navbarScroll
+        >
           <Link to="/cart" className="nav-link position-relative">
             <i className="bi bi-cart" style={{ fontSize: "1.5rem" }}></i>
             {cartCount > 0 && (
               <span
                 className="start-100 translate-middle badge rounded-pill bg-danger"
-                style={{ fontSize: "0.75rem" }}>
+                style={{ fontSize: "0.75rem" }}
+              >
                 {cartCount}
               </span>
             )}
