@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import AddToCartButton from "../components/AddToCartButton";
 
 //prendere dati dal context
 
@@ -36,12 +37,15 @@ export default function ClothesListPage() {
                     <div className="card-body py-2">
                       <h6>{cloth.name}</h6>
                       <p>{cloth.price}€</p>
-                      <NavLink
-                        to={`/clothes/${cloth.slug}`}
-                        className="nav-item"
-                      >
-                        Vedi dettagli
-                      </NavLink>
+                      <div className="d-flex justify-content-between align-items-center">
+                        <NavLink
+                          to={`/clothes/${cloth.slug}`}
+                          className="nav-item"
+                        >
+                          Vedi dettagli
+                        </NavLink>
+                        <AddToCartButton item={cloth} />
+                      </div>
                     </div>
                   </div>
                 </div>

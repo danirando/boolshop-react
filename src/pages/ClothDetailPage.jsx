@@ -1,6 +1,7 @@
 import { NavLink, useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import AddToCartButton from "../components/AddToCartButton";
 
 // prendere dati dal context
 
@@ -40,15 +41,15 @@ export default function ClothDetailPage() {
               </div>
               <div className="text d-flex flex-column gap-3  p-3">
                 <div>{cloth.name} </div>
-                <div className="text-success">{cloth.price} </div>
+                <div className="text-success">{cloth.price}€ </div>
                 <div className="text-secondary">
                   Materiale: {cloth.material}
                 </div>
                 <div className="text-secondary">
                   Categoria: {cloth.category?.[0]?.name}
                 </div>
-                <div>comnponente selezione taglie</div>
-                <div>componente add to cart</div>
+                <div>componente selezione taglie</div>
+                <AddToCartButton item={cloth} />
               </div>
             </div>
           </div>
