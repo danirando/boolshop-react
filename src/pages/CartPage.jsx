@@ -37,9 +37,9 @@ export default function CartPage() {
                   </Card.Text>
 
                   <div className="d-flex align-items-center gap-2 mb-2">
-                    <label htmlFor={`qty-${item.id}`}>Pieces:</label>
+                    <label htmlFor={`${item.id}`}>Pieces:</label>
                     <input
-                      id={`qty-${item.id}`}
+                      id={`${item.id}`}
                       type="number"
                       min="1"
                       value={item.quantity}
