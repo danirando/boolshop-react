@@ -5,6 +5,8 @@ body {
   background-color: #feefed;
   font-family: "Pacifico", cursive;
   color: #122852;
+  padding-top: 100px;
+  padding-top: 90px;
 }
 
 /* HEADER */
@@ -16,6 +18,10 @@ body {
 }
 
 @media (max-width: 762px) {
+  body {
+    padding-top: 290px;
+  }
+
   .header-container {
     flex-direction: column;
   }
@@ -213,7 +219,7 @@ body {
   background-color: red;
 }
 
-section > h2 {
+section>h2 {
   padding-bottom: 20px;
 }
 
@@ -234,19 +240,6 @@ section > h2 {
   transform: scale(1.05);
   z-index: 50;
   cursor: pointer;
-}
-
-/* MAIN */
-
-main {
-  padding-top: 90px;
-  min-height: 100vh;
-}
-
-@media (max-width: 762px) {
-  main {
-    padding-top: 290px;
-  }
 }
 
 /* FOOTER */
@@ -283,6 +276,7 @@ main {
     text-align: center;
   }
 }
+
 /* Clothes Detail Page */
 
 .text {
