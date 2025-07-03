@@ -15,17 +15,6 @@ body {
   transition: transform 0.2s ease-in-out;
 }
 
-@media (max-width: 767px) {
-  .logo {
-    text-align: center;
-    height: auto;
-  }
-
-  .search-input {
-    max-width: 200px;
-  }
-}
-
 @media (max-width: 762px) {
   .header-container {
     flex-direction: column;
@@ -256,6 +245,12 @@ section>h2 {
 main {
   padding-top: 90px;
   min-height: 100vh;
+}
+
+@media (max-width: 762px) {
+  main {
+    padding-top: 290px;
+  }
 }
 
 /* FOOTER */
