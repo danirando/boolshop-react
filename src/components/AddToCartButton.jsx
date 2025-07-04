@@ -8,7 +8,6 @@ export default function AddToCartButton({
 }) {
   const { addToCart } = useCart();
   const [selectedSize, setSelectedSize] = useState(item.sizes?.[0]?.name || "");
-  console.log("item.stock:", item.stock, typeof item.stock);
 
   useEffect(() => {
     setSelectedSize(item.sizes?.[0]?.name || "");
