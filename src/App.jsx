@@ -6,6 +6,7 @@ import ClothesListPage from "./pages/ClothesListPage";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import OrderSummary from "./pages/OrderSummary";
 import { ClothesProvider } from "./contexts/ClothesContext";
 import { CartProvider } from "./contexts/CartContext";
 
@@ -20,6 +21,7 @@ export default function App() {
               <Route element={<DefaultLayout />}>
                 <Route path="/" element={<HomePage />}></Route>
                 <Route path="/checkout" element={<CheckoutPage />}></Route>
+                <Route path="/order-summary" element={<OrderSummary />}></Route>
                 <Route path="/cart" element={<CartPage />}></Route>
 
                 {/* ROTTE CON IN COMUNE IL PREFISSO  */}
