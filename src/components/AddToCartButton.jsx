@@ -26,9 +26,9 @@ export default function AddToCartButton({
           value={selectedSize}
           onChange={(e) => setSelectedSize(e.target.value)}
           onClick={(e) => e.stopPropagation()}>
-          {item.sizes.map((szObj) => (
-            <option key={szObj.name} value={szObj.name}>
-              {szObj.name}
+          {item.sizes.map((sz) => (
+            <option key={sz} value={sz}>
+              {sz}
             </option>
           ))}
         </select>
