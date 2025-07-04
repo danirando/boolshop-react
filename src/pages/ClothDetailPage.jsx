@@ -3,11 +3,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AddToCartButton from "../components/AddToCartButton";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import CardGroup from "react-bootstrap/CardGroup";
 
 export default function ClothDetailPage() {
   const { slug } = useParams();
   const [cloth, setCloth] = useState({});
   const clothUrl = import.meta.env.VITE_BOOKS_API_URL + "/clothes/" + slug;
+  const navigate = useNavigate();
 
   const fetchClothes = () => {
     axios.get(clothUrl).then((res) => {
@@ -16,13 +20,54 @@ export default function ClothDetailPage() {
     });
   };
 
+  useEffect(fetchClothes, []);
+
   function decrementStock(itemId) {
     setCloth((prev) =>
       prev.id === itemId ? { ...prev, stock: prev.stock - 1 } : prev
     );
   }
 
-  useEffect(fetchClothes, []);
+  function renderPromoBadge(clothPromo) {
+    if (clothPromo > 0) {
+      return (
+        <span
+          className="badge bg-danger"
+          style={{
+            position: "absolute",
+            top: "10px",
+            left: "10px",
+            fontWeight: "bold",
+          }}
+        >
+          -{clothPromo}%
+        </span>
+      );
+    }
+
+    return null;
+  }
+
+  // #  prodotti correlati
+  // const [relatedClothes, setRelatedClothes] = useState([]);
+  //     const relatedUrl = import.meta.env.VITE_BOOKS_API_URL + `/clothes?categories_id=${cloth.categories_id}`;
+
+  // const fetchRelatedClothes = () => {
+
+  //   axios.get(relatedUrl).then((res) => {
+  //     console.log("Risposta correlati:", res.data);
+
+  //     const filtered = res.data.filter((item) => item.id !== currentProductId);
+  //     setRelatedClothes(filtered);
+  //   });
+  // };
+
+  // useEffect(() => {
+
+  //     fetchRelatedClothes();
+
+  // }, []);
+
   return (
     <>
       <div className="container-sm container-md">
@@ -66,6 +111,59 @@ export default function ClothDetailPage() {
                 </NavLink>
               </div>
             </div>
+            {/* # prodotti correlati */}
+
+            {/* <CardGroup>
+            {relatedClothes.map((cloth) => {
+              return (
+                <div
+                  key={cloth.id}
+                  className="col-sm-12 col-md-6 col-lg-4"
+                  onClick={() => navigate(`/clothes/${cloth.slug}`)}
+                >
+                  <Card className="card-clothes h-100" key={cloth.id}>
+                    <Card.Img
+                      className="card-img-fixed"
+                      variant="top"
+                      src={cloth.img}
+                    />
+                    {renderPromoBadge(cloth.promo)}
+
+                    <Card.Body>
+                      <Card.Title>{cloth.name}</Card.Title>
+                      <Card.Text>
+                        {cloth.promo > 0 ? (
+                          <div className="d-flex flex-column gap-2">
+                            <span className="text-muted text-decoration-line-through">
+                              {cloth.price} €
+                            </span>
+                            <span className="text-danger fw-bold">
+                              {(
+                                cloth.price -
+                                (cloth.price * cloth.promo) / 100
+                              ).toFixed(2)}{" "}
+                              €
+                            </span>
+                          </div>
+                        ) : (
+                          <span className="">{cloth.price} €</span>
+                        )}
+                      </Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      <div className="d-flex justify-content-between align-items-center">
+                        <AddToCartButton
+                          item={cloth}
+                          showSizeSelect={cloth.sizes && cloth.sizes.length > 0}
+                          onDecrement={decrementStock}
+                        />
+                      </div>
+                    </Card.Footer>
+                  </Card>
+                </div>
+              );
+            })}
+          </CardGroup> */}
           </div>
         </div>
       </div>
