@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 // components
@@ -6,7 +5,7 @@ import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
 import AddToCartButton from "../components/AddToCartButton";
 
-import { use, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ClothesContext } from "../contexts/ClothesContext";
 
 export default function ClothesListPage() {
@@ -27,6 +26,26 @@ export default function ClothesListPage() {
   }
   console.log(clothes);
 
+  function renderPromoBadge(clothPromo) {
+    if (clothPromo > 0) {
+      return (
+        <span
+          className="badge bg-danger"
+          style={{
+            position: "absolute",
+            top: "10px",
+            left: "10px",
+            fontWeight: "bold",
+          }}
+        >
+          -{clothPromo}%
+        </span>
+      );
+    }
+
+    return null;
+  }
+
   return (
     <>
       <div className="container">
@@ -38,19 +57,35 @@ export default function ClothesListPage() {
                 <div
                   key={cloth.id}
                   className="col-sm-12 col-md-6 col-lg-4"
-                  onClick={() => navigate(`/clothes/${cloth.slug}`)}>
+                  onClick={() => navigate(`/clothes/${cloth.slug}`)}
+                >
                   <Card className="card-clothes h-100" key={cloth.id}>
                     <Card.Img
                       className="card-img-fixed"
                       variant="top"
                       src={cloth.img}
                     />
+                    {renderPromoBadge(cloth.promo)}
+
                     <Card.Body>
                       <Card.Title>{cloth.name}</Card.Title>
                       <Card.Text>
-                        <span>
-                          Price: <span className="price">{cloth.price}</span>
-                        </span>
+                        {cloth.promo > 0 ? (
+                          <div className="d-flex flex-column gap-2">
+                            <span className="text-muted text-decoration-line-through">
+                              {cloth.price} €
+                            </span>
+                            <span className="text-danger fw-bold">
+                              {(
+                                cloth.price -
+                                (cloth.price * cloth.promo) / 100
+                              ).toFixed(2)}{" "}
+                              €
+                            </span>
+                          </div>
+                        ) : (
+                          <span className="">{cloth.price} €</span>
+                        )}
                       </Card.Text>
                     </Card.Body>
                     <Card.Footer>
