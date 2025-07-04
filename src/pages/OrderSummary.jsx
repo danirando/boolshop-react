@@ -26,8 +26,17 @@ export default function OrderSummary() {
   const totalPrice = discountedTotal + shippingCost;
 
   const handleConfirm = () => {
+    const promoCodeIds = {
+      SAVE10: 1,
+      SAVE20: 2,
+      SAVE30: 3,
+    };
+
+    const promoCodeUpper = promoCode.toUpperCase();
+    const promo_code_id = promoCodeIds[promoCodeUpper] || null;
+
     const data = {
-      promo_code_id: promoCode ? promoCode.toUpperCase() : null,
+      promo_code_id,
       name: formData.name,
       surname: formData.surname,
       mail: formData.mail,
