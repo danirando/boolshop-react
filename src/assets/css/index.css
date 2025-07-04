@@ -11,21 +11,19 @@ body {
 }
 
 html,
-body {
+body,
+#root {
   height: 100%;
   margin: 0;
 }
 
-body {
+#root {
   display: flex;
   flex-direction: column;
 }
 
-
 main {
-  display: flex;
   flex: 1;
-
 }
 
 /* HEADER */
@@ -189,6 +187,10 @@ main {
   max-height: 600px;
 }
 
+.col {
+  flex: 0;
+}
+
 .nav-link {
   position: relative;
   padding: 0.5rem;
@@ -284,6 +286,8 @@ section>h2 {
 }
 
 .card-clothes {
+  width: 300px;
+  min-height: 100%;
   transition: transform 0.2s ease-in-out;
 }
 

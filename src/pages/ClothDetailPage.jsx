@@ -28,13 +28,12 @@ export default function ClothDetailPage() {
       <div className="container-sm container-md">
         <div className="row">
           <div className="col-12">
-            <div className="text-center my-5">
-              <h1>Dettagli del Prodotto</h1>
-              <p>Informazioni dettagliate sul prodotto selezionato.</p>
+            <div className="text-center my-3">
+              <h1>Details</h1>
             </div>
 
             <div className="">
-              <div className="d-flex justify-content-center flex-column align-items-center my-5">
+              <div className="d-flex justify-content-center flex-column align-items-center my-3">
                 <div className=" d-flex justify-content-center flex-column flex-md-row align-items-stretch my-5">
                   <div className="  " style={{ width: "25rem" }}>
                     <img

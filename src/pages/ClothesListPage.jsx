@@ -24,7 +24,6 @@ export default function ClothesListPage() {
       )
     );
   }
-  console.log(clothes);
 
   function renderPromoBadge(clothPromo) {
     if (clothPromo > 0) {
@@ -36,8 +35,7 @@ export default function ClothesListPage() {
             top: "10px",
             left: "10px",
             fontWeight: "bold",
-          }}
-        >
+          }}>
           -{clothPromo}%
         </span>
       );
@@ -56,9 +54,8 @@ export default function ClothesListPage() {
               return (
                 <div
                   key={cloth.id}
-                  className="col-sm-12 col-md-6 col-lg-4"
-                  onClick={() => navigate(`/clothes/${cloth.slug}`)}
-                >
+                  className="col-sm-12 col-md-6 col-lg-4 my-3"
+                  onClick={() => navigate(`/clothes/${cloth.slug}`)}>
                   <Card className="card-clothes h-100" key={cloth.id}>
                     <Card.Img
                       className="card-img-fixed"
@@ -71,20 +68,20 @@ export default function ClothesListPage() {
                       <Card.Title>{cloth.name}</Card.Title>
                       <Card.Text>
                         {cloth.promo > 0 ? (
-                          <div className="d-flex flex-column gap-2">
-                            <span className="text-muted text-decoration-line-through">
+                          <>
+                            <span className="text-muted text-decoration-line-through d-block">
                               {cloth.price} €
                             </span>
-                            <span className="text-danger fw-bold">
+                            <span className="text-danger fw-bold d-block">
                               {(
                                 cloth.price -
                                 (cloth.price * cloth.promo) / 100
                               ).toFixed(2)}{" "}
                               €
                             </span>
-                          </div>
+                          </>
                         ) : (
-                          <span className="">{cloth.price} €</span>
+                          <span>{cloth.price} €</span>
                         )}
                       </Card.Text>
                     </Card.Body>
