@@ -33,16 +33,20 @@ export function CartProvider({ children }) {
     });
   };
 
-  const updateQuantity = (id, quantity) => {
+  const updateQuantity = (id, quantity, size) => {
     setCart((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
+        item.id === id && item.size === size
+          ? { ...item, quantity: Math.max(1, quantity) }
+          : item
       )
     );
   };
 
-  const removeFromCart = (id) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+  const removeFromCart = (id, size) => {
+    setCart((prev) =>
+      prev.filter((item) => item.id !== id || item.size !== size)
+    );
   };
 
   const clearCart = () => {

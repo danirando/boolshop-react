@@ -49,7 +49,11 @@ export default function CartPage() {
                       max={item.stock}
                       value={item.quantity}
                       onChange={(e) =>
-                        updateQuantity(item.id, parseInt(e.target.value) || 1)
+                        updateQuantity(
+                          item.id,
+                          parseInt(e.target.value) || 1,
+                          item.size
+                        )
                       }
                       style={{ width: "60px" }}
                     />
@@ -67,7 +71,7 @@ export default function CartPage() {
                 <Card.Footer>
                   <button
                     className="btn btn-danger"
-                    onClick={() => removeFromCart(item.id)}
+                    onClick={() => removeFromCart(item.id, item.size)}
                   >
                     Remove
                   </button>
