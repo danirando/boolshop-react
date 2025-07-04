@@ -16,6 +16,12 @@ export default function ClothDetailPage() {
     });
   };
 
+  function decrementStock(itemId) {
+    setCloth((prev) =>
+      prev.id === itemId ? { ...prev, stock: prev.stock - 1 } : prev
+    );
+  }
+
   useEffect(fetchClothes, []);
   return (
     <>
@@ -47,7 +53,11 @@ export default function ClothDetailPage() {
                       Categoria: {cloth.category?.[0]?.name}
                     </div>
                     <div>componente selezione taglie</div>
-                    <AddToCartButton item={cloth} />
+                    <AddToCartButton
+                      item={cloth}
+                      showSizeSelect={cloth.sizes && cloth.sizes.length > 0}
+                      onDecrement={decrementStock}
+                    />
                   </div>
                 </div>
 
