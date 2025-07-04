@@ -222,7 +222,7 @@ export default function HomePage() {
                             onClick={(e) => {
                               e.stopPropagation();
                               addToCart({
-                                ...item,
+                                ...cartDiscount,
                                 size: selectedSizes[item.id] || item.sizes[0],
                               });
                               decrementQuantity(item.id, true); // <-- qui
