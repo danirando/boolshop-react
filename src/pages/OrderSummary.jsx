@@ -46,6 +46,7 @@ export default function OrderSummary() {
       cap: formData.cap,
       total_price: parseFloat(totalPrice.toFixed(2)),
       shipping_cost: parseFloat(shippingCost.toFixed(2)),
+      cart,
     };
 
     axios
