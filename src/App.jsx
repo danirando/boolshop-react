@@ -9,6 +9,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import OrderSummary from "./pages/OrderSummary";
 import { ClothesProvider } from "./contexts/ClothesContext";
 import { CartProvider } from "./contexts/CartContext";
+import SearchPage from "./pages/SearchPage";
 
 export default function App() {
   return (
@@ -23,6 +24,8 @@ export default function App() {
                 <Route path="/checkout" element={<CheckoutPage />}></Route>
                 <Route path="/order-summary" element={<OrderSummary />}></Route>
                 <Route path="/cart" element={<CartPage />}></Route>
+
+                <Route path="/search/:query" element={<SearchPage />} />
 
                 {/* ROTTE CON IN COMUNE IL PREFISSO  */}
                 <Route path="/clothes">

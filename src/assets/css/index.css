@@ -7,6 +7,23 @@ body {
   color: #122852;
   padding-top: 100px;
   padding-top: 90px;
+
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
 }
 
 /* HEADER */
@@ -170,6 +187,10 @@ body {
   max-height: 600px;
 }
 
+.col {
+  flex: 0;
+}
+
 .nav-link {
   position: relative;
   padding: 0.5rem;
@@ -251,7 +272,7 @@ body {
   background-color: red;
 }
 
-section > h2 {
+section>h2 {
   padding-bottom: 20px;
 }
 
@@ -265,6 +286,8 @@ section > h2 {
 }
 
 .card-clothes {
+  width: 300px;
+  min-height: 100%;
   transition: transform 0.2s ease-in-out;
 }
 
@@ -307,4 +330,23 @@ section > h2 {
     flex-direction: column;
     text-align: center;
   }
+}
+
+
+/* SearchPage */
+
+
+.small-card {
+  max-width: 250px;
+  margin: 0 auto;
+  font-size: 0.95rem;
+  margin: 2rem;
+}
+
+.small-card .card-body {
+  padding: 0.75rem;
+}
+
+.small-card .card-footer {
+  padding: 0.5rem;
 }

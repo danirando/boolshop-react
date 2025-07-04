@@ -26,7 +26,7 @@ export default function AddToCartButton({
           value={selectedSize}
           onChange={(e) => setSelectedSize(e.target.value)}
           onClick={(e) => e.stopPropagation()}>
-          {item.sizes.map((sz) => (
+          {[...new Set(item.sizes)].map((sz) => (
             <option key={`${item.id}-${sz}`} value={sz}>
               {sz}
             </option>
