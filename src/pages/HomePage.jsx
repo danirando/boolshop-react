@@ -41,7 +41,6 @@ export default function HomePage() {
     axios
       .get("http://localhost:3000/promo")
       .then((res) => {
-        console.log("mostSoldClothes:", res.data);
         setPromoClothes(res.data);
         setLoading(false);
       })

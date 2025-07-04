@@ -17,24 +17,45 @@ body {
   transition: transform 0.2s ease-in-out;
 }
 
+.clothes {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 0 10px;
+  transition: transform 0.2s ease-in-out;
+  transform-origin: center center;
+}
+
+.clothes:hover {
+
+  transform: scale(1.1);
+}
+
 @media (max-width: 762px) {
   body {
-    padding-top: 290px;
+    padding-top: 340px;
   }
 
-  .header-container {
+  .navbar .header-container {
+    display: flex !important;
     flex-direction: column;
+    align-items: center !important;
   }
 
   .navbar {
-    min-height: 290px;
-    align-items: flex-start;
+    min-height: 340px;
+
+
   }
 
   .d-flex.form-inline,
   .navbar .d-flex {
     flex-direction: column !important;
-    align-items: stretch !important;
+
     gap: 0.5rem;
     width: 100%;
   }

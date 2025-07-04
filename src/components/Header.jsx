@@ -9,7 +9,7 @@ export default function Header() {
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   return (
     <Navbar expand="md" className="navbar d-flex align-items-center">
-      <Container fluid className="d-flex header-container">
+      <Container className="d-flex header-container">
         <Navbar.Brand href="/">
           <img
             src="../../logo.png"
@@ -17,22 +17,20 @@ export default function Header() {
             alt="Logo"
           />
         </Navbar.Brand>
-        <Link to="/clothes" className="nav-link">
-          Abbigliamento
+        <Link to="/clothes" className="nav-link clothes">
+          Clothes
         </Link>
 
         <Nav
           className="me-auto my-2 my-lg-0"
           style={{ maxHeight: "100px" }}
-          navbarScroll
-        >
+          navbarScroll>
           <Link to="/cart" className="nav-link position-relative">
             <i className="bi bi-cart" style={{ fontSize: "1.5rem" }}></i>
             {cartCount > 0 && (
               <span
                 className="start-100 translate-middle badge rounded-pill bg-danger"
-                style={{ fontSize: "0.75rem" }}
-              >
+                style={{ fontSize: "0.75rem" }}>
                 {cartCount}
               </span>
             )}
