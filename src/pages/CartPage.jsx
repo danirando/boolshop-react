@@ -1,7 +1,7 @@
 import { useCart } from "../contexts/CartContext";
 import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
@@ -85,7 +85,9 @@ export default function CartPage() {
             <button className="btn btn-danger my-3 mx-2" onClick={clearCart}>
               Clear cart
             </button>
-            <button className="btn btn-primary my-3">Checkout</button>
+            <Link to="/checkout" className="btn btn-primary my-3">
+              Checkout{" "}
+            </Link>
           </div>
         </>
       )}
