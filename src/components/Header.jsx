@@ -1,12 +1,24 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
+import { useState } from "react";
 
 export default function Header() {
   const { cart } = useCart(); // prendi il carrello dal context
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (search.trim()) {
+      navigate(`/search/${encodeURIComponent(search.trim())}`);
+      setSearch("");
+    }
+  };
   return (
     <Navbar expand="md" className="navbar d-flex align-items-center">
       <Container className="d-flex header-container">
@@ -37,12 +49,14 @@ export default function Header() {
           </Link>
         </Nav>
 
-        <form className="d-flex">
+        <form className="d-flex" onSubmit={handleSubmit}>
           <input
             type="search"
             className="form-control me-2 search-input"
             placeholder="Search"
             aria-label="Search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
           <button type="submit" className="btn search-button">
             Search

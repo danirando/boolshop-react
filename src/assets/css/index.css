@@ -7,6 +7,25 @@ body {
   color: #122852;
   padding-top: 100px;
   padding-top: 90px;
+
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+
+main {
+  display: flex;
+  flex: 1;
+
 }
 
 /* HEADER */
@@ -251,7 +270,7 @@ body {
   background-color: red;
 }
 
-section > h2 {
+section>h2 {
   padding-bottom: 20px;
 }
 
@@ -307,4 +326,23 @@ section > h2 {
     flex-direction: column;
     text-align: center;
   }
+}
+
+
+/* SearchPage */
+
+
+.small-card {
+  max-width: 250px;
+  margin: 0 auto;
+  font-size: 0.95rem;
+  margin: 2rem;
+}
+
+.small-card .card-body {
+  padding: 0.75rem;
+}
+
+.small-card .card-footer {
+  padding: 0.5rem;
 }
