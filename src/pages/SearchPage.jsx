@@ -9,6 +9,26 @@ export default function SearchPage() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [sortOption, setSortOption] = useState("");
+
+  function sortResults(results, option) {
+    const sorted = [...results];
+    switch (option) {
+      case "prezzo":
+        sorted.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+        break;
+      case "nome":
+        sorted.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      default:
+        break;
+    }
+    return sorted;
+  }
+
+  function handleSortChange(e) {
+    setSortOption(e.target.value);
+  }
 
   useEffect(() => {
     setLoading(true);
@@ -32,6 +52,19 @@ export default function SearchPage() {
 
   return (
     <div className="container">
+      <div className="my-3 d-flex align-items-center gap-2">
+        <label htmlFor="sort">Ordina per:</label>
+        <select
+          id="sort"
+          className="form-select"
+          style={{ maxWidth: "200px" }}
+          value={sortOption}
+          onChange={handleSortChange}>
+          <option value="">-- Seleziona --</option>
+          <option value="prezzo">Prezzo</option>
+          <option value="nome">Nome</option>
+        </select>
+      </div>
       <h1 className="my-3">Risultati per: {query}</h1>
       {loading && <p>Caricamento...</p>}
       {error && <p>{error}</p>}
@@ -42,7 +75,7 @@ export default function SearchPage() {
         <div>
           {" "}
           <CardGroup className="d-flex justify-content-center gap-3">
-            {results.map((item) => {
+            {sortResults(results, sortOption).map((item) => {
               const hasPromo = item.promo > 0;
               const discountedPrice = hasPromo
                 ? (parseFloat(item.price) * (1 - item.promo / 100)).toFixed(2)
