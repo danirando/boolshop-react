@@ -24,7 +24,7 @@ export default function CartPage() {
           <CardGroup className="gap-3 d-flex flex-wrap">
             {cart.map((item) => (
               <Card
-                key={item.id}
+                key={`${item.id}-${item.size}`}
                 className="card-clothes"
                 style={{ width: "18rem" }}
               >
@@ -46,6 +46,7 @@ export default function CartPage() {
                       id={`${item.id}`}
                       type="number"
                       min="1"
+                      max={item.stock}
                       value={item.quantity}
                       onChange={(e) =>
                         updateQuantity(item.id, parseInt(e.target.value) || 1)
@@ -53,6 +54,10 @@ export default function CartPage() {
                       style={{ width: "60px" }}
                     />
                   </div>
+
+                  <Card.Text>
+                    Size: <strong>{item.size}</strong>
+                  </Card.Text>
 
                   <Card.Text>
                     Total:{" "}
