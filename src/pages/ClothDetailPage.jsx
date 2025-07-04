@@ -52,7 +52,7 @@ export default function ClothDetailPage() {
                     <div className="text-secondary">
                       Categoria: {cloth.category?.[0]?.name}
                     </div>
-                    <div>componente selezione taglie</div>
+
                     <AddToCartButton
                       item={cloth}
                       showSizeSelect={cloth.sizes && cloth.sizes.length > 0}
