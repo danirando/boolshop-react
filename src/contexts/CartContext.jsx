@@ -18,10 +18,14 @@ export function CartProvider({ children }) {
 
   const addToCart = (item) => {
     setCart((prev) => {
-      const existingItem = prev.find((p) => p.id === item.id);
+      const existingItem = prev.find(
+        (p) => p.id === item.id && p.size === item.size
+      );
       if (existingItem) {
         return prev.map((p) =>
-          p.id === item.id ? { ...p, quantity: p.quantity + 1 } : p
+          p.id === item.id && p.size === item.size
+            ? { ...p, quantity: p.quantity + 1 }
+            : p
         );
       } else {
         return [...prev, { ...item, quantity: 1 }];
