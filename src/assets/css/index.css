@@ -31,7 +31,6 @@ body {
 }
 
 .clothes:hover {
-
   transform: scale(1.1);
 }
 
@@ -48,8 +47,6 @@ body {
 
   .navbar {
     min-height: 340px;
-
-
   }
 
   .d-flex.form-inline,
@@ -254,7 +251,7 @@ body {
   background-color: red;
 }
 
-section>h2 {
+section > h2 {
   padding-bottom: 20px;
 }
 
@@ -268,7 +265,6 @@ section>h2 {
 }
 
 .card-clothes {
-
   transition: transform 0.2s ease-in-out;
 }
 
@@ -276,7 +272,6 @@ section>h2 {
   transform: scale(1.05);
   z-index: 50;
   cursor: pointer;
-
 }
 
 /* FOOTER */
@@ -312,11 +307,4 @@ section>h2 {
     flex-direction: column;
     text-align: center;
   }
-}
-
-/* Clothes Detail Page */
-
-.text {
-  color: black;
-  background-color: white;
 }
