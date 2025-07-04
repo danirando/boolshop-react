@@ -81,16 +81,37 @@ export default function ClothDetailPage() {
             <div className="">
               <div className="d-flex justify-content-center flex-column align-items-center my-5">
                 <div className=" d-flex justify-content-center flex-column flex-md-row align-items-stretch my-5">
-                  <div className="  " style={{ width: "25rem" }}>
+                  <div
+                    className="  "
+                    style={{ width: "25rem", position: "relative" }}
+                  >
                     <img
                       className="card-img-top"
                       src={cloth.img}
                       alt={cloth.name}
                     />
+                    {renderPromoBadge(cloth.promo)}
                   </div>
                   <div className="text d-flex flex-column gap-4 p-3">
                     <div>{cloth.name} </div>
-                    <div className="text-success">{cloth.price}€ </div>
+                    <div className="text-success">
+                      {cloth.promo > 0 ? (
+                        <div className="d-flex flex-column gap-2">
+                          <span className="text-muted text-decoration-line-through">
+                            {cloth.price} €
+                          </span>
+                          <span className="text-danger fw-bold">
+                            {(
+                              cloth.price -
+                              (cloth.price * cloth.promo) / 100
+                            ).toFixed(2)}{" "}
+                            €
+                          </span>
+                        </div>
+                      ) : (
+                        <span className="">{cloth.price} €</span>
+                      )}
+                    </div>
                     <div className="text-secondary">
                       Materiale: {cloth.material}
                     </div>
