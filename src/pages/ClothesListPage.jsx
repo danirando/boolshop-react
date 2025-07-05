@@ -7,6 +7,7 @@ import AddToCartButton from "../components/AddToCartButton";
 
 import { useContext, useEffect, useState } from "react";
 import { ClothesContext } from "../contexts/ClothesContext";
+import FiltersSelect from "../components/FiltersSelect";
 
 export default function ClothesListPage() {
   const { clothes } = useContext(ClothesContext);
@@ -48,6 +49,7 @@ export default function ClothesListPage() {
     <>
       <div className="container">
         <h1 className="text-center ">Clothes</h1>
+        <FiltersSelect onResultsUpdate={setLocalClothes} />
         <div className="row gy-4 py-3">
           <CardGroup>
             {localClothes.map((cloth) => {
