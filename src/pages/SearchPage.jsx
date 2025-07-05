@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
@@ -9,7 +9,7 @@ export default function SearchPage() {
   const { query } = useParams();
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchResults = async () => {
       setLoading(true);
@@ -68,24 +68,27 @@ export default function SearchPage() {
                       -{item.promo}%
                     </span>
                   )}
-                  <Card.Img
-                    className="card-img-fixed img-fluid"
-                    variant="top"
-                    src={item.img}
-                  />
-                  <Card.Body>
-                    <Card.Title>{item.name}</Card.Title>
-                    <Card.Text>
-                      {hasPromo ? (
-                        <>
-                          <span className="old-price">{item.price} €</span>{" "}
-                          <span className="price">{discountedPrice} €</span>
-                        </>
-                      ) : (
-                        <span className="price">{item.price} €</span>
-                      )}
-                    </Card.Text>
-                  </Card.Body>
+                  <div onClick={() => navigate(`/clothes/${item.slug}`)}>
+                    <Card.Img
+                      className="card-img-fixed img-fluid"
+                      variant="top"
+                      src={item.img}
+                    />
+                    <Card.Body>
+                      <Card.Title>{item.name}</Card.Title>
+                      <Card.Text>
+                        {hasPromo ? (
+                          <>
+                            <span className="old-price">{item.price} €</span>{" "}
+                            <span className="price">{discountedPrice} €</span>
+                          </>
+                        ) : (
+                          <span className="price">{item.price} €</span>
+                        )}
+                      </Card.Text>
+                    </Card.Body>
+                  </div>
+
                   <Card.Footer>
                     <AddToCartButton
                       item={{

@@ -8,11 +8,11 @@ export default function ClothDetailPage() {
   const { slug } = useParams();
   const [cloth, setCloth] = useState({});
   const clothUrl = import.meta.env.VITE_BOOKS_API_URL + "/clothes/" + slug;
-
+  console.log(slug);
+  console.log(clothUrl);
   const fetchClothes = () => {
     axios.get(clothUrl).then((res) => {
-      console.log(res.data);
-      setCloth(res.data);
+      setCloth(res.data[0]);
     });
   };
 
@@ -22,7 +22,9 @@ export default function ClothDetailPage() {
     );
   }
 
-  useEffect(fetchClothes, []);
+  useEffect(() => {
+    fetchClothes();
+  }, [slug]);
   return (
     <>
       <div className="container-sm container-md">
