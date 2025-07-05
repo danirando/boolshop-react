@@ -59,7 +59,7 @@ export default function CheckoutPage() {
       <div className="mb-3">
         <label className="form-label">mail</label>
         <input
-          type="mail"
+          type="email"
           className="form-control"
           name="mail"
           value={formData.mail}
