@@ -1,71 +1,92 @@
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { useState } from "react";
 
 export default function FiltersSelect({ onResultsUpdate }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [size, setSize] = useState("");
   const [category, setCategory] = useState("");
   const [order, setOrder] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
   const [loading, setLoading] = useState(false);
-  const [maxPrice, setMaxPrice] = useState("50");
 
-  // Chiamata per filtrare taglie
-  const fetchBySize = (size) => {
-    axios
-      .get(`http://localhost:3000/clothes/f-sizes/${size}`)
-      .then((res) => onResultsUpdate(res.data))
-      .catch((err) => console.error("Errore taglie:", err));
+  const [syncedFromUrl, setSyncedFromUrl] = useState(false);
+
+  const readFiltersFromUrl = () => {
+    const params = new URLSearchParams(location.search);
+    return {
+      size: params.get("size") || "",
+      category: params.get("category") || "",
+      order: params.get("order") || "",
+      maxPrice: params.get("price") || "",
+    };
   };
 
-  // Chiamata per filtrare categorie
-  const fetchByCategory = (category) => {
-    axios
-      .get(`http://localhost:3000/clothes/f-categories/${category}`)
-      .then((res) => onResultsUpdate(res.data))
-      .catch((err) => console.error("Errore categorie:", err));
-  };
+  useEffect(() => {
+    if (!syncedFromUrl) {
+      const filters = readFiltersFromUrl();
+      setSize(filters.size);
+      setCategory(filters.category);
+      setOrder(filters.order);
+      setMaxPrice(filters.maxPrice);
+      setSyncedFromUrl(true);
+    }
+  }, [location.search, syncedFromUrl]);
 
-  // Chiamata per ordinare prezzi ascendente
-  const fetchPriceAscendant = () => {
-    axios
-      .get("http://localhost:3000/clothes/f-p-ascendant")
-      .then((res) => onResultsUpdate(res.data))
-      .catch((err) => console.error("Errore ordine ascendente:", err));
-  };
+  useEffect(() => {
+    if (!syncedFromUrl) return;
 
-  // Chiamata per ordinare prezzi discendente
-  const fetchPriceDescendant = () => {
-    axios
-      .get("http://localhost:3000/clothes/f-p-descendant")
-      .then((res) => onResultsUpdate(res.data))
-      .catch((err) => console.error("Errore ordine discendente:", err));
-  };
-  const handleFilterPrice = (maxPrice) => {
-    if (!maxPrice) return;
+    const params = new URLSearchParams();
+    if (size) params.set("size", size);
+    if (category) params.set("category", category);
+    if (order) params.set("order", order);
+    if (maxPrice) params.set("price", maxPrice);
 
+    navigate({ search: params.toString() }, { replace: true });
+
+    setLoading(true);
     axios
-      .get(`http://localhost:3000/clothes/f-prices/${maxPrice}`)
-      .then((res) => {
-        onResultsUpdate(res.data);
+      .get("http://localhost:3000/clothes/f-all", {
+        params: { size, category, order, price: maxPrice },
       })
+      .then((res) => onResultsUpdate(res.data))
       .catch((err) => {
         if (err.response && err.response.status === 404) {
-          // Se il backend restituisce 404 quando non trova nulla
-          onResultsUpdate([]); // svuota risultati senza errori console
+          onResultsUpdate([]);
         } else {
-          console.error(err);
+          console.error("Errore filtri:", err);
         }
-      });
+      })
+      .finally(() => setLoading(false));
+  }, [
+    size,
+    category,
+    order,
+    maxPrice,
+    syncedFromUrl,
+    navigate,
+    onResultsUpdate,
+  ]);
+
+  const handleChange = (setter) => (e) => {
+    setter(e.target.value);
   };
+
+  // Nuova funzione per resettare i filtri
+  const resetFilters = () => {
+    setSize("");
+    setCategory("");
+    setOrder("");
+    setMaxPrice("");
+  };
+
   return (
     <div className="d-flex align-items-center my-3 gap-3">
-      <label className="me-2">Ordina per:</label>
-      {/* Select taglie */}
-      <select
-        value={size}
-        onChange={(e) => {
-          setSize(e.target.value);
-          fetchBySize(e.target.value);
-        }}>
+      <label className="me-2">Filtri:</label>
+
+      <select value={size} onChange={handleChange(setSize)}>
         <option value="">Filtra per taglia</option>
         <option value="XS">XS</option>
         <option value="S">S</option>
@@ -73,13 +94,7 @@ export default function FiltersSelect({ onResultsUpdate }) {
         <option value="L">L</option>
       </select>
 
-      {/* Select categorie */}
-      <select
-        value={category}
-        onChange={(e) => {
-          setCategory(e.target.value);
-          fetchByCategory(e.target.value);
-        }}>
+      <select value={category} onChange={handleChange(setCategory)}>
         <option value="">Filtra per categoria</option>
         <option value="Tops">Tops</option>
         <option value="Dresses">Dresses</option>
@@ -88,14 +103,7 @@ export default function FiltersSelect({ onResultsUpdate }) {
         <option value="Accessories">Accessories</option>
       </select>
 
-      {/* Select ordinamento prezzo */}
-      <select
-        value={order}
-        onChange={(e) => {
-          setOrder(e.target.value);
-          if (e.target.value === "asc") fetchPriceAscendant();
-          else if (e.target.value === "desc") fetchPriceDescendant();
-        }}>
+      <select value={order} onChange={handleChange(setOrder)}>
         <option value="">Ordina per prezzo</option>
         <option value="asc">Prezzo crescente</option>
         <option value="desc">Prezzo decrescente</option>
@@ -103,17 +111,19 @@ export default function FiltersSelect({ onResultsUpdate }) {
 
       <select
         value={maxPrice}
-        onChange={(e) => {
-          const value = e.target.value;
-          setMaxPrice(value);
-          handleFilterPrice(value);
-        }}
+        onChange={handleChange(setMaxPrice)}
         aria-label="Filtra per prezzo massimo">
         <option value="">Filtra per prezzo</option>
         <option value="10">Fino a 10 €</option>
         <option value="20">Fino a 20 €</option>
         <option value="30">Fino a 30 €</option>
+        <option value="50">Fino a 50 €</option>
       </select>
+
+      {/* Bottone reset */}
+      <button className="btn btn-secondary" onClick={resetFilters}>
+        Reset filtri
+      </button>
     </div>
   );
 }

@@ -1,41 +1,99 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
 import AddToCartButton from "../components/AddToCartButton";
+import FiltersSelect from "../components/FiltersSelect";
 import axios from "axios";
 
 export default function SearchPage() {
   const { query } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Stati filtri inizializzati dai parametri URL
+  const searchParams = new URLSearchParams(location.search);
+  const [size, setSize] = useState(searchParams.get("size") || "");
+  const [category, setCategory] = useState(searchParams.get("category") || "");
+  const [order, setOrder] = useState(searchParams.get("order") || "");
+  const [maxPrice, setMaxPrice] = useState(searchParams.get("price") || "");
+
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  useEffect(() => {
-    const fetchResults = async () => {
-      setLoading(true);
-      try {
-        const res = await axios.get(`http://localhost:3000/searchbar/${query}`);
-        setResults(res.data);
-      } catch (err) {
-        if (err.response && err.response.status === 404) {
-          // Imposta risultati vuoti per mostrare "nessun risultato"
-          setResults([]);
-        } else {
-          console.error("Errore nella ricerca:", err);
+
+  // Funzione per aggiornare l'URL con i filtri correnti
+  const updateURLFilters = (newFilters) => {
+    const params = new URLSearchParams(location.search);
+
+    Object.entries(newFilters).forEach(([key, value]) => {
+      if (value) params.set(key, value);
+      else params.delete(key);
+    });
+
+    navigate({
+      pathname: location.pathname,
+      search: params.toString(),
+    });
+  };
+
+  // Aggiorna stato e URL quando cambiano i filtri
+  const onFiltersChange = (newFilters) => {
+    if ("size" in newFilters) setSize(newFilters.size);
+    if ("category" in newFilters) setCategory(newFilters.category);
+    if ("order" in newFilters) setOrder(newFilters.order);
+    if ("maxPrice" in newFilters) setMaxPrice(newFilters.maxPrice);
+
+    updateURLFilters({
+      size: newFilters.size ?? size,
+      category: newFilters.category ?? category,
+      order: newFilters.order ?? order,
+      price: newFilters.maxPrice ?? maxPrice,
+    });
+  };
+
+  // Funzione per chiamare API con query + filtri
+  const fetchResults = async () => {
+    setLoading(true);
+    try {
+      const params = {};
+      if (size) params.size = size;
+      if (category) params.category = category;
+      if (order) params.order = order;
+      if (maxPrice) params.price = maxPrice;
+
+      const res = await axios.get(
+        `http://localhost:3000/searchbar/${encodeURIComponent(query)}`,
+        {
+          params,
         }
-      } finally {
-        setLoading(false);
+      );
+      setResults(res.data);
+    } catch (err) {
+      if (err.response && err.response.status === 404) {
+        setResults([]);
+      } else {
+        console.error("Errore nella ricerca:", err);
       }
-    };
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchResults();
-  }, [query]);
-
-  if (loading) return <p>Loading...</p>;
+  // Effettua la ricerca ogni volta che query o filtri cambiano
+  useEffect(() => {
+    if (query) fetchResults();
+  }, [query, size, category, order, maxPrice]);
 
   return (
     <div className="container">
       <h1 className="my-3">Risultati per: {query}</h1>
+
+      {/* FILTRI */}
+      <FiltersSelect
+        filters={{ size, category, order, maxPrice }}
+        onFiltersChange={onFiltersChange}
+        onResultsUpdate={setResults}
+      />
 
       {loading && <p>Caricamento...</p>}
 
