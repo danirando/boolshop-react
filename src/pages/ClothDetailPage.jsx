@@ -10,17 +10,41 @@ import CardGroup from "react-bootstrap/CardGroup";
 export default function ClothDetailPage() {
   const { slug } = useParams();
   const [cloth, setCloth] = useState({});
+  const [relatedClothes, setRelatedClothes] = useState([]);
   const clothUrl = import.meta.env.VITE_BOOKS_API_URL + "/clothes/" + slug;
   const navigate = useNavigate();
 
+  console.log("slug:", slug);
+  console.log("clothUrl:", clothUrl);
+
   const fetchClothes = () => {
-    axios.get(clothUrl).then((res) => {
-      console.log(res.data);
-      setCloth(res.data);
-    });
+    axios
+      .get(clothUrl)
+      .then((res) => {
+        const fetchedCloth = res.data[0];
+        console.log("Risposta prodotto:", fetchedCloth);
+        console.log("Categoria:", fetchedCloth.category);
+        setCloth(fetchedCloth);
+
+        if (fetchedCloth.category && fetchedCloth.id) {
+          const relatedUrl =
+            import.meta.env.VITE_BOOKS_API_URL +
+            `/filterCategories/${fetchedCloth.category}`;
+
+          axios.get(relatedUrl).then((res) => {
+            const filtered = res.data.filter(
+              (item) => item.id !== fetchedCloth.id
+            );
+            setRelatedClothes(filtered);
+          });
+        }
+      })
+      .catch((err) => {
+        console.error("Errore nel caricamento del prodotto:", err);
+      });
   };
 
-  useEffect(fetchClothes, []);
+  useEffect(fetchClothes, [slug]);
 
   function decrementStock(itemId) {
     setCloth((prev) =>
@@ -49,24 +73,27 @@ export default function ClothDetailPage() {
   }
 
   // #  prodotti correlati
-  // const [relatedClothes, setRelatedClothes] = useState([]);
-  //     const relatedUrl = import.meta.env.VITE_BOOKS_API_URL + `/clothes?categories_id=${cloth.categories_id}`;
 
   // const fetchRelatedClothes = () => {
+  //   console.log("Categoria per correlati:", cloth.category);
 
-  //   axios.get(relatedUrl).then((res) => {
-  //     console.log("Risposta correlati:", res.data);
+  //   if (cloth.category && cloth.id) {
+  //     const relatedUrl =
+  //       import.meta.env.VITE_BOOKS_API_URL +
+  //       `/filterCategories/${cloth.category}`;
 
-  //     const filtered = res.data.filter((item) => item.id !== currentProductId);
-  //     setRelatedClothes(filtered);
-  //   });
+  //     axios.get(relatedUrl).then((res) => {
+  //       const filtered = res.data.filter((item) => item.id !== cloth.id);
+  //       setRelatedClothes(filtered);
+  //     });
+  //   }
   // };
 
-  // useEffect(() => {
+  // useEffect(fetchRelatedClothes, [cloth.category, cloth.id]);
 
-  //     fetchRelatedClothes();
-
-  // }, []);
+  if (!cloth.id) {
+    return <div className="text-center my-5">Caricamento in corso...</div>;
+  }
 
   return (
     <>
@@ -116,7 +143,7 @@ export default function ClothDetailPage() {
                       Materiale: {cloth.material}
                     </div>
                     <div className="text-secondary">
-                      Categoria: {cloth.category?.[0]?.name}
+                      Categoria: {cloth.category}
                     </div>
 
                     <AddToCartButton
@@ -134,57 +161,61 @@ export default function ClothDetailPage() {
             </div>
             {/* # prodotti correlati */}
 
-            {/* <CardGroup>
-            {relatedClothes.map((cloth) => {
-              return (
-                <div
-                  key={cloth.id}
-                  className="col-sm-12 col-md-6 col-lg-4"
-                  onClick={() => navigate(`/clothes/${cloth.slug}`)}
-                >
-                  <Card className="card-clothes h-100" key={cloth.id}>
-                    <Card.Img
-                      className="card-img-fixed"
-                      variant="top"
-                      src={cloth.img}
-                    />
-                    {renderPromoBadge(cloth.promo)}
+            <CardGroup>
+              {relatedClothes.map((relatedCloth) => {
+                return (
+                  <div
+                    key={relatedCloth.id}
+                    className="col-sm-12 col-md-6 col-lg-4"
+                    onClick={() => navigate(`/clothes/${relatedCloth.slug}`)}
+                  >
+                    <Card className="card-clothes h-100" key={relatedCloth.id}>
+                      <Card.Img
+                        className="card-img-fixed"
+                        variant="top"
+                        src={relatedCloth.img}
+                      />
+                      {renderPromoBadge(relatedCloth.promo)}
 
-                    <Card.Body>
-                      <Card.Title>{cloth.name}</Card.Title>
-                      <Card.Text>
-                        {cloth.promo > 0 ? (
-                          <div className="d-flex flex-column gap-2">
-                            <span className="text-muted text-decoration-line-through">
-                              {cloth.price} €
-                            </span>
-                            <span className="text-danger fw-bold">
-                              {(
-                                cloth.price -
-                                (cloth.price * cloth.promo) / 100
-                              ).toFixed(2)}{" "}
-                              €
-                            </span>
-                          </div>
-                        ) : (
-                          <span className="">{cloth.price} €</span>
-                        )}
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Footer>
-                      <div className="d-flex justify-content-between align-items-center">
-                        <AddToCartButton
-                          item={cloth}
-                          showSizeSelect={cloth.sizes && cloth.sizes.length > 0}
-                          onDecrement={decrementStock}
-                        />
-                      </div>
-                    </Card.Footer>
-                  </Card>
-                </div>
-              );
-            })}
-          </CardGroup> */}
+                      <Card.Body>
+                        <Card.Title>{relatedCloth.name}</Card.Title>
+                        <Card.Text>
+                          {relatedCloth.promo > 0 ? (
+                            <div className="d-flex flex-column gap-2">
+                              <span className="text-muted text-decoration-line-through">
+                                {relatedCloth.price} €
+                              </span>
+                              <span className="text-danger fw-bold">
+                                {(
+                                  relatedCloth.price -
+                                  (relatedCloth.price * relatedCloth.promo) /
+                                    100
+                                ).toFixed(2)}{" "}
+                                €
+                              </span>
+                            </div>
+                          ) : (
+                            <span className="">{relatedCloth.price} €</span>
+                          )}
+                        </Card.Text>
+                      </Card.Body>
+                      <Card.Footer>
+                        <div className="d-flex justify-content-between align-items-center">
+                          <AddToCartButton
+                            item={relatedCloth}
+                            showSizeSelect={
+                              relatedCloth.sizes &&
+                              relatedCloth.sizes.length > 0
+                            }
+                            onDecrement={decrementStock}
+                          />
+                        </div>
+                      </Card.Footer>
+                    </Card>
+                  </div>
+                );
+              })}
+            </CardGroup>
           </div>
         </div>
       </div>
