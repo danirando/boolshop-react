@@ -9,11 +9,11 @@ import { useContext, useEffect, useState } from "react";
 import { ClothesContext } from "../contexts/ClothesContext";
 import FiltersSelect from "../components/FiltersSelect";
 import axios from "axios";
-
 export default function ClothesListPage() {
   const { clothes } = useContext(ClothesContext);
   const [localClothes, setLocalClothes] = useState(clothes);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Leggi parametri da URL

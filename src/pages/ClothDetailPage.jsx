@@ -51,7 +51,7 @@ export default function ClothDetailPage() {
                       Materiale: {cloth.material}
                     </div>
                     <div className="text-secondary">
-                      Categoria: {cloth.category?.[0]?.name}
+                      Categoria: {cloth.category}
                     </div>
 
                     <AddToCartButton
