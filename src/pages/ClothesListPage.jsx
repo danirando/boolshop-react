@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // components
 import Card from "react-bootstrap/Card";
@@ -8,11 +8,46 @@ import AddToCartButton from "../components/AddToCartButton";
 import { useContext, useEffect, useState } from "react";
 import { ClothesContext } from "../contexts/ClothesContext";
 import FiltersSelect from "../components/FiltersSelect";
+import axios from "axios";
 
 export default function ClothesListPage() {
   const { clothes } = useContext(ClothesContext);
   const [localClothes, setLocalClothes] = useState(clothes);
-  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Leggi parametri da URL
+    const params = new URLSearchParams(location.search);
+    const filters = {
+      size: params.get("size") || "",
+      category: params.get("category") || "",
+      order: params.get("order") || "",
+      price: params.get("price") || "",
+    };
+
+    // Se non ci sono filtri usa clothes dal contesto
+    if (
+      !filters.size &&
+      !filters.category &&
+      !filters.order &&
+      !filters.price
+    ) {
+      setLocalClothes(clothes);
+      return;
+    }
+
+    // Chiamata combinata al backend
+    axios
+      .get("http://localhost:3000/clothes/f-all", { params: filters })
+      .then((res) => setLocalClothes(res.data))
+      .catch((err) => {
+        if (err.response && err.response.status === 404) {
+          setLocalClothes([]);
+        } else {
+          console.error("Errore caricamento vestiti:", err);
+        }
+      });
+  }, [location.search, clothes]);
 
   useEffect(() => {
     setLocalClothes(clothes);

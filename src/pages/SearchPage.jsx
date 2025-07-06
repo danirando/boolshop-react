@@ -1,24 +1,41 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
 import AddToCartButton from "../components/AddToCartButton";
+import FiltersSelect from "../components/FiltersSelect";
 import axios from "axios";
 
 export default function SearchPage() {
-  const { query } = useParams();
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
+  const { query } = useParams();
+
   useEffect(() => {
     const fetchResults = async () => {
       setLoading(true);
+
+      const params = new URLSearchParams(location.search);
+      const size = params.get("size") || "";
+      const category = params.get("category") || "";
+      const order = params.get("order") || "";
+      const price = params.get("price") || "";
+
       try {
-        const res = await axios.get(`http://localhost:3000/searchbar/${query}`);
+        const res = await axios.get("http://localhost:3000/clothes/f-all", {
+          params: {
+            query, // parola di ricerca dalla barra
+            size,
+            category,
+            order,
+            price,
+          },
+        });
         setResults(res.data);
       } catch (err) {
         if (err.response && err.response.status === 404) {
-          // Imposta risultati vuoti per mostrare "nessun risultato"
           setResults([]);
         } else {
           console.error("Errore nella ricerca:", err);
@@ -29,15 +46,16 @@ export default function SearchPage() {
     };
 
     fetchResults();
-  }, [query]);
+  }, [query, location.search]);
 
   if (loading) return <p>Loading...</p>;
 
   return (
     <div className="container">
-      <h1 className="my-3">Risultati per: {query}</h1>
+      <h1 className="my-3">Risultati ricerca con filtri</h1>
 
-      {loading && <p>Caricamento...</p>}
+      {/* Inserisci FiltersSelect e passa onResultsUpdate */}
+      <FiltersSelect onResultsUpdate={setResults} searchQuery={query} />
 
       {!loading && results.length === 0 && (
         <div className="text-center mt-4">
