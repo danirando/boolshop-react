@@ -48,10 +48,10 @@ export default function ClothDetailPage() {
                     <div>{cloth.name} </div>
                     <div className="text-success">{cloth.price}€ </div>
                     <div className="text-secondary">
-                      Materiale: {cloth.material}
+                      <strong>Material:</strong> {cloth.material}
                     </div>
                     <div className="text-secondary">
-                      Categoria: {cloth.category}
+                      <strong>Category:</strong> {cloth.category}
                     </div>
 
                     <AddToCartButton
@@ -63,7 +63,7 @@ export default function ClothDetailPage() {
                 </div>
 
                 <NavLink to="/clothes" className="nav-link">
-                  Torna indietro
+                  Go back
                 </NavLink>
               </div>
             </div>
