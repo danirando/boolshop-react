@@ -23,14 +23,16 @@ export default function ClothesListPage() {
       category: params.get("category") || "",
       order: params.get("order") || "",
       price: params.get("price") || "",
+      query: params.get("query") || "", // <-- aggiunto query qui
     };
 
-    // Se non ci sono filtri usa clothes dal contesto
+    // Se non ci sono filtri e query, usa clothes dal contesto
     if (
       !filters.size &&
       !filters.category &&
       !filters.order &&
-      !filters.price
+      !filters.price &&
+      !filters.query // considera anche query
     ) {
       setLocalClothes(clothes);
       return;
