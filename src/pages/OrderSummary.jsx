@@ -15,7 +15,7 @@ export default function OrderSummary() {
   const formData = location.state?.formData;
 
   const totalWithoutShipping = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+    (sum, item) => sum + (item.finalPrice ?? item.price) * item.quantity,
     0
   );
 
@@ -96,7 +96,7 @@ export default function OrderSummary() {
         {cart.map((item) => (
           <li key={`${item.id}-${item.size}`}>
             {item.name} ({item.size}) x {item.quantity} = €
-            {(item.price * item.quantity).toFixed(2)}
+            {((item.finalPrice ?? item.price) * item.quantity).toFixed(2)}
           </li>
         ))}
       </ul>

@@ -25,6 +25,12 @@ export default function AddToCartButton({
       addToCart({
         ...item,
         size: selectedSize,
+        finalPrice:
+          item.promo && item.promo > 0
+            ? parseFloat(
+                (item.price - (item.price * item.promo) / 100).toFixed(2)
+              )
+            : item.price,
       });
     }
   };
@@ -48,7 +54,8 @@ export default function AddToCartButton({
           style={{ maxWidth: 90 }}
           value={selectedSize}
           onChange={(e) => setSelectedSize(e.target.value)}
-          onClick={(e) => e.stopPropagation()}>
+          onClick={(e) => e.stopPropagation()}
+        >
           {item.sizes.map((sz) => (
             <option key={`${item.id}-${sz}`} value={sz}>
               {sz}
@@ -66,7 +73,8 @@ export default function AddToCartButton({
           <button
             className="btn btn-secondary"
             onClick={handleAdd}
-            disabled={quantity >= item.stock}>
+            disabled={quantity >= item.stock}
+          >
             +
           </button>
         </div>
@@ -80,9 +88,16 @@ export default function AddToCartButton({
               ...item,
               size: selectedSize,
               quantity: 1,
+              finalPrice:
+                item.promo && item.promo > 0
+                  ? parseFloat(
+                      (item.price - (item.price * item.promo) / 100).toFixed(2)
+                    )
+                  : item.price,
             });
             if (onDecrement) onDecrement(item.id);
-          }}>
+          }}
+        >
           Add to cart
         </button>
       )}

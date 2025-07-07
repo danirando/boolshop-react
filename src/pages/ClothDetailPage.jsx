@@ -14,16 +14,16 @@ export default function ClothDetailPage() {
   const clothUrl = import.meta.env.VITE_BOOKS_API_URL + "/clothes/" + slug;
   const navigate = useNavigate();
 
-  console.log("slug:", slug);
-  console.log("clothUrl:", clothUrl);
+  // console.log("slug:", slug);
+  // console.log("clothUrl:", clothUrl);
 
   const fetchClothes = () => {
     axios
       .get(clothUrl)
       .then((res) => {
         const fetchedCloth = res.data[0];
-        console.log("Prodotto:", fetchedCloth);
-        console.log("Categoria:", fetchedCloth.category);
+        // console.log("Prodotto:", fetchedCloth);
+        // console.log("Categoria:", fetchedCloth.category);
         setCloth(fetchedCloth);
       })
       .catch((err) => {
@@ -31,7 +31,7 @@ export default function ClothDetailPage() {
       });
     axios.get(clothUrl).then((res) => {
       const dataCloth = res.data[0];
-      console.log(dataCloth);
+      // console.log(dataCloth);
       setCloth(dataCloth);
     });
   };
@@ -136,14 +136,17 @@ export default function ClothDetailPage() {
                       ) : (
                         <span className="">{cloth.price} €</span>
                       )}
-                    </div>
-                    <div className="text-secondary">
-                      Materiale: {cloth.material}
-                    </div>
-                    <div className="text-secondary">
-                      <strong>Availability:</strong> {cloth.stock}
-                      Categoria: {cloth.category}
-                      Categoria: {cloth.category}
+                      <div className="text-secondary d-flex flex-column gap-2">
+                        <div className="">
+                          <strong> Materiale:</strong> {cloth.material}
+                        </div>
+                        <div className="">
+                          <strong>Availability:</strong> {cloth.stock}
+                        </div>
+                        <div className="">
+                          <strong>Categoria:</strong> {cloth.category}
+                        </div>
+                      </div>
                     </div>
 
                     <AddToCartButton
