@@ -308,3 +308,31 @@ section > h2 {
     text-align: center;
   }
 }
+
+/* detail page */
+
+/* # related products */
+
+.related-card {
+  max-width: 250px;
+  font-size: 0.9rem;
+  margin: 0 auto;
+}
+
+.related-card .card-img-fixed {
+  height: 180px;
+  object-fit: cover;
+}
+
+.related-card .card-body {
+  padding: 0.75rem;
+}
+
+.related-card .card-title {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.related-card .card-text {
+  font-size: 0.85rem;
+}

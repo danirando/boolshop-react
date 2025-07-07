@@ -64,8 +64,10 @@ export default function ClothDetailPage() {
   const fetchRelatedClothes = () => {
     if (cloth.category && cloth.id) {
       // Da controllare l'endpoint
-      const relatedUrl =
-        import.meta.env.VITE_BOOKS_API_URL + `/f-categories/${cloth.category}`;
+      const category = cloth.category;
+      const relatedUrl = `http://localhost:3000/clothes/f-categories/${category}`;
+
+      console.log("url correlati", relatedUrl);
 
       axios.get(relatedUrl).then((res) => {
         console.log("Categoria per correlati:", cloth.category);
@@ -153,61 +155,68 @@ export default function ClothDetailPage() {
             </div>
             {/* # prodotti correlati */}
 
-            <CardGroup>
-              {relatedClothes.map((relatedCloth) => {
-                return (
-                  <div
-                    key={relatedCloth.id}
-                    className="col-sm-12 col-md-6 col-lg-4"
-                    onClick={() => navigate(`/clothes/${relatedCloth.slug}`)}
-                  >
-                    <Card className="card-clothes h-100" key={relatedCloth.id}>
-                      <Card.Img
-                        className="card-img-fixed"
-                        variant="top"
-                        src={relatedCloth.img}
-                      />
-                      {renderPromoBadge(relatedCloth.promo)}
+            <section className="my-5">
+              <h4 className="text-center my-5">Related Products</h4>
 
-                      <Card.Body>
-                        <Card.Title>{relatedCloth.name}</Card.Title>
-                        <Card.Text>
-                          {relatedCloth.promo > 0 ? (
-                            <div className="d-flex flex-column gap-2">
-                              <span className="text-muted text-decoration-line-through">
-                                {relatedCloth.price} €
-                              </span>
-                              <span className="text-danger fw-bold">
-                                {(
-                                  relatedCloth.price -
-                                  (relatedCloth.price * relatedCloth.promo) /
-                                    100
-                                ).toFixed(2)}{" "}
-                                €
-                              </span>
-                            </div>
-                          ) : (
-                            <span className="">{relatedCloth.price} €</span>
-                          )}
-                        </Card.Text>
-                      </Card.Body>
-                      <Card.Footer>
-                        <div className="d-flex justify-content-between align-items-center">
-                          <AddToCartButton
-                            item={relatedCloth}
-                            showSizeSelect={
-                              relatedCloth.sizes &&
-                              relatedCloth.sizes.length > 0
-                            }
-                            onDecrement={decrementStock}
-                          />
-                        </div>
-                      </Card.Footer>
-                    </Card>
-                  </div>
-                );
-              })}
-            </CardGroup>
+              <CardGroup>
+                {relatedClothes.slice(0, 3).map((relatedCloth) => {
+                  return (
+                    <div
+                      key={relatedCloth.id}
+                      className="col-sm-12 col-md-6 col-lg-4"
+                      onClick={() => navigate(`/clothes/${relatedCloth.slug}`)}
+                    >
+                      <Card
+                        className="card-clothes related-card h-100"
+                        key={relatedCloth.id}
+                      >
+                        <Card.Img
+                          className="card-img-fixed"
+                          variant="top"
+                          src={relatedCloth.img}
+                        />
+                        {renderPromoBadge(relatedCloth.promo)}
+
+                        <Card.Body>
+                          <Card.Title>{relatedCloth.name}</Card.Title>
+                          <Card.Text>
+                            {relatedCloth.promo > 0 ? (
+                              <div className="d-flex flex-column gap-2">
+                                <span className="text-muted text-decoration-line-through">
+                                  {relatedCloth.price} €
+                                </span>
+                                <span className="text-danger fw-bold">
+                                  {(
+                                    relatedCloth.price -
+                                    (relatedCloth.price * relatedCloth.promo) /
+                                      100
+                                  ).toFixed(2)}{" "}
+                                  €
+                                </span>
+                              </div>
+                            ) : (
+                              <span className="">{relatedCloth.price} €</span>
+                            )}
+                          </Card.Text>
+                        </Card.Body>
+                        <Card.Footer>
+                          <div className="d-flex justify-content-between align-items-center">
+                            <AddToCartButton
+                              item={relatedCloth}
+                              showSizeSelect={
+                                relatedCloth.sizes &&
+                                relatedCloth.sizes.length > 0
+                              }
+                              onDecrement={decrementStock}
+                            />
+                          </div>
+                        </Card.Footer>
+                      </Card>
+                    </div>
+                  );
+                })}
+              </CardGroup>
+            </section>
           </div>
         </div>
       </div>
