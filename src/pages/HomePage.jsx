@@ -103,43 +103,10 @@ export default function HomePage() {
                     </div>
 
                     <Card.Footer className="d-flex flex-column gap-3">
-                      {item.stock > 0 ? (
-                        <>
-                          {item.sizes && item.sizes.length > 0 && (
-                            <select
-                              className="form-select"
-                              style={{ maxWidth: 90 }}
-                              value={selectedSizes[item.id] || item.sizes[0]}
-                              onChange={(e) =>
-                                setSelectedSizes((prev) => ({
-                                  ...prev,
-                                  [item.id]: e.target.value,
-                                }))
-                              }
-                              onClick={(e) => e.stopPropagation()}>
-                              {item.sizes.map((sz) => (
-                                <option key={sz} value={sz}>
-                                  {sz}
-                                </option>
-                              ))}
-                            </select>
-                          )}
-                          <button
-                            className="btn add-button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              addToCart({
-                                ...item,
-                                size: selectedSizes[item.id] || item.sizes[0],
-                              });
-                              decrementQuantity(item.id, false); // <-- qui
-                            }}>
-                            Add to cart
-                          </button>
-                        </>
-                      ) : (
-                        <div>Out of stock</div>
-                      )}
+                      <AddToCartButton
+                        item={item}
+                        onDecrement={() => decrementQuantity(item.id, false)}
+                      />
                     </Card.Footer>
                   </Card>
                 );
@@ -197,39 +164,10 @@ export default function HomePage() {
 
                     <Card.Footer className="d-flex flex-column gap-3">
                       {item.stock > 0 ? (
-                        <>
-                          {item.sizes && item.sizes.length > 0 && (
-                            <select
-                              className="form-select"
-                              style={{ maxWidth: 90 }}
-                              value={selectedSizes[item.id] || item.sizes[0]}
-                              onChange={(e) =>
-                                setSelectedSizes((prev) => ({
-                                  ...prev,
-                                  [item.id]: e.target.value,
-                                }))
-                              }
-                              onClick={(e) => e.stopPropagation()}>
-                              {item.sizes.map((sz) => (
-                                <option key={sz} value={sz}>
-                                  {sz}
-                                </option>
-                              ))}
-                            </select>
-                          )}
-                          <button
-                            className="btn add-button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              addToCart({
-                                ...cartDiscount,
-                                size: selectedSizes[item.id] || item.sizes[0],
-                              });
-                              decrementQuantity(item.id, true); // <-- qui
-                            }}>
-                            Add to cart
-                          </button>
-                        </>
+                        <AddToCartButton
+                          item={item}
+                          onDecrement={() => decrementQuantity(item.id, false)}
+                        />
                       ) : (
                         <div>Out of stock</div>
                       )}

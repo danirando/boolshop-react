@@ -14,54 +14,117 @@ export default function CheckoutPage() {
     paymentMethod: "card",
   });
 
+  const [errors, setErrors] = useState({});
+
   const { cart } = useCart();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
+
+    const error = validateField(name, value);
+
+    setErrors((prev) => {
+      const updatedErrors = { ...prev };
+      if (error) {
+        updatedErrors[name] = error;
+      } else {
+        delete updatedErrors[name];
+      }
+      return updatedErrors;
+    });
+  };
+
+  const validateField = (name, value) => {
+    let error = "";
+
+    switch (name) {
+      case "name":
+      case "surname":
+        if (!/^[a-zA-Z\s]+$/.test(value)) {
+          error = `${name} must contain only letters.`;
+        }
+        break;
+      case "mail":
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          error = "Please enter a valid email address.";
+        }
+        break;
+      case "cap":
+        if (value.length !== 5 || !/^\d+$/.test(value)) {
+          error = "Postal code must be 5 digits.";
+        }
+        break;
+      case "cell_number":
+        if (!/^\d{10}$/.test(value)) {
+          error = "Cell number must be 10 digits.";
+        }
+        break;
+      default:
+        break;
+    }
+
+    return error;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/order-summary", { state: { formData, cart } });
+
+    const newErrors = {};
+
+    Object.keys(formData).forEach((key) => {
+      const error = validateField(key, formData[key]);
+      if (error) {
+        newErrors[key] = error;
+      }
+    });
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      navigate("/order-summary", { state: { formData, cart } });
+    }
   };
 
   return (
     <div className="container">
-      <div className="row g-3">
-        <form onSubmit={handleSubmit} className="mt-4">
-          <div className="d-flex">
-            <div className="mb-3 col-6">
-              <label className="form-label">Name</label>
-              <input
-                type="text"
-                className="form-control"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className="mb-3 mx-2 col-6">
-              <label className="form-label">Surname</label>
-              <input
-                type="text"
-                className="form-control"
-                name="surname"
-                value={formData.surname}
-                onChange={handleChange}
-                required
-              />
-            </div>
+      <form onSubmit={handleSubmit} className="mt-4">
+        <div className="row g-3">
+          <div className="col-6 mb-3">
+            <label className="form-label">Name</label>
+            <input
+              type="text"
+              className="form-control"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+            {errors.name && <div className="text-danger">{errors.name}</div>}
           </div>
 
-          <div className="mb-3">
-            <label className="form-label">mail</label>
+          <div className="col-6 mb-3">
+            <label className="form-label">Surname</label>
+            <input
+              type="text"
+              className="form-control"
+              name="surname"
+              value={formData.surname}
+              onChange={handleChange}
+              required
+            />
+            {errors.surname && (
+              <div className="text-danger">{errors.surname}</div>
+            )}
+          </div>
+
+          <div className="col-12 mb-3">
+            <label className="form-label">Email</label>
             <input
               type="email"
               className="form-control"
@@ -70,78 +133,80 @@ export default function CheckoutPage() {
               onChange={handleChange}
               required
             />
+            {errors.mail && <div className="text-danger">{errors.mail}</div>}
           </div>
 
-          <div className="d-flex justify-content-between">
-            <div className="mb-3 col-5">
-              <label className="form-label">Address</label>
-              <input
-                type="text"
-                className="form-control"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className="mb-3 col-4">
-              <label className="form-label">City</label>
-              <input
-                type="text"
-                className="form-control"
-                name="city"
-                value={formData.city}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className="mb-3 col-2">
-              <label className="form-label">Postal Code</label>
-              <input
-                type="number"
-                className="form-control"
-                name="cap"
-                value={formData.cap}
-                onChange={handleChange}
-                required
-              />
-            </div>
+          <div className="col-6 mb-3">
+            <label className="form-label">Address</label>
+            <input
+              type="text"
+              className="form-control"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              required
+            />
           </div>
 
-          <div className="d-flex justify-content-between">
-            <div className="mb-3 col-5">
-              <label className="form-label">Cell Number</label>
-              <input
-                type="number"
-                className="form-control"
-                name="cell_number"
-                value={formData.cell_number}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className="mb-3 col-5">
-              <label className="form-label">Payment method</label>
-              <select
-                className="form-select"
-                name="paymentMethod"
-                value={formData.paymentMethod}
-                onChange={handleChange}
-              >
-                <option value="card">Credit Card</option>
-                <option value="paypal">PayPal</option>
-              </select>
-            </div>
+          <div className="col-4 mb-3">
+            <label className="form-label">City</label>
+            <input
+              type="text"
+              className="form-control"
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+              required
+            />
           </div>
 
-          <button type="submit" className="btn btn-success">
-            Confirm
-          </button>
-        </form>
-      </div>
+          <div className="col-2 mb-3">
+            <label className="form-label">Postal Code</label>
+            <input
+              type="number"
+              className="form-control"
+              name="cap"
+              value={formData.cap}
+              onChange={handleChange}
+              required
+            />
+            {errors.cap && <div className="text-danger">{errors.cap}</div>}
+          </div>
+
+          <div className="col-6 mb-3">
+            <label className="form-label">Cell Number</label>
+            <input
+              type="number"
+              className="form-control"
+              name="cell_number"
+              value={formData.cell_number}
+              onChange={handleChange}
+              required
+            />
+            {errors.cell_number && (
+              <div className="text-danger">{errors.cell_number}</div>
+            )}
+          </div>
+
+          <div className="col-6 mb-3">
+            <label className="form-label">Payment method</label>
+            <select
+              className="form-select"
+              name="paymentMethod"
+              value={formData.paymentMethod}
+              onChange={handleChange}>
+              <option value="card">Credit Card</option>
+              <option value="paypal">PayPal</option>
+            </select>
+          </div>
+
+          <div className="col-12">
+            <button type="submit" className="btn btn-success">
+              Confirm
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   );
 }
