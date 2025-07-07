@@ -31,107 +31,117 @@ export default function CheckoutPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="container mt-4">
-      <div className="mb-3">
-        <label className="form-label">Name</label>
-        <input
-          type="text"
-          className="form-control"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      </div>
+    <div className="container">
+      <div className="row g-3">
+        <form onSubmit={handleSubmit} className="mt-4">
+          <div className="d-flex">
+            <div className="mb-3 col-6">
+              <label className="form-label">Name</label>
+              <input
+                type="text"
+                className="form-control"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-      <div className="mb-3">
-        <label className="form-label">Surname</label>
-        <input
-          type="text"
-          className="form-control"
-          name="surname"
-          value={formData.surname}
-          onChange={handleChange}
-          required
-        />
-      </div>
+            <div className="mb-3 mx-2 col-6">
+              <label className="form-label">Surname</label>
+              <input
+                type="text"
+                className="form-control"
+                name="surname"
+                value={formData.surname}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
 
-      <div className="mb-3">
-        <label className="form-label">mail</label>
-        <input
-          type="email"
-          className="form-control"
-          name="mail"
-          value={formData.mail}
-          onChange={handleChange}
-          required
-        />
-      </div>
+          <div className="mb-3">
+            <label className="form-label">mail</label>
+            <input
+              type="email"
+              className="form-control"
+              name="mail"
+              value={formData.mail}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-      <div className="mb-3">
-        <label className="form-label">Address</label>
-        <input
-          type="text"
-          className="form-control"
-          name="address"
-          value={formData.address}
-          onChange={handleChange}
-          required
-        />
-      </div>
+          <div className="d-flex justify-content-between">
+            <div className="mb-3 col-5">
+              <label className="form-label">Address</label>
+              <input
+                type="text"
+                className="form-control"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-      <div className="mb-3">
-        <label className="form-label">City</label>
-        <input
-          type="text"
-          className="form-control"
-          name="city"
-          value={formData.city}
-          onChange={handleChange}
-          required
-        />
-      </div>
+            <div className="mb-3 col-4">
+              <label className="form-label">City</label>
+              <input
+                type="text"
+                className="form-control"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-      <div className="mb-3">
-        <label className="form-label">Postal Code</label>
-        <input
-          type="number"
-          className="form-control"
-          name="cap"
-          value={formData.cap}
-          onChange={handleChange}
-          required
-        />
-      </div>
+            <div className="mb-3 col-2">
+              <label className="form-label">Postal Code</label>
+              <input
+                type="number"
+                className="form-control"
+                name="cap"
+                value={formData.cap}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
 
-      <div className="mb-3">
-        <label className="form-label">cell_number</label>
-        <input
-          type="number"
-          className="form-control"
-          name="cell_number"
-          value={formData.cell_number}
-          onChange={handleChange}
-          required
-        />
-      </div>
+          <div className="d-flex justify-content-between">
+            <div className="mb-3 col-5">
+              <label className="form-label">Cell Number</label>
+              <input
+                type="number"
+                className="form-control"
+                name="cell_number"
+                value={formData.cell_number}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-      <div className="mb-3">
-        <label className="form-label">Payment method</label>
-        <select
-          className="form-select"
-          name="paymentMethod"
-          value={formData.paymentMethod}
-          onChange={handleChange}
-        >
-          <option value="card">Credit Card</option>
-          <option value="paypal">PayPal</option>
-        </select>
-      </div>
+            <div className="mb-3 col-5">
+              <label className="form-label">Payment method</label>
+              <select
+                className="form-select"
+                name="paymentMethod"
+                value={formData.paymentMethod}
+                onChange={handleChange}
+              >
+                <option value="card">Credit Card</option>
+                <option value="paypal">PayPal</option>
+              </select>
+            </div>
+          </div>
 
-      <button type="submit" className="btn btn-success">
-        Confirm
-      </button>
-    </form>
+          <button type="submit" className="btn btn-success">
+            Confirm
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }
