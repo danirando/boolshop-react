@@ -6,8 +6,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
+  // const totalPrice = cart.reduce(
+  //   (total, item) => total + item.price * item.quantity,
+  //   0
+  // );
   const totalPrice = cart.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) => total + (item.finalPrice ?? item.price) * item.quantity,
     0
   );
   const navigate = useNavigate();
@@ -34,9 +38,23 @@ export default function CartPage() {
                   />
                   <Card.Body>
                     <Card.Title>{item.name}</Card.Title>
+
                     <Card.Text>
-                      Price: <span className="price">{item.price} €</span>
+                      Price:{" "}
+                      {item.promo > 0 ? (
+                        <>
+                          <span className="text-muted text-decoration-line-through me-2">
+                            {item.price} €
+                          </span>
+                          <span className="text-danger fw-bold">
+                            {item.finalPrice} €
+                          </span>
+                        </>
+                      ) : (
+                        <span className="price">{item.price} €</span>
+                      )}
                     </Card.Text>
+                    {/* Price: <span className="price">{item.price} €</span> */}
 
                     <div className="d-flex align-items-center gap-2 mb-2">
                       <label htmlFor={`${item.id}`}>Pieces:</label>
@@ -64,9 +82,19 @@ export default function CartPage() {
                     <Card.Text>
                       Total:{" "}
                       <strong>
-                        {(item.price * item.quantity).toFixed(2)} €
+                        {(
+                          (item.finalPrice ?? item.price) * item.quantity
+                        ).toFixed(2)}{" "}
+                        €
                       </strong>
                     </Card.Text>
+
+                    {/* <Card.Text>
+                      Total:{" "}
+                      <strong>
+                        {(item.price * item.quantity).toFixed(2)} €
+                      </strong>
+                    </Card.Text> */}
                   </Card.Body>
                   <Card.Footer>
                     <button
