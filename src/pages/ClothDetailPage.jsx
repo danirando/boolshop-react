@@ -157,6 +157,9 @@ export default function ClothDetailPage() {
 
             <section className="my-5">
               <h4 className="text-center my-5">Related Products</h4>
+              {(!relatedClothes || relatedClothes.length === 0) && (
+                <div className="text-center">No related products found.</div>
+              )}
 
               <CardGroup>
                 {relatedClothes.slice(0, 3).map((relatedCloth) => {
