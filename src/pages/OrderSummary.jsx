@@ -56,16 +56,6 @@ export default function OrderSummary() {
   };
 
   const handleConfirm = () => {
-    if (!isCodeValidated) {
-      alert("Please confirm your promo code before.");
-      return;
-    }
-
-    if (isInvalidCode) {
-      alert("Invalid promo code.");
-      return;
-    }
-
     const data = {
       promo_code_id: promoData ? promoData.id : null,
       name: formData.name,
