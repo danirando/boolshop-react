@@ -12,6 +12,8 @@ import axios from "axios";
 export default function ClothesListPage() {
   const { clothes } = useContext(ClothesContext);
   const [localClothes, setLocalClothes] = useState(clothes);
+  const [searchQuery, setSearchQuery] = useState(""); // per mostrare la query attuale
+  const [isSearching, setIsSearching] = useState(false); // per sapere se si sta effettuando una ricerca
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -23,8 +25,10 @@ export default function ClothesListPage() {
       category: params.get("category") || "",
       order: params.get("order") || "",
       price: params.get("price") || "",
-      query: params.get("query") || "", // <-- aggiunto query qui
+      query: params.get("query") || "",
     };
+    setSearchQuery(filters.query);
+    setIsSearching(!!filters.query);
 
     // Se non ci sono filtri e query, usa clothes dal contesto
     if (
@@ -87,6 +91,16 @@ export default function ClothesListPage() {
       <div className="container">
         <h1 className="text-center ">Clothes</h1>
         <FiltersSelect onResultsUpdate={setLocalClothes} />
+        {isSearching && (
+          <h4 className="my-3">
+            {localClothes.length > 0 ? (
+              <>Risultati per: "{searchQuery}"</>
+            ) : (
+              <>Nessun risultato per: "{searchQuery}"</>
+            )}
+          </h4>
+        )}
+
         <div className="row gy-4 py-3">
           <CardGroup>
             {localClothes.map((cloth) => {

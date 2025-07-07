@@ -77,55 +77,67 @@ export default function FiltersSelect({ onResultsUpdate }) {
   };
 
   return (
-    <div className="d-flex align-items-center my-3 gap-3">
-      <label className="me-2">Ordina per:</label>
+    <>
+      {" "}
+      <div className="d-flex flex-column g-3 gap-3">
+        <div className="d-flex gap-3">
+          <label className="me-2">Order by:</label>
+          <label htmlFor="size">Taglia</label>
+          <select
+            name="size"
+            value={size}
+            onChange={(e) => updateFilters({ size: e.target.value })}>
+            <option value="">---</option>
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+          </select>
+          <label htmlFor="price">Price</label>
+          <select
+            name="price"
+            value={order}
+            onChange={(e) => updateFilters({ order: e.target.value })}>
+            <option value="">---</option>
+            <option value="asc">Prezzo crescente</option>
+            <option value="desc">Prezzo decrescente</option>
+          </select>
+        </div>
+        <div className="d-flex gap-3">
+          <label>Filter by:</label>
+          <label htmlFor="Category">Category</label>
+          <select
+            name="category"
+            value={category}
+            onChange={(e) => updateFilters({ category: e.target.value })}>
+            <option value="">---</option>
+            <option value="Tops">Tops</option>
+            <option value="Dresses">Dresses</option>
+            <option value="Bottoms">Bottoms</option>
+            <option value="Outerwear">Outerwear</option>
+            <option value="Accessories">Accessories</option>
+          </select>
+          <label htmlFor="max-price">Max price</label>
+          <select
+            name="max-price"
+            value={maxPrice}
+            onChange={(e) => updateFilters({ price: e.target.value })}
+            aria-label="Filtra per prezzo massimo">
+            <option value="">---</option>
+            <option value="10">Fino a 10 €</option>
+            <option value="20">Fino a 20 €</option>
+            <option value="30">Fino a 30 €</option>
+          </select>
 
-      <select
-        value={size}
-        onChange={(e) => updateFilters({ size: e.target.value })}>
-        <option value="">Filtra per taglia</option>
-        <option value="XS">XS</option>
-        <option value="S">S</option>
-        <option value="M">M</option>
-        <option value="L">L</option>
-      </select>
-
-      <select
-        value={category}
-        onChange={(e) => updateFilters({ category: e.target.value })}>
-        <option value="">Filtra per categoria</option>
-        <option value="Tops">Tops</option>
-        <option value="Dresses">Dresses</option>
-        <option value="Bottoms">Bottoms</option>
-        <option value="Outerwear">Outerwear</option>
-        <option value="Accessories">Accessories</option>
-      </select>
-
-      <select
-        value={order}
-        onChange={(e) => updateFilters({ order: e.target.value })}>
-        <option value="">Ordina per prezzo</option>
-        <option value="asc">Prezzo crescente</option>
-        <option value="desc">Prezzo decrescente</option>
-      </select>
-
-      <select
-        value={maxPrice}
-        onChange={(e) => updateFilters({ price: e.target.value })}
-        aria-label="Filtra per prezzo massimo">
-        <option value="">Filtra per prezzo</option>
-        <option value="10">Fino a 10 €</option>
-        <option value="20">Fino a 20 €</option>
-        <option value="30">Fino a 30 €</option>
-      </select>
-
-      <button
-        className="btn btn-secondary"
-        onClick={() =>
-          updateFilters({ size: "", category: "", order: "", price: "" })
-        }>
-        Reset Filtri
-      </button>
-    </div>
+          <button
+            className="btn btn-secondary"
+            onClick={() =>
+              updateFilters({ size: "", category: "", order: "", price: "" })
+            }>
+            Reset Filtri
+          </button>
+        </div>
+      </div>
+    </>
   );
 }
