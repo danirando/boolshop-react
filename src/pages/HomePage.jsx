@@ -74,7 +74,7 @@ export default function HomePage() {
       <div className="hero-space">
         <div className="hero-content">
           <h1 className="hero-text">
-            Nuovi outfit, stessa vibe. Scopri la tua prossima ossessione.
+            New outfits, same vibe. Discover your next obsession.
           </h1>
         </div>
       </div>
@@ -116,7 +116,8 @@ export default function HomePage() {
                                   [item.id]: e.target.value,
                                 }))
                               }
-                              onClick={(e) => e.stopPropagation()}>
+                              onClick={(e) => e.stopPropagation()}
+                            >
                               {item.sizes.map((sz) => (
                                 <option key={sz} value={sz}>
                                   {sz}
@@ -133,7 +134,8 @@ export default function HomePage() {
                                 size: selectedSizes[item.id] || item.sizes[0],
                               });
                               decrementQuantity(item.id, false); // <-- qui
-                            }}>
+                            }}
+                          >
                             Add to cart
                           </button>
                         </>
@@ -177,7 +179,8 @@ export default function HomePage() {
                             top: "10px",
                             left: "10px",
                             fontWeight: "bold",
-                          }}>
+                          }}
+                        >
                           -{item.promo}%
                         </span>
                       )}
@@ -209,7 +212,8 @@ export default function HomePage() {
                                   [item.id]: e.target.value,
                                 }))
                               }
-                              onClick={(e) => e.stopPropagation()}>
+                              onClick={(e) => e.stopPropagation()}
+                            >
                               {item.sizes.map((sz) => (
                                 <option key={sz} value={sz}>
                                   {sz}
@@ -226,7 +230,8 @@ export default function HomePage() {
                                 size: selectedSizes[item.id] || item.sizes[0],
                               });
                               decrementQuantity(item.id, true); // <-- qui
-                            }}>
+                            }}
+                          >
                             Add to cart
                           </button>
                         </>

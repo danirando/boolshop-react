@@ -3,15 +3,15 @@ export default function Footer() {
     <div className="d-flex flex-wrap justify-content-between align-items-center footer-container">
       <div className="footer-left">
         <h5>Boolshop spa</h5>
-        <p>Sede legale: Milano, Via Montenapoleone, 432</p>
+        <p>Registered office: Milan, Via Montenapoleone, 432</p>
       </div>
       <div className="footer-center ">
         <img src="../../logo.png" className="img-fluid" alt="" />
       </div>
       <div className="footer-right">
-        <h6>Contatti:</h6>
+        <h6>Contacts:</h6>
         <p>Email: boolshop@gmail.com</p>
-        <p>Telefono: +39 0123 456 87</p>
+        <p>Phone: +39 0123 456 87</p>
         <div className="d-flex gap-3">
           <a
             href="/"
