@@ -29,6 +29,11 @@ export default function ClothDetailPage() {
       .catch((err) => {
         console.error("Errore nel caricamento del prodotto:", err);
       });
+    axios.get(clothUrl).then((res) => {
+      const dataCloth = res.data[0];
+      console.log(dataCloth);
+      setCloth(dataCloth);
+    });
   };
 
   useEffect(fetchClothes, [slug]);
@@ -136,6 +141,7 @@ export default function ClothDetailPage() {
                       Materiale: {cloth.material}
                     </div>
                     <div className="text-secondary">
+                      <strong>Availability:</strong> {cloth.stock}
                       Categoria: {cloth.category}
                       Categoria: {cloth.category}
                     </div>
@@ -149,7 +155,7 @@ export default function ClothDetailPage() {
                 </div>
 
                 <NavLink to="/clothes" className="nav-link">
-                  Torna indietro
+                  Go back
                 </NavLink>
               </div>
             </div>

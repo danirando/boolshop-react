@@ -74,7 +74,7 @@ export default function HomePage() {
       <div className="hero-space">
         <div className="hero-content">
           <h1 className="hero-text">
-            Nuovi outfit, stessa vibe. Scopri la tua prossima ossessione.
+            New outfits, same vibe. Discover your next obsession.
           </h1>
         </div>
       </div>
@@ -144,7 +144,8 @@ export default function HomePage() {
                             top: "10px",
                             left: "10px",
                             fontWeight: "bold",
-                          }}>
+                          }}
+                        >
                           -{item.promo}%
                         </span>
                       )}
