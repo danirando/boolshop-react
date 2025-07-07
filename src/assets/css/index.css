@@ -7,7 +7,6 @@ body {
   color: #122852;
   padding-top: 100px;
   padding-top: 90px;
-
 }
 
 html,
@@ -272,7 +271,7 @@ main {
   background-color: red;
 }
 
-section>h2 {
+section > h2 {
   padding-bottom: 20px;
 }
 
@@ -332,9 +331,63 @@ section>h2 {
   }
 }
 
+/* detail page */
+
+/* # related products */
+
+.related-card {
+  max-width: 250px;
+  font-size: 0.9rem;
+  margin: 0 auto;
+}
+
+.related-card .card-img-fixed {
+  height: 180px;
+  object-fit: cover;
+}
+
+.related-card .card-body {
+  padding: 0.75rem;
+}
+
+.related-card .card-title {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.related-card .card-text {
+  font-size: 0.85rem;
+}
+
+/* detail page */
+
+/* # related products */
+
+.related-card {
+  max-width: 250px;
+  font-size: 0.9rem;
+  margin: 0 auto;
+}
+
+.related-card .card-img-fixed {
+  height: 180px;
+  object-fit: cover;
+}
+
+.related-card .card-body {
+  padding: 0.75rem;
+}
+
+.related-card .card-title {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.related-card .card-text {
+  font-size: 0.85rem;
+}
 
 /* SearchPage */
-
 
 .small-card {
   max-width: 250px;
