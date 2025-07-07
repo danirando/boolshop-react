@@ -1,17 +1,16 @@
 import { useCart } from "../contexts/CartContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 export default function OrderSummary() {
   const { cart, clearCart } = useCart();
   const [promoCode, setPromoCode] = useState("");
+  const [promoData, setPromoData] = useState(null);
+  const [isInvalidCode, setIsInvalidCode] = useState(false);
+  const [isCodeValidated, setIsCodeValidated] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
-  const validCodes = {
-    SAVE10: 0.1,
-    SAVE20: 0.2,
-    SAVE30: 0.3,
-  };
+
   const location = useLocation();
   const formData = location.state?.formData;
 
@@ -20,23 +19,55 @@ export default function OrderSummary() {
     0
   );
 
-  const discount = validCodes[promoCode.toUpperCase()] || 0;
+  const discount = promoData ? promoData.value / 100 : 0;
   const discountedTotal = totalWithoutShipping * (1 - discount);
   const shippingCost = discountedTotal > 70 ? 0 : 5;
   const totalPrice = discountedTotal + shippingCost;
 
-  const handleConfirm = () => {
-    const promoCodeIds = {
-      SAVE10: 1,
-      SAVE20: 2,
-      SAVE30: 3,
-    };
+  const validatePromoCode = () => {
+    if (!promoCode.trim()) {
+      setPromoData(null);
+      setIsInvalidCode(false);
+      setIsCodeValidated(true);
+      return;
+    }
 
-    const promoCodeUpper = promoCode.toUpperCase();
-    const promo_code_id = promoCodeIds[promoCodeUpper] || null;
+    axios
+      .post("http://localhost:3000/guest/validate-code", { code: promoCode })
+      .then((res) => {
+        if (res.data.valid) {
+          setPromoData({
+            id: res.data.promo_code_id,
+            value: res.data.discount,
+          });
+          setIsInvalidCode(false);
+        } else {
+          setPromoData(null);
+          setIsInvalidCode(true);
+        }
+        setIsCodeValidated(true);
+      })
+      .catch((err) => {
+        console.error("Validation error:", err);
+        setPromoData(null);
+        setIsInvalidCode(true);
+        setIsCodeValidated(true);
+      });
+  };
+
+  const handleConfirm = () => {
+    if (!isCodeValidated) {
+      alert("Please confirm your promo code before.");
+      return;
+    }
+
+    if (isInvalidCode) {
+      alert("Invalid promo code.");
+      return;
+    }
 
     const data = {
-      promo_code_id,
+      promo_code_id: promoData ? promoData.id : null,
       name: formData.name,
       surname: formData.surname,
       mail: formData.mail,
@@ -87,8 +118,21 @@ export default function OrderSummary() {
         <label>Promo code: </label>
         <input
           value={promoCode}
-          onChange={(e) => setPromoCode(e.target.value)}
+          onChange={(e) => {
+            setPromoCode(e.target.value);
+            setIsCodeValidated(false);
+            setIsInvalidCode(false);
+          }}
         />
+        <button className="btn btn-secondary ms-2" onClick={validatePromoCode}>
+          Check promo code
+        </button>
+        {isInvalidCode && <p style={{ color: "red" }}>Invalid promo code</p>}
+        {promoData && (
+          <p style={{ color: "green" }}>
+            Valid promo code: discount: {promoData.value}%
+          </p>
+        )}
       </div>
 
       <p>Shipping: €{shippingCost.toFixed(2)}</p>
