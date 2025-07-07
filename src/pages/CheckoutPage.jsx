@@ -14,20 +14,85 @@ export default function CheckoutPage() {
     paymentMethod: "card",
   });
 
+  const [errors, setErrors] = useState({});
+
   const { cart } = useCart();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
+
+    const error = validateField(name, value);
+
+    setErrors((prev) => {
+      const updatedErrors = { ...prev };
+      if (error) {
+        updatedErrors[name] = error;
+      } else {
+        delete updatedErrors[name];
+      }
+      return updatedErrors;
+    });
+  };
+
+  const validateField = (name, value) => {
+    let error = "";
+
+    switch (name) {
+      case "name":
+        if (!/^[a-zA-Z\s]+$/.test(value)) {
+          error = "Name must contain only letters.";
+        }
+        break;
+      case "surname":
+        if (!/^[a-zA-Z\s]+$/.test(value)) {
+          error = "Surname must contain only letters.";
+        }
+        break;
+      case "mail":
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          error = "Please enter a valid email address.";
+        }
+        break;
+      case "cap":
+        if (value.length !== 5 || !/^\d+$/.test(value)) {
+          error = "Postal code must be 5 digits.";
+        }
+        break;
+      case "cell_number":
+        if (!/^\d{10}$/.test(value)) {
+          error = "Cell number must be 10 digits.";
+        }
+        break;
+      default:
+        break;
+    }
+
+    return error;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/order-summary", { state: { formData, cart } });
+
+    const newErrors = {};
+
+    Object.keys(formData).forEach((key) => {
+      const error = validateField(key, formData[key]);
+      if (error) {
+        newErrors[key] = error;
+      }
+    });
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      navigate("/order-summary", { state: { formData, cart } });
+    }
   };
 
   return (
@@ -42,6 +107,7 @@ export default function CheckoutPage() {
           onChange={handleChange}
           required
         />
+        {errors.name && <div className="text-danger">{errors.name}</div>}
       </div>
 
       <div className="mb-3">
@@ -54,6 +120,7 @@ export default function CheckoutPage() {
           onChange={handleChange}
           required
         />
+        {errors.surname && <div className="text-danger">{errors.surname}</div>}
       </div>
 
       <div className="mb-3">
@@ -66,6 +133,7 @@ export default function CheckoutPage() {
           onChange={handleChange}
           required
         />
+        {errors.mail && <div className="text-danger">{errors.mail}</div>}
       </div>
 
       <div className="mb-3">
@@ -102,6 +170,7 @@ export default function CheckoutPage() {
           onChange={handleChange}
           required
         />
+        {errors.cap && <div className="text-danger">{errors.cap}</div>}
       </div>
 
       <div className="mb-3">
@@ -114,6 +183,9 @@ export default function CheckoutPage() {
           onChange={handleChange}
           required
         />
+        {errors.cell_number && (
+          <div className="text-danger">{errors.cell_number}</div>
+        )}
       </div>
 
       <div className="mb-3">
@@ -122,8 +194,7 @@ export default function CheckoutPage() {
           className="form-select"
           name="paymentMethod"
           value={formData.paymentMethod}
-          onChange={handleChange}
-        >
+          onChange={handleChange}>
           <option value="card">Credit Card</option>
           <option value="paypal">PayPal</option>
         </select>
