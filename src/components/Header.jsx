@@ -82,7 +82,7 @@ export default function Header() {
         style={{ backgroundColor: "#f8f9fa" }}>
         <span style={{ fontSize: "0.95rem" }}>
           Spedizione gratuita: ordine minimo 70€. Codici promo: SAVE10, SAVE20,
-          SAVE30.
+          SAVE30. Validi dal 07-07-25 al 20-07-25
         </span>
       </div>
     </>
