@@ -22,22 +22,9 @@ export default function ClothDetailPage() {
       .get(clothUrl)
       .then((res) => {
         const fetchedCloth = res.data[0];
-        console.log("Risposta prodotto:", fetchedCloth);
+        console.log("Prodotto:", fetchedCloth);
         console.log("Categoria:", fetchedCloth.category);
         setCloth(fetchedCloth);
-
-        if (fetchedCloth.category && fetchedCloth.id) {
-          const relatedUrl =
-            import.meta.env.VITE_BOOKS_API_URL +
-            `/filterCategories/${fetchedCloth.category}`;
-
-          axios.get(relatedUrl).then((res) => {
-            const filtered = res.data.filter(
-              (item) => item.id !== fetchedCloth.id
-            );
-            setRelatedClothes(filtered);
-          });
-        }
       })
       .catch((err) => {
         console.error("Errore nel caricamento del prodotto:", err);
@@ -74,22 +61,27 @@ export default function ClothDetailPage() {
 
   // #  prodotti correlati
 
-  // const fetchRelatedClothes = () => {
-  //   console.log("Categoria per correlati:", cloth.category);
+  const fetchRelatedClothes = () => {
+    if (cloth.category && cloth.id) {
+      // Da controllare l'endpoint
+      const relatedUrl =
+        import.meta.env.VITE_BOOKS_API_URL + `/f-categories/${cloth.category}`;
 
-  //   if (cloth.category && cloth.id) {
-  //     const relatedUrl =
-  //       import.meta.env.VITE_BOOKS_API_URL +
-  //       `/filterCategories/${cloth.category}`;
+      axios.get(relatedUrl).then((res) => {
+        console.log("Categoria per correlati:", cloth.category);
+        console.log("ID prodotto corrente:", cloth.id);
 
-  //     axios.get(relatedUrl).then((res) => {
-  //       const filtered = res.data.filter((item) => item.id !== cloth.id);
-  //       setRelatedClothes(filtered);
-  //     });
-  //   }
-  // };
+        const filtered = res.data.filter((item) => item.id !== cloth.id);
+        setRelatedClothes(filtered);
+      });
+    }
+  };
 
-  // useEffect(fetchRelatedClothes, [cloth.category, cloth.id]);
+  useEffect(() => {
+    if (cloth.category && cloth.id) {
+      fetchRelatedClothes();
+    }
+  }, [cloth.category, cloth.id]);
 
   if (!cloth.id) {
     return <div className="text-center my-5">Caricamento in corso...</div>;
