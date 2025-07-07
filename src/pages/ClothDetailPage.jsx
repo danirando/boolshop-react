@@ -12,7 +12,9 @@ export default function ClothDetailPage() {
   console.log(clothUrl);
   const fetchClothes = () => {
     axios.get(clothUrl).then((res) => {
-      setCloth(res.data[0]);
+      const dataCloth = res.data[0];
+      console.log(dataCloth);
+      setCloth(dataCloth);
     });
   };
 
@@ -52,6 +54,9 @@ export default function ClothDetailPage() {
                     </div>
                     <div className="text-secondary">
                       <strong>Category:</strong> {cloth.category}
+                    </div>
+                    <div className="text-secondary">
+                      <strong>Availability:</strong> {cloth.stock}
                     </div>
 
                     <AddToCartButton
