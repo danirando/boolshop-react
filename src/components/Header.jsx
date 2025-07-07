@@ -46,23 +46,24 @@ export default function Header() {
             Clothes
           </Link>
 
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll>
-            <Link to="/cart" className="nav-link position-relative">
-              <i className="bi bi-cart" style={{ fontSize: "1.5rem" }}></i>
-              {cartCount > 0 && (
-                <span
-                  className="start-100 translate-middle badge rounded-pill bg-danger"
-                  style={{ fontSize: "0.75rem" }}>
-                  {cartCount}
-                </span>
-              )}
-            </Link>
-          </Nav>
-
-          <form className="d-flex" onSubmit={handleSubmit}>
+          <form
+            className="d-flex align-items-center gap-3 form-search"
+            onSubmit={handleSubmit}>
+            <Nav
+              className="me-auto my-2 my-lg-0"
+              style={{ maxHeight: "100px" }}
+              navbarScroll>
+              <Link to="/cart" className="nav-link position-relative">
+                <i className="bi bi-cart" style={{ fontSize: "1.5rem" }}></i>
+                {cartCount > 0 && (
+                  <span
+                    className="start-100 translate-middle badge rounded-pill bg-danger"
+                    style={{ fontSize: "0.75rem" }}>
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+            </Nav>
             <input
               type="search"
               className="form-control me-2 search-input"
