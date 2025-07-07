@@ -52,56 +52,69 @@ main {
 
 @media (max-width: 762px) {
   body {
-    padding-top: 340px;
-  }
-
-  .navbar .header-container {
-    display: flex !important;
-    flex-direction: column;
-    align-items: center !important;
+    padding-top: 140px;
+    /* adegua al tuo header effettivo */
   }
 
   .navbar {
-    min-height: 340px;
+    padding: 0.5rem 0;
   }
 
-  .d-flex.form-inline,
-  .navbar .d-flex {
-    flex-direction: column !important;
+  .navbar .header-container {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    gap: 0.5rem;
+  .navbar-brand {
     width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .logo-img {
+    max-height: 50px;
+    width: auto;
+  }
+
+  .navbar .second-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    width: 100%;
+  }
+
+  .nav-link.clothes {
+    order: 1;
   }
 
   .search-input {
-    width: 100% !important;
-    max-width: 100%;
+    max-width: 140px;
   }
 
   .search-button {
-    width: 100%;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.85rem;
   }
 
-  .bi.bi-cart {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1.8rem;
+  .nav-link.position-relative {
+    position: relative;
+    order: 3;
   }
 
-  .nav-link .badge {
-    min-width: 1.1em;
-    height: 1.1em;
-    font-size: 0.7rem;
-    top: 0.1rem;
-    right: 0.1rem;
-    padding: 0;
-    margin-right: 1rem;
-  }
-
-  .nav-link {
-    margin-right: 1rem;
+  .nav-link.position-relative .badge {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    transform: none;
   }
 }
+
+
+
+
 
 .logo:hover {
   transform: scale(1.1);
@@ -271,7 +284,7 @@ main {
   background-color: red;
 }
 
-section > h2 {
+section>h2 {
   padding-bottom: 20px;
 }
 
