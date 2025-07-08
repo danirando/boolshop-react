@@ -6,12 +6,8 @@ export default function AddToCartButton({
   onDecrement,
   showSizeSelect = true,
 }) {
-  const { addToCart, removeFromCart } = useCart();
+  const { cart, addToCart, removeFromCart } = useCart();
   const [selectedSize, setSelectedSize] = useState(item.sizes?.[0] || "");
-  const [cart, setCart] = useState(() => {
-    const stored = localStorage.getItem("cart");
-    return stored ? JSON.parse(stored) : [];
-  });
   const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
