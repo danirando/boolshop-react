@@ -8,11 +8,22 @@ export default function AddToCartButton({
 }) {
   const { addToCart, removeFromCart } = useCart();
   const [selectedSize, setSelectedSize] = useState(item.sizes?.[0] || "");
+  const [cart, setCart] = useState(() => {
+    const stored = localStorage.getItem("cart");
+    return stored ? JSON.parse(stored) : [];
+  });
   const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
     setSelectedSize(item.sizes?.[0] || "");
   }, [item.sizes]);
+
+  useEffect(() => {
+    const existingItem = cart.find(
+      (i) => i.id === item.id && i.size === selectedSize
+    );
+    setQuantity(existingItem ? existingItem.quantity : 0);
+  }, [cart, item.id, selectedSize]);
 
   if (item.stock <= 0) {
     return <div>Out of stock</div>;
