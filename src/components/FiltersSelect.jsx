@@ -26,6 +26,7 @@ export default function FiltersSelect({ onResultsUpdate }) {
   }, [location.search]);
 
   const updateFilters = (newFilters) => {
+    console.log("stato attuale filtro", order);
     const currentParams = new URLSearchParams(location.search);
 
     // Aggiorna currentParams con i nuovi filtri ricevuti
@@ -59,6 +60,14 @@ export default function FiltersSelect({ onResultsUpdate }) {
       params[key] = value;
     });
 
+    let endpoint = "http://localhost:3000/clothes/f-all";
+    if (params.order === "asc") {
+      endpoint = "http://localhost:3000/clothes/f-p-ascendant";
+    }
+    if (params.order === "desc") {
+      endpoint = "http://localhost:3000/clothes/f-p-descendant";
+    }
+
     // Aggiorna URL
     navigate(
       {
@@ -67,8 +76,10 @@ export default function FiltersSelect({ onResultsUpdate }) {
       },
       { replace: true }
     );
+    // Scegli dinamicamente l'endpoint in base al filtro "order"
+
     axios
-      .get(`http://localhost:3000/clothes/f-all`, { params })
+      .get(endpoint, { params })
       .then((res) => onResultsUpdate(res.data))
       .catch((err) => {
         if (err.response && err.response.status === 404) {
@@ -90,7 +101,8 @@ export default function FiltersSelect({ onResultsUpdate }) {
             id="size"
             name="size"
             value={size}
-            onChange={(e) => updateFilters({ size: e.target.value })}>
+            onChange={(e) => updateFilters({ size: e.target.value })}
+          >
             <option value="">---</option>
             <option value="XS">XS</option>
             <option value="S">S</option>
@@ -102,7 +114,8 @@ export default function FiltersSelect({ onResultsUpdate }) {
             id="price"
             name="price"
             value={order}
-            onChange={(e) => updateFilters({ order: e.target.value })}>
+            onChange={(e) => updateFilters({ order: e.target.value })}
+          >
             <option value="">---</option>
             <option value="asc">Prezzo crescente</option>
             <option value="desc">Prezzo decrescente</option>
@@ -116,7 +129,8 @@ export default function FiltersSelect({ onResultsUpdate }) {
               id="category"
               name="category"
               value={category}
-              onChange={(e) => updateFilters({ category: e.target.value })}>
+              onChange={(e) => updateFilters({ category: e.target.value })}
+            >
               <option value="">---</option>
               <option value="Tops">Tops</option>
               <option value="Dresses">Dresses</option>
@@ -130,7 +144,8 @@ export default function FiltersSelect({ onResultsUpdate }) {
               name="max-price"
               value={maxPrice}
               onChange={(e) => updateFilters({ price: e.target.value })}
-              aria-label="Filtra per prezzo massimo">
+              aria-label="Filtra per prezzo massimo"
+            >
               <option value="">---</option>
               <option value="10">Fino a 10 €</option>
               <option value="20">Fino a 20 €</option>
@@ -163,7 +178,8 @@ export default function FiltersSelect({ onResultsUpdate }) {
                 price: "",
                 promo: "",
               })
-            }>
+            }
+          >
             Reset Filtri
           </button>
         </div>
