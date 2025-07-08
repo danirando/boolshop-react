@@ -33,11 +33,13 @@ export function CartProvider({ children }) {
     });
   };
 
-  function removeFromCart(itemId) {
+  function removeFromCart(itemId, size) {
     setCart((prev) =>
       prev
         .map((item) =>
-          item.id === itemId ? { ...item, quantity: item.quantity - 1 } : item
+          item.id === itemId && item.size === size
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
         )
         .filter((item) => item.quantity > 0)
     );
@@ -59,7 +61,8 @@ export function CartProvider({ children }) {
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart }}>
+      value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart }}
+    >
       {children}
     </CartContext.Provider>
   );

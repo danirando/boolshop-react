@@ -57,26 +57,6 @@ export default function CartPage() {
                         <span className="price">{item.price} €</span>
                       )}
                     </Card.Text>
-                    {/* Price: <span className="price">{item.price} €</span> */}
-
-                    {/* <div className="d-flex align-items-center gap-2 mb-2">
-                      <label htmlFor={`${item.id}`}>Pieces:</label>
-                      <input
-                        id={`${item.id}`}
-                        type="number"
-                        min="1"
-                        max={item.stock}
-                        value={item.quantity}
-                        onChange={(e) =>
-                          updateQuantity(
-                            item.id,
-                            parseInt(e.target.value) || 1,
-                            item.size
-                          )
-                        }
-                        style={{ width: "60px" }}
-                      />
-                    </div> */}
                     <div className="d-flex align-items-center gap-2">
                       <button
                         className="btn btn-secondary"
@@ -91,7 +71,8 @@ export default function CartPage() {
                           } else {
                             removeFromCart(item.id, item.size);
                           }
-                        }}>
+                        }}
+                      >
                         –
                       </button>
                       <span>{item.quantity}</span>
@@ -107,7 +88,8 @@ export default function CartPage() {
                             );
                           }
                         }}
-                        disabled={item.quantity >= item.stock}>
+                        disabled={item.quantity >= item.stock}
+                      >
                         +
                       </button>
                     </div>
@@ -136,7 +118,8 @@ export default function CartPage() {
                   <Card.Footer>
                     <button
                       className="btn btn-danger"
-                      onClick={() => removeFromCart(item.id, item.size)}>
+                      onClick={() => removeFromCart(item.id, item.size)}
+                    >
                       Remove
                     </button>
                   </Card.Footer>
