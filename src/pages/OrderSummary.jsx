@@ -97,9 +97,8 @@ export default function OrderSummary() {
               details regarding your purchase! Hope to see you soon!
             </h3>
             <button
-              className="add-button btn mt-3 col-2"
-              onClick={() => navigate("/")}
-            >
+              className="add-button btn mt-3 col-2 confirm"
+              onClick={() => navigate("/")}>
               Back to Homepage
             </button>
           </div>
