@@ -82,7 +82,7 @@ export default function HomePage() {
         <div className="d-flex flex-column gap-3 sections-container">
           <section>
             <h2>Top Seller</h2>
-            <CardGroup>
+            <CardGroup className="card-group">
               {mostSoldClothes.map((item) => {
                 return (
                   <Card className="card-clothes" key={item.id}>
@@ -144,8 +144,7 @@ export default function HomePage() {
                             top: "10px",
                             left: "10px",
                             fontWeight: "bold",
-                          }}
-                        >
+                          }}>
                           -{item.promo}%
                         </span>
                       )}
