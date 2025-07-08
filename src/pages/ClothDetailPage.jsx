@@ -86,7 +86,7 @@ export default function ClothDetailPage() {
   }, [cloth.category, cloth.id]);
 
   if (!cloth.id) {
-    return <div className="text-center my-5">Caricamento in corso...</div>;
+    return <div className="text-center my-5">Error 404. Page not found!</div>;
   }
 
   return (
