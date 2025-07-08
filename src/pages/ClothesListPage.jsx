@@ -38,7 +38,8 @@ export default function ClothesListPage() {
       !filters.category &&
       !filters.order &&
       !filters.price &&
-      !filters.query // considera anche query
+      !filters.query &&
+      !filters.promo // considera anche query
     ) {
       setLocalClothes(clothes);
       return;
