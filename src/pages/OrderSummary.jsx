@@ -1,6 +1,6 @@
 import { useCart } from "../contexts/CartContext";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function OrderSummary() {
@@ -13,6 +13,7 @@ export default function OrderSummary() {
 
   const location = useLocation();
   const formData = location.state?.formData;
+  const navigate = useNavigate();
 
   const totalWithoutShipping = cart.reduce(
     (sum, item) => sum + (item.finalPrice ?? item.price) * item.quantity,
@@ -86,7 +87,25 @@ export default function OrderSummary() {
   }
 
   if (confirmed) {
-    return <h2>Order confirmed!</h2>;
+    return (
+      <>
+        <div className="container text-center">
+          <div className="row justify-content-center">
+            <h1 className="my-5">Order confirmed!</h1>
+            <h3 className="my-3">
+              Thank you for choosing us, we have sent you an email with all the
+              details regarding your purchase! Hope to see you soon!
+            </h3>
+            <button
+              className="add-button btn mt-3 col-2"
+              onClick={() => navigate("/")}
+            >
+              Back to Homepage
+            </button>
+          </div>
+        </div>
+      </>
+    );
   }
 
   return (
