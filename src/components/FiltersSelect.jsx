@@ -85,16 +85,16 @@ export default function FiltersSelect({ onResultsUpdate }) {
         onResultsUpdate(res.data);
       })
       .catch((err) => {
-        console.error(" Errore nella richiesta:", err);
-        if (err.response) {
-          console.error(" Risposta errore:", err.response.data);
-        }
-
-        // if (err.response && err.response.status === 404) {
-        //   onResultsUpdate([]);
-        // } else {
-        //   console.error("Errore filtri:", err);
+        // console.error(" Errore nella richiesta:", err);
+        // if (err.response) {
+        //   console.error(" Risposta errore:", err.response.data);
         // }
+
+        if (err.response && err.response.status === 404) {
+          onResultsUpdate([]);
+        } else {
+          console.error("Errore filtri:", err);
+        }
       });
   };
 

@@ -143,7 +143,12 @@ export default function ClothesListPage() {
                               {cloth.price} €
                             </span>
                             <span className="text-danger fw-bold d-block">
-                              {Number(cloth.final_price).toFixed(2)} €
+                              {Number(
+                                cloth.final_price ??
+                                  cloth.price -
+                                    (cloth.price * cloth.promo) / 100
+                              ).toFixed(2)}{" "}
+                              €
                             </span>
                           </>
                         ) : (
