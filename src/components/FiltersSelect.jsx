@@ -26,6 +26,7 @@ export default function FiltersSelect({ onResultsUpdate }) {
   }, [location.search]);
 
   const updateFilters = (newFilters) => {
+    console.log("stato attuale filtro", order);
     const currentParams = new URLSearchParams(location.search);
 
     // Aggiorna currentParams con i nuovi filtri ricevuti
@@ -59,6 +60,14 @@ export default function FiltersSelect({ onResultsUpdate }) {
       params[key] = value;
     });
 
+    let endpoint = "http://localhost:3000/clothes/f-all";
+    if (params.order === "asc") {
+      endpoint = "http://localhost:3000/clothes/f-p-ascendant";
+    }
+    if (params.order === "desc") {
+      endpoint = "http://localhost:3000/clothes/f-p-descendant";
+    }
+
     // Aggiorna URL
     navigate(
       {
@@ -67,10 +76,20 @@ export default function FiltersSelect({ onResultsUpdate }) {
       },
       { replace: true }
     );
+    // Scegli dinamicamente l'endpoint in base al filtro "order"
+
     axios
-      .get(`http://localhost:3000/clothes/f-all`, { params })
-      .then((res) => onResultsUpdate(res.data))
+      .get(endpoint, { params })
+      .then((res) => {
+        console.log(res.data);
+        onResultsUpdate(res.data);
+      })
       .catch((err) => {
+        // console.error(" Errore nella richiesta:", err);
+        // if (err.response) {
+        //   console.error(" Risposta errore:", err.response.data);
+        // }
+
         if (err.response && err.response.status === 404) {
           onResultsUpdate([]);
         } else {
@@ -169,7 +188,7 @@ export default function FiltersSelect({ onResultsUpdate }) {
               })
             }
           >
-            Reset Filters
+            Reset Filtri
           </button>
         </div>
       </div>
