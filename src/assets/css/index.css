@@ -119,6 +119,15 @@ main {
     justify-content: center;
   }
 
+  .select-content-bottom {
+    flex-direction: column;
+  }
+
+}
+
+.select-content,
+.select-content-bottom {
+  align-items: center;
 }
 
 .search-button {

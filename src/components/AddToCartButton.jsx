@@ -54,9 +54,8 @@ export default function AddToCartButton({
           style={{ maxWidth: 90 }}
           value={selectedSize}
           onChange={(e) => setSelectedSize(e.target.value)}
-          onClick={(e) => e.stopPropagation()}
-        >
-          {item.sizes.map((sz) => (
+          onClick={(e) => e.stopPropagation()}>
+          {[...new Set(item.sizes)].map((sz) => (
             <option key={`${item.id}-${sz}`} value={sz}>
               {sz}
             </option>
@@ -73,8 +72,7 @@ export default function AddToCartButton({
           <button
             className="btn btn-secondary"
             onClick={handleAdd}
-            disabled={quantity >= item.stock}
-          >
+            disabled={quantity >= item.stock}>
             +
           </button>
         </div>
@@ -96,8 +94,7 @@ export default function AddToCartButton({
                   : item.price,
             });
             if (onDecrement) onDecrement(item.id);
-          }}
-        >
+          }}>
           Add to cart
         </button>
       )}
