@@ -46,9 +46,20 @@ export default function ClothesListPage() {
     }
 
     // Chiamata combinata al backend
+    axios;
+    let endpoint = "http://localhost:3000/clothes/f-all";
+    if (filters.order === "asc") {
+      endpoint = "http://localhost:3000/clothes/f-p-ascendant";
+    }
+    if (filters.order === "desc") {
+      endpoint = "http://localhost:3000/clothes/f-p-descendant";
+    }
+
     axios
-      .get("http://localhost:3000/clothes/f-all", { params: filters })
+      .get(endpoint, { params: filters })
       .then((res) => setLocalClothes(res.data))
+      // .get("http://localhost:3000/clothes/f-all", { params: filters })
+      // .then((res) => setLocalClothes(res.data))
       .catch((err) => {
         if (err.response && err.response.status === 404) {
           setLocalClothes([]);
@@ -80,7 +91,8 @@ export default function ClothesListPage() {
             top: "10px",
             left: "10px",
             fontWeight: "bold",
-          }}>
+          }}
+        >
           -{clothPromo}%
         </span>
       );
@@ -111,7 +123,8 @@ export default function ClothesListPage() {
                 <div
                   key={cloth.id}
                   className="col-sm-12 col-md-6 col-lg-4 my-3"
-                  onClick={() => navigate(`/clothes/${cloth.slug}`)}>
+                  onClick={() => navigate(`/clothes/${cloth.slug}`)}
+                >
                   <Card className="card-clothes h-100" key={cloth.id}>
                     <Card.Img
                       className="card-img-fixed"
@@ -122,6 +135,7 @@ export default function ClothesListPage() {
 
                     <Card.Body>
                       <Card.Title>{cloth.name}</Card.Title>
+
                       <Card.Text>
                         {cloth.promo > 0 ? (
                           <>
@@ -129,15 +143,11 @@ export default function ClothesListPage() {
                               {cloth.price} €
                             </span>
                             <span className="text-danger fw-bold d-block">
-                              {(
-                                cloth.price -
-                                (cloth.price * cloth.promo) / 100
-                              ).toFixed(2)}{" "}
-                              €
+                              {Number(cloth.final_price).toFixed(2)} €
                             </span>
                           </>
                         ) : (
-                          <span>{cloth.price} €</span>
+                          <span>{Number(cloth.price).toFixed(2)} €</span>
                         )}
                       </Card.Text>
                     </Card.Body>
