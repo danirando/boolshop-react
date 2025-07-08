@@ -3,9 +3,12 @@ import Card from "react-bootstrap/Card";
 import CardGroup from "react-bootstrap/CardGroup";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function CartPage() {
-  const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
+  const [quantity, setQuantity] = useState(0);
+  const { cart, removeFromCart, updateQuantity, clearCart, addToCart } =
+    useCart();
   // const totalPrice = cart.reduce(
   //   (total, item) => total + item.price * item.quantity,
   //   0
@@ -56,7 +59,7 @@ export default function CartPage() {
                     </Card.Text>
                     {/* Price: <span className="price">{item.price} €</span> */}
 
-                    <div className="d-flex align-items-center gap-2 mb-2">
+                    {/* <div className="d-flex align-items-center gap-2 mb-2">
                       <label htmlFor={`${item.id}`}>Pieces:</label>
                       <input
                         id={`${item.id}`}
@@ -73,6 +76,40 @@ export default function CartPage() {
                         }
                         style={{ width: "60px" }}
                       />
+                    </div> */}
+                    <div className="d-flex align-items-center gap-2">
+                      <button
+                        className="btn btn-secondary"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (item.quantity > 1) {
+                            updateQuantity(
+                              item.id,
+                              item.quantity - 1,
+                              item.size
+                            );
+                          } else {
+                            removeFromCart(item.id, item.size);
+                          }
+                        }}>
+                        –
+                      </button>
+                      <span>{item.quantity}</span>
+                      <button
+                        className="btn btn-secondary"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (item.quantity < item.stock) {
+                            updateQuantity(
+                              item.id,
+                              item.quantity + 1,
+                              item.size
+                            );
+                          }
+                        }}
+                        disabled={item.quantity >= item.stock}>
+                        +
+                      </button>
                     </div>
 
                     <Card.Text>
@@ -99,8 +136,7 @@ export default function CartPage() {
                   <Card.Footer>
                     <button
                       className="btn btn-danger"
-                      onClick={() => removeFromCart(item.id, item.size)}
-                    >
+                      onClick={() => removeFromCart(item.id, item.size)}>
                       Remove
                     </button>
                   </Card.Footer>
