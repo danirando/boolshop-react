@@ -14,16 +14,12 @@ export default function ClothDetailPage() {
   const clothUrl = import.meta.env.VITE_BOOKS_API_URL + "/clothes/" + slug;
   const navigate = useNavigate();
 
-  // console.log("slug:", slug);
-  // console.log("clothUrl:", clothUrl);
-
   const fetchClothes = () => {
     axios
       .get(clothUrl)
       .then((res) => {
         const fetchedCloth = res.data[0];
-        // console.log("Prodotto:", fetchedCloth);
-        // console.log("Categoria:", fetchedCloth.category);
+
         setCloth(fetchedCloth);
       })
       .catch((err) => {
@@ -31,7 +27,7 @@ export default function ClothDetailPage() {
       });
     axios.get(clothUrl).then((res) => {
       const dataCloth = res.data[0];
-      // console.log(dataCloth);
+
       setCloth(dataCloth);
     });
   };
@@ -68,7 +64,6 @@ export default function ClothDetailPage() {
 
   const fetchRelatedClothes = () => {
     if (cloth.category && cloth.id) {
-      // Da controllare l'endpoint
       const category = cloth.category;
       const relatedUrl = `http://localhost:3000/clothes/f-categories/${category}`;
 
@@ -91,7 +86,7 @@ export default function ClothDetailPage() {
   }, [cloth.category, cloth.id]);
 
   if (!cloth.id) {
-    return <div className="text-center my-5">Caricamento in corso...</div>;
+    return <div className="text-center my-5">Error 404. Page not found!</div>;
   }
 
   return (
@@ -175,7 +170,7 @@ export default function ClothDetailPage() {
                   return (
                     <div
                       key={relatedCloth.id}
-                      className="col-sm-12 col-md-6 col-lg-4"
+                      className="col-sm-12 col-md-6 col-lg-4 mb-3"
                       onClick={() => navigate(`/clothes/${relatedCloth.slug}`)}
                     >
                       <Card

@@ -48,17 +48,20 @@ export default function Header() {
 
           <form
             className="d-flex align-items-center gap-3 form-search"
-            onSubmit={handleSubmit}>
+            onSubmit={handleSubmit}
+          >
             <Nav
               className="me-auto my-2 my-lg-0"
               style={{ maxHeight: "100px" }}
-              navbarScroll>
+              navbarScroll
+            >
               <Link to="/cart" className="nav-link position-relative">
                 <i className="bi bi-cart" style={{ fontSize: "1.5rem" }}></i>
                 {cartCount > 0 && (
                   <span
                     className="start-100 translate-middle badge rounded-pill bg-danger"
-                    style={{ fontSize: "0.75rem" }}>
+                    style={{ fontSize: "0.75rem" }}
+                  >
                     {cartCount}
                   </span>
                 )}
@@ -80,10 +83,11 @@ export default function Header() {
       </Navbar>
       <div
         className="w-100 text-center py-2"
-        style={{ backgroundColor: "#f8f9fa" }}>
+        style={{ backgroundColor: "#f8f9fa" }}
+      >
         <span style={{ fontSize: "0.95rem" }}>
-          Spedizione gratuita: ordine minimo 70€. Codici promo: SAVE10, SAVE20,
-          SAVE30. Validi dal 07-07-25 al 20-07-25
+          Free shipping: minimum order 70€. Promo codes: SAVE10, SAVE20, SAVE30.
+          Valid from 07-07-25 to 20-07-25
         </span>
       </div>
     </>

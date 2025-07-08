@@ -52,14 +52,14 @@ export default function SearchPage() {
 
   return (
     <div className="container">
-      <h1 className="my-3">Risultati ricerca con filtri</h1>
+      <h1 className="my-3">Search results with filters</h1>
 
       {/* Inserisci FiltersSelect e passa onResultsUpdate */}
       <FiltersSelect onResultsUpdate={setResults} searchQuery={query} />
 
       {!loading && results.length === 0 && (
         <div className="text-center mt-4">
-          <h5>Nessun risultato trovato.</h5>
+          <h5>No results found!</h5>
         </div>
       )}
 
@@ -82,7 +82,8 @@ export default function SearchPage() {
                         top: "10px",
                         left: "10px",
                         fontWeight: "bold",
-                      }}>
+                      }}
+                    >
                       -{item.promo}%
                     </span>
                   )}

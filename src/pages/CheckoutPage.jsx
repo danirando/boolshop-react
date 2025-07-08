@@ -174,7 +174,7 @@ export default function CheckoutPage() {
           </div>
 
           <div className="col-6 mb-3">
-            <label className="form-label">Cell Number</label>
+            <label className="form-label">Phone Number</label>
             <input
               type="number"
               className="form-control"
@@ -194,7 +194,8 @@ export default function CheckoutPage() {
               className="form-select"
               name="paymentMethod"
               value={formData.paymentMethod}
-              onChange={handleChange}>
+              onChange={handleChange}
+            >
               <option value="card">Credit Card</option>
               <option value="paypal">PayPal</option>
             </select>

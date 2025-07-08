@@ -80,7 +80,8 @@ export default function ClothesListPage() {
             top: "10px",
             left: "10px",
             fontWeight: "bold",
-          }}>
+          }}
+        >
           -{clothPromo}%
         </span>
       );
@@ -97,9 +98,9 @@ export default function ClothesListPage() {
         {isSearching && (
           <h4 className="my-3">
             {localClothes.length > 0 ? (
-              <>Risultati per: "{searchQuery}"</>
+              <>Results for: "{searchQuery}"</>
             ) : (
-              <>Nessun risultato per: "{searchQuery}"</>
+              <>No results for: "{searchQuery}"</>
             )}
           </h4>
         )}
@@ -111,7 +112,8 @@ export default function ClothesListPage() {
                 <div
                   key={cloth.id}
                   className="col-sm-12 col-md-6 col-lg-4 my-3"
-                  onClick={() => navigate(`/clothes/${cloth.slug}`)}>
+                  onClick={() => navigate(`/clothes/${cloth.slug}`)}
+                >
                   <Card className="card-clothes h-100" key={cloth.id}>
                     <Card.Img
                       className="card-img-fixed"

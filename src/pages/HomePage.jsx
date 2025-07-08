@@ -115,7 +115,7 @@ export default function HomePage() {
           </section>
           <div className="separetor"></div>
           <section>
-            <h2>In promo</h2>
+            <h2>On sale</h2>
             <CardGroup>
               {promoClothes.map((item) => {
                 const discountedPrice = (

@@ -85,12 +85,13 @@ export default function FiltersSelect({ onResultsUpdate }) {
       <div className="d-flex flex-column g-3 gap-3 select-container">
         <div className="d-flex gap-3 select-content">
           <label className="me-2">Order by:</label>
-          <label htmlFor="size">Taglia</label>
+          <label htmlFor="size">Size</label>
           <select
             id="size"
             name="size"
             value={size}
-            onChange={(e) => updateFilters({ size: e.target.value })}>
+            onChange={(e) => updateFilters({ size: e.target.value })}
+          >
             <option value="">---</option>
             <option value="XS">XS</option>
             <option value="S">S</option>
@@ -102,10 +103,11 @@ export default function FiltersSelect({ onResultsUpdate }) {
             id="price"
             name="price"
             value={order}
-            onChange={(e) => updateFilters({ order: e.target.value })}>
+            onChange={(e) => updateFilters({ order: e.target.value })}
+          >
             <option value="">---</option>
-            <option value="asc">Prezzo crescente</option>
-            <option value="desc">Prezzo decrescente</option>
+            <option value="asc">Increasing price</option>
+            <option value="desc">Decreasing price</option>
           </select>
         </div>
         <div className="d-flex gap-3 select-content-bottom">
@@ -116,7 +118,8 @@ export default function FiltersSelect({ onResultsUpdate }) {
               id="category"
               name="category"
               value={category}
-              onChange={(e) => updateFilters({ category: e.target.value })}>
+              onChange={(e) => updateFilters({ category: e.target.value })}
+            >
               <option value="">---</option>
               <option value="Tops">Tops</option>
               <option value="Dresses">Dresses</option>
@@ -130,11 +133,12 @@ export default function FiltersSelect({ onResultsUpdate }) {
               name="max-price"
               value={maxPrice}
               onChange={(e) => updateFilters({ price: e.target.value })}
-              aria-label="Filtra per prezzo massimo">
+              aria-label="Filtra per prezzo massimo"
+            >
               <option value="">---</option>
-              <option value="10">Fino a 10 €</option>
-              <option value="20">Fino a 20 €</option>
-              <option value="30">Fino a 30 €</option>
+              <option value="10">Up to 10 €</option>
+              <option value="20">Up to 20 €</option>
+              <option value="30">Up to 30 €</option>
             </select>
           </div>
 
@@ -149,7 +153,7 @@ export default function FiltersSelect({ onResultsUpdate }) {
               }
             />
             <label className="form-check-label" htmlFor="inPromo">
-              In Promo
+              On Sale
             </label>
           </div>
 
@@ -163,8 +167,9 @@ export default function FiltersSelect({ onResultsUpdate }) {
                 price: "",
                 promo: "",
               })
-            }>
-            Reset Filtri
+            }
+          >
+            Reset Filters
           </button>
         </div>
       </div>
