@@ -67,8 +67,6 @@ export default function FiltersSelect({ onResultsUpdate }) {
       },
       { replace: true }
     );
-    console.log("PARAMS PER AXIOS:", params);
-    // Chiamata axios al backend
     axios
       .get(`http://localhost:3000/clothes/f-all`, { params })
       .then((res) => onResultsUpdate(res.data))
@@ -84,11 +82,12 @@ export default function FiltersSelect({ onResultsUpdate }) {
   return (
     <>
       {" "}
-      <div className="d-flex flex-column g-3 gap-3">
-        <div className="d-flex gap-3">
+      <div className="d-flex flex-column g-3 gap-3 select-container">
+        <div className="d-flex gap-3 select-content">
           <label className="me-2">Order by:</label>
           <label htmlFor="size">Taglia</label>
           <select
+            id="size"
             name="size"
             value={size}
             onChange={(e) => updateFilters({ size: e.target.value })}>
@@ -100,6 +99,7 @@ export default function FiltersSelect({ onResultsUpdate }) {
           </select>
           <label htmlFor="price">Price</label>
           <select
+            id="price"
             name="price"
             value={order}
             onChange={(e) => updateFilters({ order: e.target.value })}>
@@ -108,31 +108,36 @@ export default function FiltersSelect({ onResultsUpdate }) {
             <option value="desc">Prezzo decrescente</option>
           </select>
         </div>
-        <div className="d-flex gap-3">
-          <label>Filter by:</label>
-          <label htmlFor="Category">Category</label>
-          <select
-            name="category"
-            value={category}
-            onChange={(e) => updateFilters({ category: e.target.value })}>
-            <option value="">---</option>
-            <option value="Tops">Tops</option>
-            <option value="Dresses">Dresses</option>
-            <option value="Bottoms">Bottoms</option>
-            <option value="Outerwear">Outerwear</option>
-            <option value="Accessories">Accessories</option>
-          </select>
-          <label htmlFor="max-price">Max price</label>
-          <select
-            name="max-price"
-            value={maxPrice}
-            onChange={(e) => updateFilters({ price: e.target.value })}
-            aria-label="Filtra per prezzo massimo">
-            <option value="">---</option>
-            <option value="10">Fino a 10 €</option>
-            <option value="20">Fino a 20 €</option>
-            <option value="30">Fino a 30 €</option>
-          </select>
+        <div className="d-flex gap-3 select-content-bottom">
+          <div className="d-flex gap-3">
+            <label>Filter by:</label>
+            <label htmlFor="category">Category</label>
+            <select
+              id="category"
+              name="category"
+              value={category}
+              onChange={(e) => updateFilters({ category: e.target.value })}>
+              <option value="">---</option>
+              <option value="Tops">Tops</option>
+              <option value="Dresses">Dresses</option>
+              <option value="Bottoms">Bottoms</option>
+              <option value="Outerwear">Outerwear</option>
+              <option value="Accessories">Accessories</option>
+            </select>
+            <label htmlFor="max-price">Max price</label>
+            <select
+              id="max-price"
+              name="max-price"
+              value={maxPrice}
+              onChange={(e) => updateFilters({ price: e.target.value })}
+              aria-label="Filtra per prezzo massimo">
+              <option value="">---</option>
+              <option value="10">Fino a 10 €</option>
+              <option value="20">Fino a 20 €</option>
+              <option value="30">Fino a 30 €</option>
+            </select>
+          </div>
+
           <div className="form-check">
             <input
               className="form-check-input"
