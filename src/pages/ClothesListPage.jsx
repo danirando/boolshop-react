@@ -26,7 +26,9 @@ export default function ClothesListPage() {
       order: params.get("order") || "",
       price: params.get("price") || "",
       query: params.get("query") || "",
+      promo: params.get("promo") || "", // AGGIUNTO
     };
+
     setSearchQuery(filters.query);
     setIsSearching(!!filters.query);
 

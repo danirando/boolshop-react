@@ -12,6 +12,7 @@ export default function FiltersSelect({ onResultsUpdate }) {
   const [order, setOrder] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [inPromo, setInPromo] = useState(false);
 
   // Sincronizza stato filtri + query con URL all'avvio e quando location.search cambia
   useEffect(() => {
@@ -21,32 +22,42 @@ export default function FiltersSelect({ onResultsUpdate }) {
     setOrder(params.get("order") || "");
     setMaxPrice(params.get("price") || "");
     setSearchQuery(params.get("query") || "");
+    setInPromo(params.get("promo") === "1");
   }, [location.search]);
 
   const updateFilters = (newFilters) => {
-    // Leggi parametri attuali dall'URL
     const currentParams = new URLSearchParams(location.search);
 
-    // Aggiorna con i nuovi filtri ricevuti
+    // Aggiorna currentParams con i nuovi filtri ricevuti
     Object.entries(newFilters).forEach(([key, value]) => {
-      if (value) {
-        currentParams.set(key, value);
+      if (key === "promo") {
+        const isPromo = value === "1";
+        setInPromo(isPromo);
+        if (isPromo) {
+          currentParams.set("promo", "1");
+        } else {
+          currentParams.delete("promo");
+        }
       } else {
-        currentParams.delete(key);
+        if (value) {
+          currentParams.set(key, value);
+        } else {
+          currentParams.delete(key);
+        }
       }
     });
 
-    // Mantieni la search query se già presente (evita di perderla)
-    const queryFromURL = currentParams.get("query");
-    if (queryFromURL) {
-      setSearchQuery(queryFromURL);
-    }
-
-    // Aggiorna stato locale dei filtri
+    // Aggiorna stati locali coerenti
     if ("size" in newFilters) setSize(newFilters.size);
     if ("category" in newFilters) setCategory(newFilters.category);
     if ("order" in newFilters) setOrder(newFilters.order);
     if ("price" in newFilters) setMaxPrice(newFilters.price);
+
+    // Prepara i params per axios DOPO aver aggiornato currentParams
+    const params = {};
+    currentParams.forEach((value, key) => {
+      params[key] = value;
+    });
 
     // Aggiorna URL
     navigate(
@@ -56,13 +67,7 @@ export default function FiltersSelect({ onResultsUpdate }) {
       },
       { replace: true }
     );
-
-    // Prepara i params per axios
-    const params = {};
-    currentParams.forEach((value, key) => {
-      params[key] = value;
-    });
-
+    console.log("PARAMS PER AXIOS:", params);
     // Chiamata axios al backend
     axios
       .get(`http://localhost:3000/clothes/f-all`, { params })
@@ -128,11 +133,31 @@ export default function FiltersSelect({ onResultsUpdate }) {
             <option value="20">Fino a 20 €</option>
             <option value="30">Fino a 30 €</option>
           </select>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              id="inPromo"
+              checked={inPromo}
+              onChange={(e) =>
+                updateFilters({ promo: e.target.checked ? "1" : "" })
+              }
+            />
+            <label className="form-check-label" htmlFor="inPromo">
+              In Promo
+            </label>
+          </div>
 
           <button
             className="btn btn-secondary"
             onClick={() =>
-              updateFilters({ size: "", category: "", order: "", price: "" })
+              updateFilters({
+                size: "",
+                category: "",
+                order: "",
+                price: "",
+                promo: "",
+              })
             }>
             Reset Filtri
           </button>
