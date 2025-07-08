@@ -1,7 +1,9 @@
 export default function NotFoundPage() {
   return (
     <>
-      <h1>404</h1>
+      <div className="container my-3">
+        <h1>Errore 404. Pagina non trovata</h1>
+      </div>
     </>
   );
 }
