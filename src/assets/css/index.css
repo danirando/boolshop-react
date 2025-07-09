@@ -102,13 +102,13 @@ main {
     position: absolute;
 
     /* allineamento in alto */
-    right: 0;
+    right: -20px;
     /* allineamento a destra */
 
-    min-width: 1.1em;
-    height: 1.1em;
+    min-width: 2em;
+    height: 2em;
     font-size: 0.7rem;
-    padding: 10px;
+    padding: 0px;
 
     display: flex;
     align-items: center;
@@ -178,7 +178,7 @@ main {
 .nav-link .badge {
   position: absolute;
   top: 0.8rem;
-  right: -1rem;
+  right: 1rem;
   min-width: 2em;
   height: 2em;
   padding: 0;
