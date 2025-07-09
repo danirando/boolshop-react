@@ -18,48 +18,45 @@ export default function ClothesListPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Leggi parametri da URL
     const params = new URLSearchParams(location.search);
+
     const filters = {
       size: params.get("size") || "",
       category: params.get("category") || "",
       order: params.get("order") || "",
       price: params.get("price") || "",
       query: params.get("query") || "",
-      promo: params.get("promo") || "", // AGGIUNTO
+      promo: params.get("promo") || "",
     };
 
     setSearchQuery(filters.query);
     setIsSearching(!!filters.query);
 
-    // Se non ci sono filtri e query, usa clothes dal contesto
+    // Se non ci sono filtri, mostra i clothes dal context
     if (
       !filters.size &&
       !filters.category &&
       !filters.order &&
       !filters.price &&
       !filters.query &&
-      !filters.promo // considera anche query
+      !filters.promo
     ) {
       setLocalClothes(clothes);
       return;
     }
 
-    // Chiamata combinata al backend
-    axios;
-    let endpoint = "http://localhost:3000/clothes/f-all";
-    if (filters.order === "asc") {
-      endpoint = "http://localhost:3000/clothes/f-p-ascendant";
-    }
-    if (filters.order === "desc") {
-      endpoint = "http://localhost:3000/clothes/f-p-descendant";
-    }
+    // Pulisci parametri vuoti
+    const filteredParams = {};
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== "" && value !== null) {
+        filteredParams[key] = value;
+      }
+    });
 
+    // Unica chiamata all'endpoint completo
     axios
-      .get(endpoint, { params: filters })
+      .get("http://localhost:3000/clothes/f-all", { params: filteredParams })
       .then((res) => setLocalClothes(res.data))
-      // .get("http://localhost:3000/clothes/f-all", { params: filters })
-      // .then((res) => setLocalClothes(res.data))
       .catch((err) => {
         if (err.response && err.response.status === 404) {
           setLocalClothes([]);
@@ -91,8 +88,7 @@ export default function ClothesListPage() {
             top: "10px",
             left: "10px",
             fontWeight: "bold",
-          }}
-        >
+          }}>
           -{clothPromo}%
         </span>
       );
@@ -123,8 +119,7 @@ export default function ClothesListPage() {
                 <div
                   key={cloth.id}
                   className="col-sm-12 col-md-6 col-lg-4 my-3"
-                  onClick={() => navigate(`/clothes/${cloth.slug}`)}
-                >
+                  onClick={() => navigate(`/clothes/${cloth.slug}`)}>
                   <Card className="card-clothes h-100" key={cloth.id}>
                     <Card.Img
                       className="card-img-fixed"
