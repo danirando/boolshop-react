@@ -118,6 +118,17 @@ main {
   .select-content-bottom {
     flex-direction: column;
   }
+
+  .navbar .dropdown-menu {
+    position: absolute !important;
+    left: 0 !important;
+    right: auto !important;
+  }
+
+  .navbar .dropdown {
+    position: static !important;
+    /* rimuove relative che crea overflow */
+  }
 }
 
 @media (max-width: 575px) {
@@ -311,7 +322,7 @@ main {
   background-color: red;
 }
 
-section > h2 {
+section>h2 {
   padding-bottom: 20px;
 }
 
