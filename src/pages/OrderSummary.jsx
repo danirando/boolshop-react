@@ -108,7 +108,7 @@ export default function OrderSummary() {
   }
 
   return (
-    <div>
+    <div className="container my-3">
       <h2>Your order</h2>
       <ul>
         {cart.map((item) => (

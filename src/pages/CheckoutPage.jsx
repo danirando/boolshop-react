@@ -60,6 +60,17 @@ export default function CheckoutPage() {
           error = "Postal code must be 5 digits.";
         }
         break;
+      case "city":
+        if (typeof value !== "string" || value.trim().length < 2) {
+          error = "City must be at least 2 characters long.";
+        }
+        break;
+
+      case "address":
+        if (value.trim().length < 5) {
+          error = "Address must be at least 5 characters long.";
+        }
+        break;
       case "cell_number":
         if (!/^\d{10}$/.test(value)) {
           error = "Cell number must be 10 digits.";
@@ -146,6 +157,9 @@ export default function CheckoutPage() {
               onChange={handleChange}
               required
             />
+            {errors.address && (
+              <div className="text-danger">{errors.address}</div>
+            )}
           </div>
 
           <div className="col-4 mb-3">
@@ -158,6 +172,7 @@ export default function CheckoutPage() {
               onChange={handleChange}
               required
             />
+            {errors.city && <div className="text-danger">{errors.city}</div>}
           </div>
 
           <div className="col-2 mb-3">
@@ -194,8 +209,7 @@ export default function CheckoutPage() {
               className="form-select"
               name="paymentMethod"
               value={formData.paymentMethod}
-              onChange={handleChange}
-            >
+              onChange={handleChange}>
               <option value="card">Credit Card</option>
               <option value="paypal">PayPal</option>
             </select>
