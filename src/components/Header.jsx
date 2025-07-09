@@ -55,17 +55,84 @@ export default function Header() {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Link to="/cart" className="nav-link position-relative">
-                <i className="bi bi-cart" style={{ fontSize: "1.5rem" }}></i>
-                {cartCount > 0 && (
-                  <span
-                    className="start-100 translate-middle badge rounded-pill bg-danger"
-                    style={{ fontSize: "0.75rem" }}
-                  >
-                    {cartCount}
-                  </span>
-                )}
-              </Link>
+              <div className="dropdown position-relative">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i className="bi bi-cart" style={{ fontSize: "1.5rem" }}></i>
+                  {cartCount > 0 && (
+                    <span
+                      className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                      style={{ fontSize: "0.75rem" }}
+                    >
+                      {cartCount}
+                    </span>
+                  )}
+                </a>
+
+                <ul
+                  className="dropdown-menu dropdown-menu-end p-2"
+                  style={{ minWidth: "250px" }}
+                >
+                  {cart.length === 0 ? (
+                    <li className="dropdown-item text-muted">Cart is empty</li>
+                  ) : (
+                    <>
+                      {cart.map((item) => (
+                        <li
+                          key={`${item.id}-${item.size}`}
+                          className="dropdown-item p-0"
+                        >
+                          <Link
+                            to={`/clothes/${item.slug}`}
+                            className="d-flex justify-content-between align-items-center px-3 py-2 text-decoration-none text-dark"
+                          >
+                            <span>
+                              {item.name} ({item.size})
+                            </span>
+                            <span>
+                              × {item.quantity} -{" "}
+                              {item.finalPrice ?? item.price}€
+                            </span>
+                          </Link>
+                        </li>
+                      ))}
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
+                      <li className="px-3 py-1 d-flex justify-content-between fw-bold">
+                        <span>Total:</span>
+                        <span>
+                          {cart
+                            .reduce(
+                              (sum, item) =>
+                                sum +
+                                (item.finalPrice ?? item.price) * item.quantity,
+                              0
+                            )
+                            .toFixed(2)}
+                          €
+                        </span>
+                      </li>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
+                      <li>
+                        <Link
+                          to="/cart"
+                          className="dropdown-item text-center text-primary fw-bold"
+                        >
+                          Go to cart
+                        </Link>
+                      </li>
+                    </>
+                  )}
+                </ul>
+              </div>
             </Nav>
             <input
               type="search"
