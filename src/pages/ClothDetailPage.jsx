@@ -133,13 +133,13 @@ export default function ClothDetailPage() {
                       )}
                       <div className="text-secondary d-flex flex-column gap-2">
                         <div className="">
-                          <strong> Materiale:</strong> {cloth.material}
+                          <strong> Material:</strong> {cloth.material}
                         </div>
                         <div className="">
                           <strong>Availability:</strong> {cloth.stock}
                         </div>
                         <div className="">
-                          <strong>Categoria:</strong> {cloth.category}
+                          <strong>Category:</strong> {cloth.category}
                         </div>
                       </div>
                     </div>
