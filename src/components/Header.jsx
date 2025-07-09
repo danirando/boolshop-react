@@ -66,7 +66,7 @@ export default function Header() {
                   <i className="bi bi-cart" style={{ fontSize: "1.5rem" }}></i>
                   {cartCount > 0 && (
                     <span
-                      className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                      className="translate-middle badge rounded-pill bg-danger"
                       style={{ fontSize: "0.75rem" }}
                     >
                       {cartCount}
