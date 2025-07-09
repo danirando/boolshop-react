@@ -145,7 +145,7 @@ main {
 
 .select-content,
 .select-content-bottom {
-  align-items: center;
+  align-items: flex-start;
 }
 
 .search-button {
