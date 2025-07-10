@@ -59,6 +59,7 @@ export default function OrderSummary() {
   const handleConfirm = () => {
     const data = {
       promo_code_id: promoData ? promoData.id : null,
+      discount: promoData ? promoData.value : 0,
       name: formData.name,
       surname: formData.surname,
       mail: formData.mail,
@@ -98,7 +99,8 @@ export default function OrderSummary() {
             </h3>
             <button
               className="add-button btn mt-3 col-2 confirm"
-              onClick={() => navigate("/")}>
+              onClick={() => navigate("/")}
+            >
               Back to Homepage
             </button>
           </div>
