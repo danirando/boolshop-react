@@ -84,20 +84,7 @@ export default function FiltersSelect({ onResultsUpdate }) {
       <div className="d-flex gap-3 select-content">
         <label className="me-2">Order by:</label>
 
-        <label htmlFor="size">Size</label>
-        <select
-          id="size"
-          name="size"
-          value={size}
-          onChange={(e) => updateFilters({ size: e.target.value })}>
-          <option value="">---</option>
-          <option value="XS">XS</option>
-          <option value="S">S</option>
-          <option value="M">M</option>
-          <option value="L">L</option>
-        </select>
-
-        <label htmlFor="price">Price order</label>
+        <label htmlFor="price">Price</label>
         <select
           id="price"
           name="price"
@@ -138,6 +125,19 @@ export default function FiltersSelect({ onResultsUpdate }) {
             <option value="10">Up to 10 €</option>
             <option value="20">Up to 20 €</option>
             <option value="30">Up to 30 €</option>
+          </select>
+
+          <label htmlFor="size">Size</label>
+          <select
+            id="size"
+            name="size"
+            value={size}
+            onChange={(e) => updateFilters({ size: e.target.value })}>
+            <option value="">---</option>
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
           </select>
         </div>
 
