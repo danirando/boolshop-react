@@ -31,8 +31,8 @@ export default function CartPage() {
         <Container>
           <Row xs={1} md={3} className="g-4">
             {cart.map((item) => (
-              <Col key={`${item.id}-${item.size}`}>
-                <Card className="card-clothes" style={{ width: "100%" }}>
+              <Col key={`${item.id}-${item.size}`} className="d-flex">
+                <Card className="card-clothes h-100" style={{ width: "18rem" }}>
                   <Card.Img
                     variant="top"
                     src={item.img}
@@ -40,7 +40,7 @@ export default function CartPage() {
                     onClick={() => navigate(`/clothes/${item.slug}`)}
                   />
                   <Card.Body>
-                    <Card.Title>{item.name}</Card.Title>
+                    <Card.Title className="text-wrap">{item.name}</Card.Title>
 
                     <Card.Text>
                       Price:{" "}
