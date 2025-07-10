@@ -80,32 +80,34 @@ export default function FiltersSelect({ onResultsUpdate }) {
   };
 
   return (
-    <div className="d-flex flex-column g-3 gap-3 select-container">
-      <div className="d-flex gap-3 select-content">
-        <label className="me-2">Order by:</label>
+    <div className="container-fluid select-container">
+      <div className="row g-3">
+        <div className="col-12 col-sm-6 col-md-4">
+          <label htmlFor="price" className="form-label">
+            Order by price
+          </label>
+          <select
+            id="price"
+            name="price"
+            value={order}
+            onChange={(e) => updateFilters({ order: e.target.value })}
+            className="form-select">
+            <option value="">---</option>
+            <option value="asc">Increasing price</option>
+            <option value="desc">Decreasing price</option>
+          </select>
+        </div>
 
-        <label htmlFor="price">Price</label>
-        <select
-          id="price"
-          name="price"
-          value={order}
-          onChange={(e) => updateFilters({ order: e.target.value })}>
-          <option value="">---</option>
-          <option value="asc">Increasing price</option>
-          <option value="desc">Decreasing price</option>
-        </select>
-      </div>
-
-      <div className="d-flex gap-3 select-content-bottom">
-        <div className="d-flex gap-3">
-          <label>Filter by:</label>
-
-          <label htmlFor="category">Category</label>
+        <div className="col-12 col-sm-6 col-md-4">
+          <label htmlFor="category" className="form-label">
+            Category
+          </label>
           <select
             id="category"
             name="category"
             value={category}
-            onChange={(e) => updateFilters({ category: e.target.value })}>
+            onChange={(e) => updateFilters({ category: e.target.value })}
+            className="form-select">
             <option value="">---</option>
             <option value="Tops">Tops</option>
             <option value="Dresses">Dresses</option>
@@ -113,26 +115,35 @@ export default function FiltersSelect({ onResultsUpdate }) {
             <option value="Outerwear">Outerwear</option>
             <option value="Accessories">Accessories</option>
           </select>
+        </div>
 
-          <label htmlFor="max-price">Max price</label>
+        <div className="col-12 col-sm-6 col-md-4">
+          <label htmlFor="max-price" className="form-label">
+            Max price
+          </label>
           <select
             id="max-price"
             name="max-price"
             value={maxPrice}
             onChange={(e) => updateFilters({ price: e.target.value })}
-            aria-label="Filtra per prezzo massimo">
+            className="form-select">
             <option value="">---</option>
             <option value="10">Up to 10 €</option>
             <option value="20">Up to 20 €</option>
             <option value="30">Up to 30 €</option>
           </select>
+        </div>
 
-          <label htmlFor="size">Size</label>
+        <div className="col-12 col-sm-6 col-md-4">
+          <label htmlFor="size" className="form-label">
+            Size
+          </label>
           <select
             id="size"
             name="size"
             value={size}
-            onChange={(e) => updateFilters({ size: e.target.value })}>
+            onChange={(e) => updateFilters({ size: e.target.value })}
+            className="form-select">
             <option value="">---</option>
             <option value="XS">XS</option>
             <option value="S">S</option>
@@ -141,34 +152,38 @@ export default function FiltersSelect({ onResultsUpdate }) {
           </select>
         </div>
 
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="inPromo"
-            checked={inPromo}
-            onChange={(e) =>
-              updateFilters({ promo: e.target.checked ? "1" : "" })
-            }
-          />
-          <label className="form-check-label" htmlFor="inPromo">
-            On Sale
-          </label>
+        <div className="col-12 col-sm-6 col-md-4 d-flex align-items-center">
+          <div className="form-check mt-4">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              id="inPromo"
+              checked={inPromo}
+              onChange={(e) =>
+                updateFilters({ promo: e.target.checked ? "1" : "" })
+              }
+            />
+            <label className="form-check-label" htmlFor="inPromo">
+              On Sale
+            </label>
+          </div>
         </div>
 
-        <button
-          className="btn btn-secondary"
-          onClick={() =>
-            updateFilters({
-              size: "",
-              category: "",
-              order: "",
-              price: "",
-              promo: "",
-            })
-          }>
-          Reset Filters
-        </button>
+        <div className="col-12 col-sm-6 col-md-4 d-flex align-items-center">
+          <button
+            className="btn btn-secondary w-100 mt-3 mt-sm-4"
+            onClick={() =>
+              updateFilters({
+                size: "",
+                category: "",
+                order: "",
+                price: "",
+                promo: "",
+              })
+            }>
+            Reset Filters
+          </button>
+        </div>
       </div>
     </div>
   );
