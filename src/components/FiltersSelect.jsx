@@ -179,6 +179,7 @@ export default function FiltersSelect({ onResultsUpdate }) {
                 order: "",
                 price: "",
                 promo: "",
+                query: "",
               })
             }>
             Reset Filters
