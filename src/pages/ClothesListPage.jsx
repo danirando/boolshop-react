@@ -104,13 +104,13 @@ export default function ClothesListPage() {
         <h1 className="text-center mt-3 ">Clothes</h1>
         <FiltersSelect onResultsUpdate={setLocalClothes} />
         {isSearching && (
-          <h4 className="my-3">
+          <h3 className=" text-center mb-2 mt-5">
             {localClothes.length > 0 ? (
               <>Results for: "{searchQuery}"</>
             ) : (
               <>No results for: "{searchQuery}"</>
             )}
-          </h4>
+          </h3>
         )}
 
         <div className="row gy-4 py-3">

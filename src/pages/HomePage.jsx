@@ -50,8 +50,9 @@ export default function HomePage() {
       });
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Errore: {error.message}</p>;
+  if (loading) return <h3 className="text-center mb-2 mt-5">Loading...</h3>;
+  if (error)
+    return <h3 className="text-center mb-2 mt-5">Errore: {error.message}</h3>;
 
   function decrementQuantity(itemId, fromPromo = false) {
     if (fromPromo) {

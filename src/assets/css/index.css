@@ -468,3 +468,8 @@ section > h2 {
 .small-card .card-footer {
   padding: 0.5rem;
 }
+
+/* SUMMARY */
+.list-summary {
+  list-style-type: none;
+}

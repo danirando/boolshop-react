@@ -209,14 +209,15 @@ export default function CheckoutPage() {
               className="form-select"
               name="paymentMethod"
               value={formData.paymentMethod}
-              onChange={handleChange}>
+              onChange={handleChange}
+            >
               <option value="card">Credit Card</option>
               <option value="paypal">PayPal</option>
             </select>
           </div>
 
           <div className="col-12">
-            <button type="submit" className="btn btn-success">
+            <button type="submit" className="btn btn-outline-success">
               Confirm
             </button>
           </div>

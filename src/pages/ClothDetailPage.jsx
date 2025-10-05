@@ -116,10 +116,11 @@ export default function ClothDetailPage() {
                     <div>{cloth.name} </div>
                     <div className="text-success">
                       {cloth.promo > 0 ? (
-                        <div className="d-flex flex-column gap-2">
+                        <div>
                           <span className="text-muted text-decoration-line-through">
                             {cloth.price} €
                           </span>
+                          <span> </span>
                           <span className="text-danger fw-bold">
                             {(
                               cloth.price -
@@ -162,7 +163,9 @@ export default function ClothDetailPage() {
             <section className="my-5">
               <h4 className="text-center my-5">Related Products</h4>
               {(!relatedClothes || relatedClothes.length === 0) && (
-                <div className="text-center">No related products found.</div>
+                <div className="text-center fw-bold fs-6 text-uppercase">
+                  No related products found
+                </div>
               )}
 
               <CardGroup>
@@ -188,10 +191,11 @@ export default function ClothDetailPage() {
                           <Card.Title>{relatedCloth.name}</Card.Title>
                           <Card.Text>
                             {relatedCloth.promo > 0 ? (
-                              <div className="d-flex flex-column gap-2">
+                              <>
                                 <span className="text-muted text-decoration-line-through">
                                   {relatedCloth.price} €
                                 </span>
+                                <span> </span>
                                 <span className="text-danger fw-bold">
                                   {(
                                     relatedCloth.price -
@@ -200,14 +204,14 @@ export default function ClothDetailPage() {
                                   ).toFixed(2)}{" "}
                                   €
                                 </span>
-                              </div>
+                              </>
                             ) : (
                               <span className="">{relatedCloth.price} €</span>
                             )}
                           </Card.Text>
                         </Card.Body>
-                        <Card.Footer>
-                          <div className="d-flex justify-content-between align-items-center">
+                        <Card.Footer className="d-flex flex-column gap-3">
+                          <div>
                             <AddToCartButton
                               item={relatedCloth}
                               showSizeSelect={
