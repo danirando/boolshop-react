@@ -50,8 +50,9 @@ export default function HomePage() {
       });
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Errore: {error.message}</p>;
+  if (loading) return <h3 className="text-center mb-2 mt-5">Loading...</h3>;
+  if (error)
+    return <h3 className="text-center mb-2 mt-5">Errore: {error.message}</h3>;
 
   function decrementQuantity(itemId, fromPromo = false) {
     if (fromPromo) {
@@ -96,7 +97,7 @@ export default function HomePage() {
                         <Card.Title>{item.name}</Card.Title>
                         <Card.Text>
                           <span>
-                            Price: <span className="price">{item.price}</span>
+                            <span className="price">{item.price}</span> €
                           </span>
                         </Card.Text>
                       </Card.Body>
@@ -144,7 +145,8 @@ export default function HomePage() {
                             top: "10px",
                             left: "10px",
                             fontWeight: "bold",
-                          }}>
+                          }}
+                        >
                           -{item.promo}%
                         </span>
                       )}
@@ -153,11 +155,13 @@ export default function HomePage() {
                         <Card.Title>{item.name}</Card.Title>
                         <Card.Text>
                           <span>
-                            Price:{" "}
+                            {" "}
                             <span className="old-price">{item.price}</span>
                             <span> </span>
-                            <span className="price">{discountedPrice}</span>
-                          </span>
+                            <span className="price text-danger fw-bold">
+                              {discountedPrice} €
+                            </span>
+                          </span>{" "}
                         </Card.Text>
                       </Card.Body>
                     </div>

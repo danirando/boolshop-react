@@ -43,7 +43,7 @@ export default function Header() {
             />
           </Navbar.Brand>
           <Link to="/clothes" className="nav-link clothes">
-            Clothes
+            CLOTHES
           </Link>
 
           <form
@@ -93,7 +93,7 @@ export default function Header() {
                           >
                             <span
                               style={{
-                                color: item.promo > 0 ? "green" : "inherit",
+                                color: item.promo > 0 ? "#dc3545" : "inherit",
                               }}
                             >
                               {item.name} ({item.size})
@@ -128,7 +128,7 @@ export default function Header() {
                       <li>
                         <Link
                           to="/cart"
-                          className="dropdown-item text-center text-primary fw-bold"
+                          className="dropdown-item text-center text-success fw-bold"
                         >
                           Go to cart
                         </Link>
@@ -154,9 +154,12 @@ export default function Header() {
       </Navbar>
       <div
         className="w-100 text-center py-2"
-        style={{ backgroundColor: "#f8f9fa" }}
+        style={{
+          backgroundColor: "#f8f9fa",
+          borderBottom: "1px solid #eff1f1ff",
+        }}
       >
-        <span style={{ fontSize: "0.95rem" }}>
+        <span style={{ fontSize: "1.2rem", fontWeight: "bold" }}>
           Free shipping: minimum order 70€. Promo codes: SAVE10, SAVE20, SAVE30.
           Valid from 07-07-25 to 20-07-25
         </span>

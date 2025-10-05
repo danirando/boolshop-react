@@ -20,13 +20,13 @@ export default function CartPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="container mt-5">
-      <div className="my-5">
+    <div className="container">
+      <div className="text-center mt-3 mb-5">
         <h1>My cart</h1>
       </div>
 
       {cart.length === 0 ? (
-        <p>Cart is empty</p>
+        <h3>Cart is empty</h3>
       ) : (
         <Container>
           <Row xs={1} md={3} className="g-4">
@@ -43,7 +43,6 @@ export default function CartPage() {
                     <Card.Title className="text-wrap">{item.name}</Card.Title>
 
                     <Card.Text>
-                      Price:{" "}
                       {item.promo > 0 ? (
                         <>
                           <span className="text-muted text-decoration-line-through me-2">
@@ -117,7 +116,7 @@ export default function CartPage() {
                   </Card.Body>
                   <Card.Footer>
                     <button
-                      className="btn btn-danger"
+                      className="btn btn-outline-danger"
                       onClick={() => removeFromCart(item.id, item.size)}
                     >
                       Remove
@@ -129,10 +128,13 @@ export default function CartPage() {
           </Row>
           <div className="mt-4">
             <h3>Total: {totalPrice.toFixed(2)} €</h3>
-            <button className="btn btn-danger my-3 mx-2" onClick={clearCart}>
+            <button
+              className="btn btn-outline-secondary my-3 mx-2"
+              onClick={clearCart}
+            >
               Clear cart
             </button>
-            <Link to="/checkout" className="btn btn-primary my-3">
+            <Link to="/checkout" className="btn btn-outline-success my-3">
               Checkout{" "}
             </Link>
           </div>

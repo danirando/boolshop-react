@@ -88,7 +88,8 @@ export default function ClothesListPage() {
             top: "10px",
             left: "10px",
             fontWeight: "bold",
-          }}>
+          }}
+        >
           -{clothPromo}%
         </span>
       );
@@ -100,16 +101,16 @@ export default function ClothesListPage() {
   return (
     <>
       <div className="container">
-        <h1 className="text-center ">Clothes</h1>
+        <h1 className="text-center mt-3 ">Clothes</h1>
         <FiltersSelect onResultsUpdate={setLocalClothes} />
         {isSearching && (
-          <h4 className="my-3">
+          <h3 className=" text-center mb-2 mt-5">
             {localClothes.length > 0 ? (
               <>Results for: "{searchQuery}"</>
             ) : (
               <>No results for: "{searchQuery}"</>
             )}
-          </h4>
+          </h3>
         )}
 
         <div className="row gy-4 py-3">
@@ -119,7 +120,8 @@ export default function ClothesListPage() {
                 <div
                   key={cloth.id}
                   className="col-sm-12 col-md-6 col-lg-4 my-3"
-                  onClick={() => navigate(`/clothes/${cloth.slug}`)}>
+                  onClick={() => navigate(`/clothes/${cloth.slug}`)}
+                >
                   <Card className="card-clothes h-100" key={cloth.id}>
                     <Card.Img
                       className="card-img-fixed"
@@ -134,10 +136,11 @@ export default function ClothesListPage() {
                       <Card.Text>
                         {cloth.promo > 0 ? (
                           <>
-                            <span className="text-muted text-decoration-line-through d-block">
+                            <span className="text-muted text-decoration-line-through">
                               {cloth.price} €
                             </span>
-                            <span className="text-danger fw-bold d-block">
+                            <span> </span>
+                            <span className="text-danger fw-bold">
                               {Number(
                                 cloth.final_price ??
                                   cloth.price -
@@ -151,8 +154,8 @@ export default function ClothesListPage() {
                         )}
                       </Card.Text>
                     </Card.Body>
-                    <Card.Footer>
-                      <div className="d-flex justify-content-between align-items-center">
+                    <Card.Footer className="d-flex flex-column gap-3">
+                      <div>
                         <AddToCartButton
                           item={cloth}
                           showSizeSelect={cloth.sizes && cloth.sizes.length > 0}

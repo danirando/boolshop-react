@@ -1,10 +1,11 @@
 /* IMPORT GOOGLE FONTS */
-@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
-
+/* @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wdth,wght@0,5..1200,87.5..112.5,300..900;1,5..1200,87.5..112.5,300..900&family=Quicksand:wght@300..700&display=swap");
 body {
-  background-color: #feefed;
-  font-family: "Pacifico", cursive;
-  color: #122852;
+  background-color: #f8f8f8;
+  /* font-family: "Pacifico", cursive; */
+  font-family: "Playfair", serif;
+  color: black;
   padding-top: 100px;
   padding-top: 90px;
 }
@@ -40,7 +41,8 @@ main {
   justify-content: center;
   min-width: 100px;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
   padding: 0 10px;
   transition: transform 0.2s ease-in-out;
   transform-origin: center center;
@@ -156,9 +158,9 @@ main {
 .logo:hover {
   transform: scale(1.1);
 }
-
+/* #b0c4de */
 .navbar {
-  background-color: #fef2f1;
+  background-color: white;
   position: fixed;
   top: 0;
   left: 0;
@@ -170,8 +172,10 @@ main {
 .search-button,
 .add-button {
   background-color: #fef2f1;
-  color: #122852;
-  border: 1px solid #122852;
+  color: black;
+  border: 1px solid black;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
 }
 
 .search-button:hover,
@@ -183,7 +187,7 @@ main {
 .search-input {
   max-width: 300px;
   max-height: 50px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Playfair", serif;
 }
 
 .nav-link .badge {
@@ -209,7 +213,7 @@ main {
 
 .bi.bi-cart {
   position: relative;
-  color: #122852;
+  color: black;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -220,7 +224,7 @@ main {
 }
 
 .bi.bi-cart:hover {
-  background-color: #d56693;
+  background-color: #ffd0cd;
   transform: scale(1.2);
 }
 
@@ -268,28 +272,38 @@ main {
 }
 
 .hero-text {
-  color: #122852;
+  color: black;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   max-width: 800px;
   font-size: clamp(2rem, 5vw, 4rem);
-  font-family: "Pacifico", cursive;
+  font-family: "Playfair", serif;
 }
 
 .hero-content {
   padding: 10px;
   border-radius: 50px;
-  background-color: rgb(128, 128, 128, 0.5);
+  background-color: rgb(255, 255, 255);
 }
 
 .container.sections {
   padding-top: 30px;
   padding-bottom: 30px;
 }
-
-.separetor {
+.form-select {
+  border: 1px solid black;
+}
+.btn-secondary {
+  border: 1px solid black;
+  background-color: #f8f8f8;
+  color: black;
+}
+.card-footer {
+  background-color: transparent;
+}
+/* .separetor {
   height: 1px;
   background-color: black;
-}
+} */
 
 .card-img-fixed {
   width: 100%;
@@ -322,13 +336,13 @@ main {
   background-color: red;
 }
 
-section>h2 {
+section > h2 {
   padding-bottom: 20px;
 }
 
 .old-price,
 .price {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Playfair", serif;
 }
 
 .old-price {
@@ -351,9 +365,9 @@ section>h2 {
 
 .footer-container {
   min-height: 90px;
-  background-color: #ffd0cd;
+  background-color: white;
   padding: 0 30px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Playfair", serif;
 }
 
 .footer-left,
@@ -362,13 +376,13 @@ section>h2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: #122852;
+  color: black;
 }
 
 .footer-left *,
 .footer-right * {
   margin: 0;
-  color: #122852;
+  color: black;
 }
 
 .footer-center img {
@@ -453,4 +467,9 @@ section>h2 {
 
 .small-card .card-footer {
   padding: 0.5rem;
+}
+
+/* SUMMARY */
+.list-summary {
+  list-style-type: none;
 }

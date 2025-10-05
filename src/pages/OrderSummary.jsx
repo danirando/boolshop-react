@@ -94,7 +94,7 @@ export default function OrderSummary() {
           <div className="row justify-content-center">
             <h1 className="my-5">Order confirmed!</h1>
             <h3 className="my-3">
-              Thank you for choosing us, we have sent you an email with all the
+              Thank you for choosing us, we sent you an email with all the
               details regarding your purchase! Hope to see you soon!
             </h3>
             <button
@@ -110,12 +110,12 @@ export default function OrderSummary() {
   }
 
   return (
-    <div className="container my-3">
-      <h2>Your order</h2>
-      <ul>
+    <div className="container text-center fs-5">
+      <h1 className="text-center mt-3 mb-5">Your order</h1>
+      <ul className="list-summary">
         {cart.map((item) => (
           <li key={`${item.id}-${item.size}`}>
-            {item.name} ({item.size}) x {item.quantity} = €
+            - {item.name} ({item.size}) x {item.quantity} = €
             {((item.finalPrice ?? item.price) * item.quantity).toFixed(2)}
           </li>
         ))}
@@ -125,7 +125,8 @@ export default function OrderSummary() {
       <p>Discount: {discount * 100}%</p>
 
       <div>
-        <label>Promo code: </label>
+        <label>Promo code:</label>
+        <span> </span>
         <input
           value={promoCode}
           onChange={(e) => {
@@ -150,7 +151,7 @@ export default function OrderSummary() {
         <strong>Total: €{totalPrice.toFixed(2)}</strong>
       </p>
 
-      <button className="btn btn-success" onClick={handleConfirm}>
+      <button className="btn btn-outline-success" onClick={handleConfirm}>
         Confirm order
       </button>
     </div>
